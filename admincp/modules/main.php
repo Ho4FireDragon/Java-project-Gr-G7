@@ -27,14 +27,24 @@
     }
     
     elseif ($tam=="quanlycacbaivietcacvandesuckhoecuaca" && $query=='them'){
-        include("modules/quanlycacbaivietcacvandesuckhoecuaca/them.php");
-        include("modules/quanlycacbaivietcacvandesuckhoecuaca/lietke.php");
+        include("modules/QL_Cac_Van_De_SK_ca/them.php");
+        include("modules/QL_Cac_Van_De_SK_ca/lietke.php");
 
-    }elseif($tam=="quanlycacbaivietvecacvandelienquan" && $query=='lietke'){
-        include("modules/quanlycacbaivietvecacvandelienquan/them.php");
-        include("modules/quanlycacbaivietvecacvandelienquan/lietke.php");
+    }elseif ($tam=="quanlycacbaivietcacvandesuckhoecuaca" && $query=='sua'){
+        include("modules/QL_Cac_Van_De_SK_ca/sua.php");
 
-    }else{
+    }
+    
+    elseif($tam=="quanlycacbaivietvecacvandelienquan" && $query=='them'){
+        include("modules/QL_Cac_Van_De_LQ/them.php");
+        include("modules/QL_Cac_Van_De_LQ/lietke.php");
+
+    }elseif ($tam=="quanlycacbaivietvecacvandelienquan" && $query=='sua'){
+        include("modules/QL_Cac_Van_De_LQ/sua.php");
+
+    }
+    
+    else{
         include("modules/dashboard.php");
     }
 ?>
