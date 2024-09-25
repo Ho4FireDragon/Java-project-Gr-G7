@@ -8,12 +8,21 @@
         $tam = '';
         $query = '';
     }
-    if($tam=="quanlybaivietcacloaica" && $query=='them'){
-        include("modules/Ql_Cac_loai_ca/them.php");
-        include("modules/Ql_Cac_loai_ca/lietke.php");
+    if($tam=="quanlydanhmucdichvu" && $query=='them'){
+        include("modules/Ql_Cac_Loai_Dv/them.php");
+        include("modules/Ql_Cac_Loai_Dv/lietke.php");
 
-    }elseif ($tam=="quanlybaivietcacloaica" && $query=='sua'){
-        include("modules/Ql_Cac_loai_ca/sua.php");
+    }elseif ($tam=="quanlydanhmucdichvu" && $query=='sua'){
+        include("modules/Ql_Cac_Loai_Dv/sua.php");
+
+    }
+
+    if($tam=="quanlydichvu" && $query=='them'){
+        include("modules/QL_Dv/them.php");
+        include("modules/QL_Dv/lietke.php");
+
+    }elseif ($tam=="quanlydichvu" && $query=='sua'){
+        include("modules/QL_Dv/sua.php");
 
     }
     
