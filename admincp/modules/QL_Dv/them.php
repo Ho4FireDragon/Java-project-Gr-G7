@@ -15,7 +15,7 @@
 
     <tr>
         <td>Giá Dịch Vụ</td>
-        <td><input type="text" name="giasp"></td>
+        <td><input type="text" name="giadichvu"></td>
     </tr>
 
     <tr>
@@ -26,13 +26,16 @@
     <tr>
         <td>Danh mục sản phẩm</td>
         <td>
-          <select name="dichvu">
+          <select name="danhmucdichvu">
             <?php 
-            $sql_dichvu= "SELECT * FROM tbl_dichvu ORDER BY id_dichvu DESC";
-            $query_dichvu = mysqli_query($mysqli,$sql_dichvu);
-            while($row_dichvu = mysqli_fetch_array($query_dichvu)){
+            $sql_danhmucdichvu= "SELECT * FROM tbl_danhmucdichvu ORDER BY id_danhmucdichvu DESC";
+            $query_danhmucdichvu = mysqli_query($mysqli,$sql_danhmucdichvu);
+            while($row_danhmucdichvu = mysqli_fetch_array($query_danhmucdichvu)){
             ?>
-            <option value="<?php echo $row_dichvu['id_dichvu'] ?>"><?php echo $row_dichvu['tendichvu'] ?></option>
+            <option value="<?php echo $row_danhmucdichvu['id_danhmucdichvu'] ?>">
+                <?php echo $row_danhmucdichvu['tendanhmucdichvu'] ?>
+            </option>
+
             <?php
             }
             ?>

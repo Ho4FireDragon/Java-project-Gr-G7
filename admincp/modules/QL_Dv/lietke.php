@@ -1,42 +1,39 @@
 <?php 
-    $sql_lietke_sp = "SELECT * FROM tbl_sanpham,tbl_danhmuc WHERE tbl_sanpham.id_danhmuc=tbl_danhmuc.id_danhmuc ORDER BY id_sanpham DESC";
-    $query_lietke_sp = mysqli_query($mysqli,$sql_lietke_sp);
+    $sql_lietke_dichvu = "SELECT * FROM tbl_dichvu, tbl_danhmucdichvu WHERE tbl_dichvu.id_danhmucdichvu = tbl_danhmucdichvu.id_danhmucdichvu ORDER BY tbl_danhmucdichvu.id_danhmucdichvu DESC";
+    $query_lietke_dichvu = mysqli_query($mysqli, $sql_lietke_dichvu);
 ?>
+
 <p>Liệt Kê Các Loại Dịch Vụ</p>
 <table style="width:100%" border="1" style="border-collapse: collapse;">
   <tr>
     <th>Id</th>
-    <th>Tên sản phẩm</th>
-    <th>Bảo Hành</th>
-    <th>Giá sản phẩm</th>
-    <th>Tồn kho</th>
-    <th>Số lượng bán</th>
+    <th>Tên dịch vụ</th>
+    <th>Mã dịch vụ</th>
+    <th>Giá dịch vụ</th>
     <th>Danh mục</th>
     <th>Thông số kĩ thuật</th>
     <th>Nội dung</th>
-    <th>Trình Trạng</th>
     <th>Hình ảnh</th>
     <th>Quản lý</th>
   </tr>
   <?php 
   $i = 0;
-  while($row = mysqli_fetch_array($query_lietke_sp)){
+  while($row = mysqli_fetch_array($query_lietke_dichvu)){
     $i++;
   ?>
   <tr>
-    <td><?php echo $i?></td>
-    <td><?php echo $row['tensanpham']?></td>
-    <td><?php echo $row['masp']?></td>
-    <td><?php echo $row['giasp']?></td>
-    <td><?php echo $row['soluong']?></td>
-    <td><?php echo $row['soluongban']?></td>
-    <td><?php echo $row['tendanhmuc']?></td>
-    <td><?php echo $row['tomtat']?></td>
-    <td><?php echo $row['noidung']?></td>
-    <td><img src="modules/quanlysp/uploads/<?php echo $row['hinhanh']?>" width="100px"></td>
+    <td><?php echo $i ?></td>
+    <td><?php echo $row['tendichvu'] ?></td>
+    <td><?php echo $row['madichvu'] ?></td>
+    <td><?php echo $row['giadichvu'] ?></td> 
+    <td><?php echo $row['tendanhmucdichvu'] ?></td>
+    <td><?php echo $row['tomtat'] ?></td>
+    <td><?php echo $row['noidung'] ?></td>
+    <td><img src="modules/QL_Dv/uploads/<?php echo $row['hinhanh'] ?>" width="100px"></td>
 
     <td>
-        <a href="modules/quanlysp/xuly.php?idsanpham=<?php echo $row['id_sanpham'] ?>">Xoá</a> | <a href="?action=quanlysp&query=sua&idsanpham=<?php echo $row['id_sanpham'] ?>">Sửa</a>
+        <a href="modules/QL_Dv/xuly.php?iddichvu=<?php echo $row['id_dichvu'] ?>">Xoá</a> | 
+        <a href="?action=QL_Dv&query=sua&iddichvu=<?php echo $row['id_dichvu'] ?>">Sửa</a>
     </td>
   </tr>
   <?php 
