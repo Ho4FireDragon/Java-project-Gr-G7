@@ -1,0 +1,128 @@
+ul.admincp_list{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+ul.admincp_list li{
+    float:left;
+    margin: 5px;
+}
+.clear{
+    clear: both;
+}
+h3.title_admin {
+    text-align: center;
+    font-size: 40px;
+    color: aquamarine;
+}
+.wrapper {
+    border: 2px solid black;
+    height: auto;
+    width: 100%;
+    border-radius: 15px ;
+}
+
+/* Đăng nhập  */ 
+.wrapper_login {
+    
+    align-items: center;
+
+
+}
+
+.wrapper_login form {
+    
+
+    padding: 10% 40%;
+    width: 360px;
+    font-family: 'Roboto Mono', monospace;
+
+}
+
+.wrapper_login table {
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    outline: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px 15px;
+    background-color: rgb(242, 229, 229);
+}
+
+.wrapper_login input {
+    border: 1px solid gray;
+    border-radius: 20px;
+    outline: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 8px 12px;
+    width: 200px;
+
+}
+
+#loginbuttonad input {
+    background-color: #00A4BD;
+    font-family: 'Roboto Mono', monospace;
+    box-shadow: 1px 1px #00A4BD, 2px 2px #FF7A59
+}
+
+#loginbuttonad input:hover {
+    background-color: blue;
+    box-shadow: 1px 1px #00A4BD, 1.5px 1.5px #FF7A59
+}
+
+/* main */
+.admincp_menu {
+    background-color: #2c3e50;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.admincp_list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.admincp_list li {
+    border-right: 1px solid #34495e;
+}
+
+.admincp_list li:last-child {
+    border-right: none;
+}
+
+.admincp_list li a {
+    display: block;
+    padding: 15px 20px;
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+
+.admincp_list li a:hover {
+    background-color: #1abc9c;
+}
+
+.admincp_list li a:active {
+    background-color: #16a085;
+}
+
+
+/* footer */
+
+.footerad {
+    background-color: #2c3e50;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 -4px 8px rgba(0,0,0,0.1);
+    padding: 20px;
+    margin-top: 20px;
+    text-align: center;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+}
