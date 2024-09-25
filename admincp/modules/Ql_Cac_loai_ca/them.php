@@ -12,7 +12,7 @@
     </tr>
 
     <tr>
-        <td colspan="2"><input type="submit" name="themloaica" value="Thêm danh mục sản phẩm"></td>
+        <td colspan="2"><input type="submit" name="themloaica" value="Thêm Cá"></td>
     </tr>
   </form>
 </table>
