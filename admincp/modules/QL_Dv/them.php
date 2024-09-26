@@ -19,6 +19,11 @@
     </tr>
 
     <tr>
+        <td>Tóm tắt</td>
+        <td><input type="text" name="tomtat"></td>
+    </tr>
+
+    <tr>
         <td>Nội Dung</td>
         <td><textarea rows="5" cols="120" name="noidung" style="resize: none;"></textarea></td>
     </tr>

@@ -1,69 +1,63 @@
-
 <?php 
-    $sql_sua_sp = "SELECT * FROM tbl_sanpham WHERE id_sanpham='$_GET[idsanpham]' LIMIT 1";
-    $query_sua_sp = mysqli_query($mysqli,$sql_sua_sp);
+    $sql_sua_sp = "SELECT * FROM tbl_dichvu WHERE id_dichvu='$_GET[iddichvu]' LIMIT 1"; 
+    $query_sua_sp = mysqli_query($mysqli, $sql_sua_sp);
 ?>
-<p>Sửa sản phẩm</p>
+<p>Sửa Dịch Vụ</p>
 <table border="1px" width="50%" style="border-collapse: collapse;">
 <?php
 while($row = mysqli_fetch_array($query_sua_sp)){
 ?>
-  <form method="POST" action="modules/quanlysp/xuly.php?idsanpham=<?php echo $row['id_sanpham'] ?>" enctype="multipart/form-data"> <!-- phương thức để gửi dữ liểu(tránh mất dữ liệu-không thấy trên đg dẫn) -->
+  <form method="POST" action="modules/QL_Dv/xuly.php?iddichvu=<?php echo $row['id_dichvu'] ?>" enctype="multipart/form-data">
     <tr>
-        <td>Tên Sản Phẩm</td>
-        <td><input type="text" value="<?php echo $row['tensanpham'] ?>" name="tensanpham"></td>
+        <td>Tên Dịch Vụ</td>
+        <td><input type="text" value="<?php echo $row['tendichvu'] ?>" name="tendichvu"></td>
     </tr>
 
     <tr>
-        <td>Bảo Hành</td>
-        <td><input type="text" value="<?php echo $row['masp'] ?>" name="masp"></td>
+        <td>Mã Dịch Vụ</td>
+        <td><input type="text" value="<?php echo $row['madichvu'] ?>" name="madichvu"></td>
     </tr>
 
     <tr>
-        <td>Hình Ảnh Sản Phẩm</td>
+        <td>Hình Ảnh Dịch Vụ</td>
         <td>
             <input type="file" name="hinhanh" id="image">
-            <img src="modules/quanlysp/uploads/<?php echo $row['hinhanh']?>" width="100px">
+            <img src="modules/QL_Dv/uploads/<?php echo $row['hinhanh']?>" width="100px">
             <div id="preview"></div>
         </td>
-
     </tr>
 
     <tr>
-        <td>Giá Sản Phẩm</td>
-        <td><input type="text" value="<?php echo $row['giasp'] ?>" name="giasp"></td>
+        <td>Giá Dịch Vụ</td>
+        <td><input type="text" value="<?php echo $row['giadichvu'] ?>" name="giadichvu"></td>
     </tr>
 
-    <tr>
-        <td>Số Lượng Sản Phẩm</td>
-        <td><input type="text" value="<?php echo $row['soluong'] ?>" name="soluong"></td>
-    </tr>
 
     <tr>
         <td>Nội Dung</td>
-        <td><textarea rows="5" cols="120" name="noidung" style="resize: none;"><?php echo $row['noidung'] ?>></textarea></td>
+        <td><textarea rows="5" cols="120" name="noidung" style="resize: none;"><?php echo $row['noidung'] ?></textarea></td>
     </tr>
 
     <tr>
-        <td>Thông số kĩ thuật</td>
+        <td>Tóm Tắt</td>
         <td><textarea rows="5" cols="120" name="tomtat" style="resize: none;"><?php echo $row['tomtat'] ?></textarea></td>
     </tr>
 
     <tr>
-        <td>Danh mục sản phẩm</td>
+        <td>Danh mục dịch vụ</td>
         <td>
-          <select name="danhmuc">
+          <select name="danhmucdichvu">
             <?php 
-            $sql_danhmuc= "SELECT * FROM tbl_danhmuc ORDER BY id_danhmuc DESC";
-            $query_danhmuc = mysqli_query($mysqli,$sql_danhmuc);
-            while($row_danhmuc = mysqli_fetch_array($query_danhmuc)){
-                if($row_danhmuc['id_danhmuc']==$row['id_danhmuc']){
+            $sql_danhmucdichvu= "SELECT * FROM tbl_danhmucdichvu ORDER BY id_danhmucdichvu DESC";
+            $query_danhmucdichvu = mysqli_query($mysqli,$sql_danhmucdichvu);
+            while($row_danhmucdichvu = mysqli_fetch_array($query_danhmucdichvu)){
+                if($row_danhmucdichvu['id_danhmucdichvu'] == $row['id_danhmucdichvu']){
             ?>
-            <option selected value="<?php echo $row_danhmuc['id_danhmuc'] ?>"><?php echo $row_danhmuc['tendanhmuc'] ?></option>
+            <option selected value="<?php echo $row_danhmucdichvu['id_danhmucdichvu'] ?>"><?php echo $row_danhmucdichvu['tendanhmucdichvu'] ?></option>
             <?php
                 }else{
             ?>
-            <option value="<?php echo $row_danhmuc['id_danhmuc'] ?>"><?php echo $row_danhmuc['tendanhmuc'] ?></option>
+            <option value="<?php echo $row_danhmucdichvu['id_danhmucdichvu'] ?>"><?php echo $row_danhmucdichvu['tendanhmucdichvu'] ?></option>
             <?php        
                 }
             }
@@ -77,15 +71,15 @@ while($row = mysqli_fetch_array($query_sua_sp)){
         <td>
           <select name="tinhtrang">
             <?php
-            if($row['tinhtrang']==1) {
+            if($row['tinhtrang'] == 1) {
             ?>
-            <option value=1 selected>Kích Hoạt</option>
-            <option value=0>Ẩn</option>
+            <option value="1" selected>Kích Hoạt</option>
+            <option value="0">Ẩn</option>
             <?php
-            }else{
+            } else {
             ?>
-            <option value=1>Kích Hoạt</option>
-            <option value=0 selected>Ẩn</option>
+            <option value="1">Kích Hoạt</option>
+            <option value="0" selected>Ẩn</option>
             <?php
             }
             ?>
@@ -94,7 +88,7 @@ while($row = mysqli_fetch_array($query_sua_sp)){
     </tr>
 
     <tr>
-        <td colspan="2"><input type="submit" name="suasanpham" value="Sửa sản phẩm"></td>
+        <td colspan="2"><input type="submit" name="suadichvu" value="Sửa Dịch Vụ"></td>
     </tr>
   </form>
 <?php
