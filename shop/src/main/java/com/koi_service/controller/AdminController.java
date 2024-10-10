@@ -9,8 +9,8 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class AdminController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView admin() {
-        ModelAndView mav = new ModelAndView("admin");
+    public ModelAndView controller() {
+        ModelAndView mav = new ModelAndView("controller");
         return mav;
     }
 }
