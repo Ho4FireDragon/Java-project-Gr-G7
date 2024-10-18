@@ -62,13 +62,17 @@
 
 <body>
 <div class="container-fluid">
-  <p>Add New User</p>
+  <p th:if="${User.id}">Edit User</p>
+  <p th:unless="${User.id}">Add New User</p>
   <form th:action="@{/users/save}" th:object="${User}" method="post">
+    <!-- Hidden field for user ID -->
+    <input type="hidden" th:field="*{id}" />
+
     <!-- First Name -->
     <div class="form-group row">
       <label for="firstname" class="col-sm-2 col-form-label">First Name</label>
       <div class="col-sm-10">
-        <input type="text" id="firstname" th:field="*{firstname}" class="form-control" placeholder="First Name"/>
+        <input type="text" id="firstname" th:field="*{firstname}" class="form-control" placeholder="First Name" required />
       </div>
     </div>
 
@@ -76,7 +80,7 @@
     <div class="form-group row">
       <label for="lastname" class="col-sm-2 col-form-label">Last Name</label>
       <div class="col-sm-10">
-        <input type="text" id="lastname" th:field="*{lastname}" class="form-control" placeholder="Last Name"/>
+        <input type="text" id="lastname" th:field="*{lastname}" class="form-control" placeholder="Last Name" required />
       </div>
     </div>
 
@@ -84,7 +88,7 @@
     <div class="form-group row">
       <label for="username" class="col-sm-2 col-form-label">Username</label>
       <div class="col-sm-10">
-        <input type="text" id="username" th:field="*{username}" class="form-control" placeholder="Username"/>
+        <input type="text" id="username" th:field="*{username}" class="form-control" placeholder="Username" required />
       </div>
     </div>
 
@@ -92,7 +96,7 @@
     <div class="form-group row">
       <label for="email" class="col-sm-2 col-form-label">Email</label>
       <div class="col-sm-10">
-        <input type="email" id="email" th:field="*{email}" class="form-control" placeholder="Email"/>
+        <input type="email" id="email" th:field="*{email}" class="form-control" placeholder="Email" required />
       </div>
     </div>
 
@@ -100,7 +104,7 @@
     <div class="form-group row">
       <label for="password" class="col-sm-2 col-form-label">Password</label>
       <div class="col-sm-10">
-        <input type="password" id="password" th:field="*{password}" class="form-control" placeholder="Password"/>
+        <input type="password" id="password" th:field="*{password}" class="form-control" placeholder="Password" required />
       </div>
     </div>
 

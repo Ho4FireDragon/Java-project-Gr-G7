@@ -4,7 +4,30 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dec4e8d0-36d0-4f0c-9b6b-ae4cb9bc0d50" name="Changes" comment="backend mvc project" />
+    <list default="true" id="dec4e8d0-36d0-4f0c-9b6b-ae4cb9bc0d50" name="Changes" comment="backend mvc project">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/qodana.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopKoi/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ShopKoi/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopKoi/src/main/java/com/shopkoi/shopkoi/User/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopKoi/src/main/java/com/shopkoi/shopkoi/User/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopKoi/src/main/java/com/shopkoi/shopkoi/User/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopKoi/src/main/java/com/shopkoi/shopkoi/User/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopKoi/src/main/java/com/shopkoi/shopkoi/User/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopKoi/src/main/java/com/shopkoi/shopkoi/User/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopKoi/src/main/resources/templates/users.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopKoi/src/main/resources/templates/users.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop/src/main/java/com/koi_service/Application.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop/src/main/java/com/koi_service/ServletInitializer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop/src/main/java/com/koi_service/controller/AdminController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/ShopKoi/src/main/resources/templates/edituser.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop/src/main/webapp/WEB-INF/views/controller.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop/src/main/webapp/WEB-INF/web.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop/src/test/java/com/koi_service/ApplicationTests.java" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,7 +44,22 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Newbie1402&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Ho4FireDragon/Java-project-Gr-G7.git&quot;,
+    &quot;accountId&quot;: &quot;f061fa12-8e9e-4469-8d2b-3229b906b79d&quot;
+  }
+}</component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="C:\xampp\php\php.exe" />
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
 }</component>
@@ -33,24 +71,58 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "JavaScript Debug.index.html.executor": "Run",
+    "JavaScript Debug.newuser.html.executor": "Debug",
+    "JavaScript Debug.users.html.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "jdk.selected.JAVA_MODULE": "23",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/xampp/htdocs/Java-project-Gr-G7",
+    "last_opened_file_path": "C:/xampp/htdocs/Java-project-Gr-G7/ShopKoi",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql",
+      "mariadb"
+    ],
     "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
       "PLAIN_TEXT"
     ]
   }
 }]]></component>
+  <component name="RunManager" selected="Compound.Unnamed">
+    <configuration name="Unnamed" type="CompoundRunConfigurationType">
+      <method v="2" />
+    </configuration>
+    <configuration name="newuser.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Java-project-Gr-G7/ShopKoi/src/main/resources/templates/newuser.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="users.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Java-project-Gr-G7/ShopKoi/src/main/resources/templates/users.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Compound.Unnamed" />
+      <item itemvalue="JavaScript Debug.newuser.html" />
+      <item itemvalue="JavaScript Debug.users.html" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.newuser.html" />
+        <item itemvalue="JavaScript Debug.users.html" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -69,6 +141,9 @@
       <updated>1728481474239</updated>
       <workItem from="1728481475468" duration="1727000" />
       <workItem from="1728483221388" duration="427000" />
+      <workItem from="1729259132802" duration="2298000" />
+      <workItem from="1729261455004" duration="1330000" />
+      <workItem from="1729262796727" duration="1123000" />
     </task>
     <task id="LOCAL-00001" summary="backend mvc project">
       <option name="closed" value="true" />
@@ -87,5 +162,9 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="backend mvc project" />
     <option name="LAST_COMMIT_MESSAGE" value="backend mvc project" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
