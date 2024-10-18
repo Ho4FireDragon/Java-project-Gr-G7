@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Add New User</title>
+  <title>Thêm người dùng mới</title>
   <link rel="stylesheet" type="text/css" th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css}"/>
 
   <style>
@@ -63,7 +63,7 @@
 <body>
 <div class="container-fluid">
   <p th:if="${User.id}">Edit User</p>
-  <p th:unless="${User.id}">Add New User</p>
+  <p th:unless="${User.id}">Thêm người dùng mới</p>
   <form th:action="@{/users/save}" th:object="${User}" method="post">
     <!-- Hidden field for user ID -->
     <input type="hidden" th:field="*{id}" />

@@ -5,28 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dec4e8d0-36d0-4f0c-9b6b-ae4cb9bc0d50" name="Changes" comment="backend mvc project">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/qodana.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopKoi/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ShopKoi/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ShopKoi/src/main/java/com/shopkoi/shopkoi/User/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopKoi/src/main/java/com/shopkoi/shopkoi/User/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopKoi/src/main/java/com/shopkoi/shopkoi/User/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopKoi/src/main/java/com/shopkoi/shopkoi/User/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopKoi/src/main/java/com/shopkoi/shopkoi/User/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopKoi/src/main/java/com/shopkoi/shopkoi/User/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopKoi/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopKoi/src/main/resources/templates/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ShopKoi/src/main/resources/templates/users.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopKoi/src/main/resources/templates/users.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop/src/main/java/com/koi_service/Application.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop/src/main/java/com/koi_service/ServletInitializer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop/src/main/java/com/koi_service/controller/AdminController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/ShopKoi/src/main/resources/templates/edituser.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop/src/main/webapp/WEB-INF/views/controller.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop/src/main/webapp/WEB-INF/web.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop/src/test/java/com/koi_service/ApplicationTests.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

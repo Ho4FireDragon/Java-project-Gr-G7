@@ -22,7 +22,7 @@ public class UserService {
                 throw new IllegalArgumentException("Tên người dùng đã tồn tại. Vui lòng chọn tên khác.");
             }
         } else {
-            // Nếu là một bản ghi đã tồn tại, kiểm tra xem có cần cập nhật tên người dùng hay không
+            // Nếu đã tồn tại, kiểm tra xem có cần cập nhật tên người dùng hay không
             User existingUser = repo.findById(user.getId()).orElseThrow(() -> new NoSuchElementException("User not found"));
             if (!existingUser.getUsername().equals(user.getUsername()) && repo.existsByUsername(user.getUsername())) {
                 throw new IllegalArgumentException("Tên người dùng đã tồn tại. Vui lòng chọn tên khác.");

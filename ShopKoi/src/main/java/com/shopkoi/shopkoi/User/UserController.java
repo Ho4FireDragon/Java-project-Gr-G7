@@ -16,13 +16,13 @@ public class UserController {
     @GetMapping("/users")
     public String showUsersList(Model model) {
         model.addAttribute("ListUser", service.listAll());
-        return "users"; // Đảm bảo template có tên là users.html
+        return "users";
     }
 
     // Hiển thị form thêm người dùng
     @GetMapping("/users/newuser")
     public String addNewUser(Model model) {
-        model.addAttribute("User", new User()); // Đưa đối tượng User rỗng vào form
+        model.addAttribute("User", new User());
         return "newuser";
     }
 
@@ -30,19 +30,19 @@ public class UserController {
     @PostMapping("/users/save")
     public String saveUser(@ModelAttribute("User") User user, RedirectAttributes redirectAttributes) {
         try {
-            service.save(user); // Lưu người dùng mới vào cơ sở dữ liệu
+            service.save(user);
             redirectAttributes.addFlashAttribute("message", "Người dùng đã được thêm thành công!");
         } catch (IllegalArgumentException e) {
-            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage()); // Thêm thông báo lỗi
+            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
         }
-        return "redirect:/users"; // Chuyển hướng về danh sách người dùng sau khi lưu
+        return "redirect:/users";
     }
 
     // Hiển thị form sửa người dùng
     @GetMapping("/users/edit/{id}")
     public String editUser(@PathVariable int id, Model model) {
         model.addAttribute("User", service.get(id)); // Lấy thông tin người dùng theo ID
-        return "newuser"; // Sử dụng lại template newuser.html cho form sửa
+        return "newuser";
     }
 
     // Xóa người dùng
@@ -50,6 +50,6 @@ public class UserController {
     public String deleteUser(@PathVariable int id, RedirectAttributes redirectAttributes) {
         service.delete(id); // Xóa người dùng theo ID
         redirectAttributes.addFlashAttribute("message", "Người dùng đã được xóa thành công!");
-        return "redirect:/users"; // Chuyển hướng về danh sách người dùng sau khi xóa
+        return "redirect:/users";
     }
 }

@@ -3,13 +3,13 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Manage User</title>
+  <title>Quản lý User</title>
   <link rel="stylesheet" type="text/css" th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css}" />
 </head>
 
 <body>
 <div class="container-fluid">
-  <h1>Manage User</h1>
+  <h1>Quản lý User</h1>
   <table class="table table-bordered table-striped">
     <thead class="thead-dark">
     <tr>
@@ -36,7 +36,7 @@
 
           <!-- Nút Xóa -->
           <a th:href="@{/users/delete/{id}(id=${user.id})}" class="btn btn-danger"
-             onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
+             onclick="return confirm('Có chắc delelete người dùng này không?');">Delete</a>
         </td>
       </tr>
     </th:block>
