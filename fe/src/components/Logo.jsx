@@ -10,8 +10,8 @@ function Logo({ width = 384, height = 246 }) {
         <svg
             version="1.0"
             xmlns="http://www.w3.org/2000/svg"
-            width={width}
-            height={height}
+            width={width + 'px'}
+            height={height + 'px'}
             viewBox="0 0 384.000000 246.000000"
             preserveAspectRatio="xMidYMid meet"
         >
