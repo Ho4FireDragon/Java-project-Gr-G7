@@ -21,14 +21,16 @@ function Header() {
                     <ul className="flex items-center justify-start">
                         {headerbar.map((item, index) => (
                             <li key={index}>
-                                <a href={item.path} className="text-[21px] leading-[80px] font-medium uppercase px-[21px] text-primary">
+                                <Link to={item.path} className="text-[21px] leading-[80px] font-medium uppercase px-[21px] text-primary">
                                     {item.label}
-                                </a>
+                                </Link>
                             </li>
                         ))}
                     </ul>
-                    <Button className="text-[21px] leading-[80px] font-medium uppercase px-[21px] text-white" color="warning">
-                        Request Appointment
+                    <Button className="text-[21px] leading-[80px] font-medium uppercase text-white px-0" color="warning">
+                        <Link to={config.routes.appointment} className="px-[21px]">
+                            Request Appointment
+                        </Link>
                     </Button>
                 </div>
             </div>
