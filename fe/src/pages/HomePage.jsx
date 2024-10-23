@@ -1,5 +1,5 @@
 function HomePage() {
-    return <div>Hello Home Page</div>
+    return <div className="h-[50vh]">Hello Home Page</div>
 }
 
 export default HomePage
