@@ -1,5 +1,7 @@
 package com.shopkoi.shopkoi;
 
+import com.shopkoi.shopkoi.Staff.Staff;
+import com.shopkoi.shopkoi.Staff.StaffRepository;
 import com.shopkoi.shopkoi.User.User;
 import com.shopkoi.shopkoi.User.UserRepository;
 import org.junit.jupiter.api.Assertions;
@@ -16,14 +18,15 @@ import java.util.Optional;
 @Rollback(false)
 public class UserRepositoryTest {
     @Autowired private UserRepository repo;
+    @Autowired private StaffRepository staffRepo;
 
     @Test
     public void TestAddUser() {
         User user = new User();
-        user.setUsername("Hoaa");
-        user.setPassword("123");
+        user.setUsername("Hoanggg");
+        user.setPassword("12341");
         user.setEmail("admin@shopkoi.com");
-        user.setFirstname("Hoa2");
+        user.setFirstname("Hoa22321");
         user.setLastname("Lee");
 
         repo.save(user);
@@ -42,7 +45,7 @@ public class UserRepositoryTest {
 
     @Test
     public void TestFindById() {
-        Integer id = 3;
+        Integer id = 7;
 
         // Tìm người dùng theo id
         Optional<User> user = repo.findById(id);
@@ -71,5 +74,13 @@ public class UserRepositoryTest {
         });
     }
 
+    @Test
+    public void TestAddStaff() {
+        Staff staff = new Staff();
+        staff.setStaffname("Hoa");
+        staff.setStaffemail("staff@shopkoi.com");
+        staff.setRole("Lao cong");
 
+        staffRepo.save(staff);
+    }
 }
