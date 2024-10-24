@@ -1,85 +1,176 @@
--- MySQL dump 10.13  Distrib 8.0.38, for Win64 (x86_64)
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
 --
--- Host: localhost    Database: shopkoi
--- ------------------------------------------------------
--- Server version	8.0.39
+-- Máy chủ: 127.0.0.1
+-- Thời gian đã tạo: Th10 24, 2024 lúc 07:14 PM
+-- Phiên bản máy phục vụ: 10.4.32-MariaDB
+-- Phiên bản PHP: 8.2.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
--- Table structure for table `staffs`
+-- Cơ sở dữ liệu: `shopkoi`
 --
 
-DROP TABLE IF EXISTS `staffs`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `services`
+--
+
+CREATE TABLE `services` (
+  `id` bigint(20) NOT NULL,
+  `content` varchar(255) DEFAULT NULL,
+  `images` varchar(255) DEFAULT NULL,
+  `nameservice` varchar(255) DEFAULT NULL,
+  `price` double NOT NULL,
+  `productcode` varchar(255) NOT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  `summary` varchar(255) DEFAULT NULL,
+  `img` varchar(255) DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `services`
+--
+
+INSERT INTO `services` (`id`, `content`, `images`, `nameservice`, `price`, `productcode`, `status`, `summary`, `img`, `image`) VALUES
+(2, NULL, NULL, 'a', 2, '1', 'bình thường', 'f', NULL, NULL),
+(3, NULL, NULL, 'a', 2, '1', 'bình thường', 'ư', NULL, NULL),
+(4, NULL, NULL, '1', 2, '1', 'bình thường', 'f', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsvwTBr3yEqWkOtfYHBVFHl_VJlT893zJFBg&s', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `service_entity`
+--
+
+CREATE TABLE `service_entity` (
+  `id` bigint(20) NOT NULL,
+  `content` varchar(255) DEFAULT NULL,
+  `images` varchar(255) DEFAULT NULL,
+  `nameservice` varchar(255) DEFAULT NULL,
+  `price` double NOT NULL,
+  `productcode` varchar(255) DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  `summary` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `staffs`
+--
+
 CREATE TABLE `staffs` (
-  `staffid` int NOT NULL AUTO_INCREMENT,
-  `role` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `staffemail` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `staffname` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `staffphone` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `staffschdule` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `staffpassword` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  PRIMARY KEY (`staffid`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `staffid` int(11) NOT NULL,
+  `role` varchar(255) DEFAULT NULL,
+  `staffemail` varchar(255) DEFAULT NULL,
+  `staffname` varchar(255) DEFAULT NULL,
+  `staffphone` varchar(255) DEFAULT NULL,
+  `staffschdule` varchar(255) DEFAULT NULL,
+  `staffpassword` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `staffs`
+-- Đang đổ dữ liệu cho bảng `staffs`
 --
 
-LOCK TABLES `staffs` WRITE;
-/*!40000 ALTER TABLE `staffs` DISABLE KEYS */;
-INSERT INTO `staffs` VALUES (7,'giam doc','hoaa@gmail.com','hoa','2831289','ranh gg',NULL);
-/*!40000 ALTER TABLE `staffs` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `staffs` (`staffid`, `role`, `staffemail`, `staffname`, `staffphone`, `staffschdule`, `staffpassword`) VALUES
+(54, 'ma', 'thespeak2004@gmail.com', 'test 1', '000', '1', NULL),
+(56, 'Role', 'thespeak2004@gmail.com', 'staff Name', 'Phone', '0', NULL),
+(58, '1', 'thespeak2004@gmail.com', 'j', '5', '1', NULL);
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Cấu trúc bảng cho bảng `users`
 --
 
-DROP TABLE IF EXISTS `users`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `users` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `email` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `first_name` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `last_name` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `password` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `username` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `UKr43af9ap4edm43mmtq01oddj6` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `id` int(11) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `first_name` varchar(50) NOT NULL,
+  `last_name` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `username` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `users`
+-- Đang đổ dữ liệu cho bảng `users`
 --
 
-LOCK TABLES `users` WRITE;
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (7,'admin@shopkoi.com','Hoa22321','Lee','12341','Hoanggg');
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+INSERT INTO `users` (`id`, `email`, `first_name`, `last_name`, `password`, `username`) VALUES
+(7, 'admin@shopkoi.com', 'Hoa22321', 'Lee', '123456', 'Hoanggg');
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+--
+-- Chỉ mục cho các bảng đã đổ
+--
+
+--
+-- Chỉ mục cho bảng `services`
+--
+ALTER TABLE `services`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `service_entity`
+--
+ALTER TABLE `service_entity`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `staffs`
+--
+ALTER TABLE `staffs`
+  ADD PRIMARY KEY (`staffid`);
+
+--
+-- Chỉ mục cho bảng `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `UKr43af9ap4edm43mmtq01oddj6` (`username`);
+
+--
+-- AUTO_INCREMENT cho các bảng đã đổ
+--
+
+--
+-- AUTO_INCREMENT cho bảng `services`
+--
+ALTER TABLE `services`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT cho bảng `service_entity`
+--
+ALTER TABLE `service_entity`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `staffs`
+--
+ALTER TABLE `staffs`
+  MODIFY `staffid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+
+--
+-- AUTO_INCREMENT cho bảng `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2024-10-23 13:37:25
