@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Service</title>
+    <link rel="stylesheet" type="text/css" th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div class="container">
+    <h2>Edit Service</h2>
+    <form th:action="@{/services/edit/{id}(id=${service.id})}" method="post">
+        <div class="form-group">
+            <label for="nameservice">Service Name</label>
+            <input type="text" class="form-control" id="nameservice" name="nameservice" th:value="${service.nameservice}" required>
+        </div>
+        <div class="form-group">
+            <label for="productcode">Product Code</label>
+            <input type="text" class="form-control" id="productcode" name="productcode" th:value="${service.productcode}" required>
+        </div>
+        <div class="form-group">
+            <label for="price">Price</label>
+            <input type="number" class="form-control" id="price" name="price" th:value="${service.price}" required>
+        </div>
+        <div class="form-group">
+            <label for="summary">Summary</label>
+            <textarea class="form-control" id="summary" name="summary" required th:text="${service.summary}"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="status">Status</label>
+            <select class="form-control" id="status" name="status" required>
+                <option value="bình thường" th:selected="${service.status == 'bình thường'}">Bình thường</option>
+                <option value="tạm ngưng" th:selected="${service.status == 'tạm ngưng'}">Tạm ngưng</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Update Service</button>
+        <a class="btn btn-secondary" th:href="@{/services}">Cancel</a>
+    </form>
+</div>
+</body>
+</html>
