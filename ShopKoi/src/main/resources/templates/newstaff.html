@@ -105,9 +105,15 @@
         <div class="form-group row">
             <label for="staffschedule" class="col-sm-2 col-form-label">Staff Schedule</label>
             <div class="col-sm-10">
-                <input type="text" id="staffschedule" th:field="*{staffschdule}" class="form-control" placeholder="Staff schedule" required />
+                <select id="staffschedule" th:field="*{staffschdule}" class="form-control" required>
+                    <option value="0" th:selected="${staff != null && staff.staffschdule == 0}">Có</option>
+                    <option value="1" th:selected="${staff != null && staff.staffschdule == 1}">Không</option>
+                </select>
             </div>
         </div>
+
+
+
 
         <!-- Submit Button -->
         <div class="form-group row">

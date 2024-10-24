@@ -26,7 +26,6 @@ public class StaffController {
         model.addAttribute("Staff", new Staff());
         return "newstaff";
     }
-
     // Sửa staff theo ID
     @GetMapping("/staff/editstaff/{id}")
     public String editStaff(@PathVariable int id, Model model) {

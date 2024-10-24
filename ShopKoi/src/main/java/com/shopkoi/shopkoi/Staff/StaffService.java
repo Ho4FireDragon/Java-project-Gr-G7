@@ -14,10 +14,22 @@ public class StaffService {
     public List<Staff> listAll() {
         return (List<Staff>) staffRepo.findAll();
     }
-
+    //chức năng edit đã sửa
     public void saveStaff(Staff staff) {
-        staffRepo.save(staff); // Lưu hoặc cập nhật người dùng vào cơ sở dữ liệu
+        // Kiểm tra xem tên người dùng đã tồn tại hay chưa
+        List<Staff> existingStaff = staffRepo.findByStaffname(staff.getStaffname());
+
+        // Nếu có người dùng cũ, xóa họ
+        if (!existingStaff.isEmpty()) {
+            for (Staff oldStaff : existingStaff) {
+                staffRepo.delete(oldStaff); // Xóa người dùng cũ
+            }
+        }
+
+        // Lưu hoặc cập nhật người dùng mới vào cơ sở dữ liệu
+        staffRepo.save(staff);
     }
+
 
     public Staff getStaff(int staffid) {
         return staffRepo.findById(staffid).orElseThrow(() -> new NoSuchElementException("User not found"));

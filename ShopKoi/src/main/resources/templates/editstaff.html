@@ -10,7 +10,7 @@
 <body>
 <div class="container-fluid">
     <h1>Edit Staff</h1>
-    <form th:action="@{/staff/updatestaff}" th:object="${staff}" method="post">
+    <form th:action="@{/staff/save}" th:object="${Staff}" method="post">
         <!-- Hidden field for staff ID -->
         <input type="hidden" th:field="*{staffid}"/>
 
