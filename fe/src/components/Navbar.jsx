@@ -109,7 +109,7 @@ function Navbar() {
                                 </div>
                                 {/* Dropdown */}
                                 {navigate.children && (
-                                    <ul className="hidden group-hover:block border-t absolute top-full left-0 bg-primary w-[208px]">
+                                    <ul className="hidden group-hover:block border-t absolute top-full left-0 bg-primary w-[208px] z-20">
                                         {navigate.children.map((dropdownItem, index) => (
                                             <li key={index} className="px-4 py-[14px] hover:bg-primary-200 transition duration-200">
                                                 <Link to={dropdownItem.path} className="block">

@@ -8,9 +8,9 @@ DefaultLayout.propTypes = {
 
 function DefaultLayout({ children }) {
     return (
-        <div id="page">
+        <div id="w-screen h-screen">
             <Header />
-            <main className="container">{children}</main>
+            <main>{children}</main>
             <Footer />
         </div>
     )
