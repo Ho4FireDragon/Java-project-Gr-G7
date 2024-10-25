@@ -14,5 +14,9 @@ export const config = {
         contact: '/contact',
         cart: '/cart',
         check_out: '/check-out',
+
+        // Auth
+        login: '/login',
+        register: '/register',
     },
 }
