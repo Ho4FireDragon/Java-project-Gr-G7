@@ -61,36 +61,36 @@
 
 <body>
 <div class="container-fluid">
-    <p th:if="${Staff.staffid}">Edit User</p>
-    <p th:unless="${Staff.staffid}">Thêm người dùng mới</p>
+    <!-- Tiêu đề thay đổi dựa trên việc tạo mới hay chỉnh sửa -->
+    <p th:if="${Staff.staffid}">Sửa nhân viên</p>
+    <p th:unless="${Staff.staffid}">Thêm nhân viên mới</p>
 
-
-    <form th:action="@{/staff/save}" th:object="${Staff}" method="post">
-        <!-- Hidden field for staff ID -->
+    <!-- Form thêm/chỉnh sửa nhân viên -->
+    <form th:action="@{/staff/save}" th:object="${Staff}" method="post" enctype="multipart/form-data">
+        <!-- Trường ẩn cho ID của nhân viên -->
         <input type="hidden" th:field="*{staffid}" />
-
 
         <!-- Staff Name -->
         <div class="form-group row">
-            <label for="staffname" class="col-sm-2 col-form-label">Staff Name</label>
+            <label for="staffname" class="col-sm-2 col-form-label">Tên nhân viên</label>
             <div class="col-sm-10">
-                <input type="text" id="staffname" th:field="*{staffname}" class="form-control" placeholder="Staff Name" required />
+                <input type="text" id="staffname" th:field="*{staffname}" class="form-control" placeholder="Tên nhân viên" required />
             </div>
         </div>
 
         <!-- Staff Phone -->
         <div class="form-group row">
-            <label for="staffphone" class="col-sm-2 col-form-label">Staff Phone</label>
+            <label for="staffphone" class="col-sm-2 col-form-label">Số điện thoại</label>
             <div class="col-sm-10">
-                <input type="text" id="staffphone" th:field="*{staffphone}" class="form-control" placeholder="Staff Phone" required />
+                <input type="text" id="staffphone" th:field="*{staffphone}" class="form-control" placeholder="Số điện thoại" required />
             </div>
         </div>
 
         <!-- Staff Email -->
         <div class="form-group row">
-            <label for="staffemail" class="col-sm-2 col-form-label">Staff Email</label>
+            <label for="staffemail" class="col-sm-2 col-form-label">Email</label>
             <div class="col-sm-10">
-                <input type="text" id="staffemail" th:field="*{staffemail}" class="form-control" placeholder="Staff Email" required />
+                <input type="email" id="staffemail" th:field="*{staffemail}" class="form-control" placeholder="Email" required />
             </div>
         </div>
 
@@ -98,29 +98,47 @@
         <div class="form-group row">
             <label for="role" class="col-sm-2 col-form-label">Role</label>
             <div class="col-sm-10">
-                <input type="text" id="role" th:field="*{role}" class="form-control" placeholder="Role" required />
+                <select id="role" th:field="*{role}" class="form-control" required>
+                    <option value="" disabled selected>Chọn Role</option>
+                    <!-- Hiển thị các lựa chọn Role từ danh sách roles -->
+                    <th:block th:each="role : ${roles}">
+                        <option th:value="${role.name}" th:text="${role.name}"></option>
+                    </th:block>
+                </select>
             </div>
         </div>
 
         <!-- Staff Schedule -->
         <div class="form-group row">
-            <label for="staffschedule" class="col-sm-2 col-form-label">Staff Schedule</label>
+            <label for="staffschedule" class="col-sm-2 col-form-label">Lịch làm việc</label>
             <div class="col-sm-10">
                 <select id="staffschedule" th:field="*{staffschdule}" class="form-control" required>
-                    <option value="0" th:selected="${staff != null && staff.staffschdule.equals('0')}">Có</option>
-                    <option value="1" th:selected="${staff != null && staff.staffschdule.equals('1')}">Không</option>
+                    <option value="Có đi làm">Có đi làm</option>
+                    <option value="Không đi làm">Không đi làm</option>
                 </select>
-
             </div>
         </div>
 
+        <!-- Staff Password -->
+        <div class="form-group row">
+            <label for="staffpassword" class="col-sm-2 col-form-label">Password</label>
+            <div class="col-sm-10">
+                <input type="password" id="staffpassword" th:field="*{staffpassword}" class="form-control" placeholder="Nhập mật khẩu" required />
+            </div>
+        </div>
 
+        <!-- Upload Image (nếu cần) -->
+        <div class="form-group row">
+            <label for="imageFile" class="col-sm-2 col-form-label">Tải lên ảnh</label>
+            <div class="col-sm-10">
+                <input type="file" id="imageFile" name="imageFile" class="form-control" accept="image/*" />
+            </div>
+        </div>
 
-
-        <!-- Submit Button -->
+        <!-- Nút Submit -->
         <div class="form-group row">
             <div class="col-sm-10 offset-sm-2">
-                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="submit" class="btn btn-primary">Lưu</button>
             </div>
         </div>
     </form>

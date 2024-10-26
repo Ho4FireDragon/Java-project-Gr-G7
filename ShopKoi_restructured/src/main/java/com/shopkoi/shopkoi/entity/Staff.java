@@ -1,32 +1,46 @@
-package com.shopkoi.shopkoi.Staff;
+package com.shopkoi.shopkoi.entity;  // Đảm bảo package đúng
 
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="staffs")
+@Table(name = "staffs")
 public class Staff {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int staffid;
 
-    @Column ()
+    @Column(nullable = false)
     private String staffname;
 
-    @Column()
+    @Column(nullable = false)
     private String staffphone;
 
-    @Column()
+    @Column(nullable = false)
     private String staffemail;
 
-    @Column()
+    @Column(nullable = false)
     private String role;
 
-    @Column()
+    @Column(nullable = false)
     private String staffschdule;
 
-    @Column()
+    @Column(nullable = false)
     private String staffpassword;
 
+    // Thêm thuộc tính mới cho đường dẫn ảnh
+    @Column()
+    private String imagePath;
+
+    // Getter và Setter cho imagePath
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    // Các getter và setter khác
     public int getStaffid() {
         return staffid;
     }
@@ -54,8 +68,6 @@ public class Staff {
     public String getStaffemail() {
         return staffemail;
     }
-
-
 
     public void setStaffemail(String staffemail) {
         this.staffemail = staffemail;

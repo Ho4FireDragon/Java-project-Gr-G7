@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dec4e8d0-36d0-4f0c-9b6b-ae4cb9bc0d50" name="Changes" comment="backend mvc project">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="dec4e8d0-36d0-4f0c-9b6b-ae4cb9bc0d50" name="Changes" comment="backend mvc project" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -52,7 +50,7 @@
     "git-widget-placeholder": "main",
     "jdk.selected.JAVA_MODULE": "23",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/xampp/htdocs/Java-project-Gr-G7/ShopKoi",
+    "last_opened_file_path": "C:/xampp/htdocs/Java-project-Gr-G7/ShopKoi_restructured",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -88,6 +86,7 @@
       <workItem from="1729297231749" duration="1129000" />
       <workItem from="1729748276849" duration="225000" />
       <workItem from="1729748509735" duration="42000" />
+      <workItem from="1729927612100" duration="23000" />
     </task>
     <task id="LOCAL-00001" summary="backend mvc project">
       <option name="closed" value="true" />
