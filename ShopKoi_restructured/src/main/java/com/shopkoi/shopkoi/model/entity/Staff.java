@@ -1,4 +1,4 @@
-package com.shopkoi.shopkoi.entity;  // Đảm bảo package đúng
+package com.shopkoi.shopkoi.model.entity;  // Đảm bảo package đúng
 
 import jakarta.persistence.*;
 

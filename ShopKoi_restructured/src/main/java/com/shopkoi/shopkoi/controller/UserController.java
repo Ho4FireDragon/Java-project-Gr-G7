@@ -1,5 +1,7 @@
-package com.shopkoi.shopkoi.User;
+package com.shopkoi.shopkoi.controller;
 
+import com.shopkoi.shopkoi.Service.UserService;
+import com.shopkoi.shopkoi.model.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

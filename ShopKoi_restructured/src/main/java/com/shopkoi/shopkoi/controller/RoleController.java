@@ -1,6 +1,6 @@
 package com.shopkoi.shopkoi.controller;
 
-import com.shopkoi.shopkoi.entity.Role;
+import com.shopkoi.shopkoi.model.entity.Role;
 import com.shopkoi.shopkoi.Service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -2,7 +2,7 @@ package com.shopkoi.shopkoi.controller;
 
 import com.shopkoi.shopkoi.Service.RoleService;
 import com.shopkoi.shopkoi.Service.StaffService;
-import com.shopkoi.shopkoi.entity.Staff;
+import com.shopkoi.shopkoi.model.entity.Staff;
 import com.shopkoi.shopkoi.util.FileUploadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

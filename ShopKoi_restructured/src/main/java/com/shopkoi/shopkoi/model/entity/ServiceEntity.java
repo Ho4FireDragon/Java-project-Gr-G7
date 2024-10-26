@@ -1,4 +1,4 @@
-package com.shopkoi.shopkoi.entity;
+package com.shopkoi.shopkoi.model.entity;
 
 import jakarta.persistence.*;
 

@@ -1,5 +1,6 @@
-package com.shopkoi.shopkoi.User;
+package com.shopkoi.shopkoi.repository;
 
+import com.shopkoi.shopkoi.model.entity.User;
 import org.springframework.data.repository.CrudRepository;
 
 public interface UserRepository extends CrudRepository<User, Integer> {

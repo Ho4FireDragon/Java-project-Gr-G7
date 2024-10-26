@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import com.shopkoi.shopkoi.service.ServiceService;
-import com.shopkoi.shopkoi.entity.ServiceEntity;
+import com.shopkoi.shopkoi.model.entity.ServiceEntity;
 
 
 import java.util.List;
