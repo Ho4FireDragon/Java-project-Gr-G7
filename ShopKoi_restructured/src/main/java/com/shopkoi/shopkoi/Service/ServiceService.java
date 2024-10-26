@@ -1,7 +1,10 @@
-package com.shopkoi.shopkoi.Service;
+package com.shopkoi.shopkoi.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.shopkoi.shopkoi.repository.ServiceRepository;
+import com.shopkoi.shopkoi.entity.ServiceEntity;
+
 
 import java.util.List;
 

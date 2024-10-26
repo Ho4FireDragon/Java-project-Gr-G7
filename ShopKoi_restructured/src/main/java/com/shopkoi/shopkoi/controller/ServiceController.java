@@ -1,9 +1,12 @@
-package com.shopkoi.shopkoi.Service;
+package com.shopkoi.shopkoi.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import com.shopkoi.shopkoi.service.ServiceService;
+import com.shopkoi.shopkoi.entity.ServiceEntity;
+
 
 import java.util.List;
 

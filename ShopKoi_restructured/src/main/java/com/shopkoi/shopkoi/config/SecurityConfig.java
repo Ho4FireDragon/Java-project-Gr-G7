@@ -1,4 +1,4 @@
-package com.shopkoi.shopkoi.Service;
+package com.shopkoi.shopkoi.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
