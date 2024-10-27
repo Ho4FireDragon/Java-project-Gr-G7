@@ -37,3 +37,20 @@ http://localhost:8080/api/users
   "email": "user01@example.com"
 }
 
+
+Customer
+http://localhost:8080/api/customers
+{
+  "userId": 8,
+  "firstname": "Le",
+  "lastname": "Hoa",
+  "email": "hoale@example.com",
+  "phone": "123456789",
+  "address": "QUAN 12 HCM"
+}
+
+
+
+Booking
+http://localhost:8080/api/bookings
+PUT

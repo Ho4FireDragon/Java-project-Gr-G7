@@ -1,9 +1,10 @@
 package com.shopkoi.shopkoi.repository;
 
-import com.shopkoi.shopkoi.model.entity.ServiceEntity;
+import com.shopkoi.shopkoi.model.entity.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ServiceRepository extends JpaRepository<ServiceEntity, Long> {
+public interface CustomerRepository extends JpaRepository<Customer, Long> {
+    Customer findByUserId(Long userId);
 }

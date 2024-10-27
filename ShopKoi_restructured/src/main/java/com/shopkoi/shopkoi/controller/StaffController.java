@@ -1,6 +1,7 @@
 package com.shopkoi.shopkoi.controller;
 
 import com.shopkoi.shopkoi.Service.StaffService;
+import com.shopkoi.shopkoi.Service.StaffSchedule;
 import com.shopkoi.shopkoi.model.entity.Staff;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,6 +22,12 @@ public class StaffController {
     public ResponseEntity<List<Staff>> getAllStaff() {
         List<Staff> staffList = staffService.listAll();
         return ResponseEntity.ok(staffList);
+    }
+
+    // Lấy danh sách tất cả các giá trị của StaffSchedule
+    @GetMapping("/schedules")
+    public ResponseEntity<List<StaffSchedule>> getAllSchedules() {
+        return ResponseEntity.ok(List.of(StaffSchedule.values()));
     }
 
     // Lấy nhân viên theo ID
@@ -50,6 +57,7 @@ public class StaffController {
             existingStaff.setStaffemail(staffDetails.getStaffemail());
             existingStaff.setStaffphone(staffDetails.getStaffphone());
             existingStaff.setRole(staffDetails.getRole());
+            existingStaff.setStaffschedule(staffDetails.getStaffschedule());
 
             Staff updatedStaff = staffService.saveStaff(existingStaff);
             return ResponseEntity.ok(updatedStaff);
@@ -62,6 +70,6 @@ public class StaffController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteStaff(@PathVariable Long id) {
         staffService.delete(id);
-        return ResponseEntity.noContent().build();  
+        return ResponseEntity.noContent().build();
     }
 }
