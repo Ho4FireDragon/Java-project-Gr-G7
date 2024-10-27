@@ -17,15 +17,15 @@ public class StaffService {
         return staffRepository.findAll();
     }
 
-    public void saveStaff(Staff staff) {
-        staffRepository.save(staff);
+    public Staff saveStaff(Staff staff) {
+        return staffRepository.save(staff);
     }
 
-    public Staff getStaff(int id) {
+    public Staff getStaff(Long id) {
         return staffRepository.findById(id).orElse(null);
     }
 
-    public void delete(int id) {
+    public void delete(Long id) {
         staffRepository.deleteById(id);
     }
 }

@@ -13,18 +13,22 @@ public class RoleService {
     @Autowired
     private RoleRepository roleRepository;
 
+    // Lấy tất cả các role
     public List<Role> listAll() {
         return roleRepository.findAll();
     }
 
-    public void save(Role role) {
-        roleRepository.save(role);
+    // Lưu role mới hoặc cập nhật role
+    public Role save(Role role) {
+        return roleRepository.save(role);
     }
 
+    // Lấy role theo ID
     public Role get(Long id) {
         return roleRepository.findById(id).orElse(null);
     }
 
+    // Xóa role theo ID
     public void delete(Long id) {
         roleRepository.deleteById(id);
     }

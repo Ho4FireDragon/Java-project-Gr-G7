@@ -1,4 +1,4 @@
-package com.shopkoi.shopkoi.service;
+package com.shopkoi.shopkoi.Service;
 
 public enum ServiceStatus {
     TẠM_NGƯNG,

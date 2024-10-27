@@ -27,6 +27,10 @@ public class ServiceEntity {
     @Column(name = "status")
     private String status;
 
+    // Thêm thuộc tính imagePath để lưu đường dẫn ảnh
+    @Column(name = "image_path")
+    private String imagePath;
+
     // Getters và Setters
 
     public Long getId() {
@@ -83,5 +87,13 @@ public class ServiceEntity {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 }

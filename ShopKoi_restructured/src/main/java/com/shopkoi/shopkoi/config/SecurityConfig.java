@@ -43,3 +43,21 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 }
+
+
+//public class SecurityConfig {
+//
+//    @Bean
+//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//        http
+//                .csrf().disable() // Tắt CSRF để đơn giản hóa khi test qua Postman
+//                .authorizeRequests()
+//                .anyRequest().permitAll(); // Cho phép mọi request không cần xác thực
+//        return http.build();
+//    }
+//
+//    @Bean
+//    public PasswordEncoder passwordEncoder() {
+//        return new BCryptPasswordEncoder();
+//    }
+//}

@@ -3,31 +3,34 @@ package com.shopkoi.shopkoi.model.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
-    @Column(nullable=false, unique=true, length=50)
+    private Long id;
     private String username;
-
-    @Column(nullable=false, length=50)
     private String password;
-
-    @Column(nullable=false, length=50, name = "first_name")
     private String firstname;
-    @Column(nullable=false, length=50, name = "last_name")
     private String lastname;
-
-    @Column(nullable=false, length=50)
     private String email;
 
-    public int getId() {
+
+    public User() {
+    }
+
+    public User(Long id, String username, String password, String firstname, String lastname, String email) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -69,10 +72,5 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    @Override
-    public String toString() {
-        return "User [id=" + id + ", username=" + username + ", password=" + password + ", firstname=" + firstname + ", lastname=" + lastname + ", email=" + email + "]";
     }
 }
