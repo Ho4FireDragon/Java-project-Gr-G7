@@ -20,16 +20,19 @@ public class ServiceService {
 
     // Lưu hoặc cập nhật dịch vụ và trả về đối tượng dịch vụ đã lưu
     public ServiceEntity saveService(ServiceEntity service) {
+        // Thực hiện lưu đối tượng ServiceEntity vào cơ sở dữ liệu
         return serviceRepository.save(service);  // Trả về đối tượng đã lưu
     }
 
     // Lấy dịch vụ theo ID
     public ServiceEntity getServiceById(Long id) {
+        // Trả về dịch vụ nếu tìm thấy theo ID hoặc null nếu không tìm thấy
         return serviceRepository.findById(id).orElse(null);
     }
 
     // Xóa dịch vụ theo ID
     public void deleteService(Long id) {
+        // Thực hiện xóa dịch vụ theo ID
         serviceRepository.deleteById(id);
     }
 }
