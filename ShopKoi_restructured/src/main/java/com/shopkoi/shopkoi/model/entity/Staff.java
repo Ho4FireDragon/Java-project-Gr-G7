@@ -1,52 +1,39 @@
-package com.shopkoi.shopkoi.model.entity;  // Đảm bảo package đúng
+package com.shopkoi.shopkoi.model.entity;
 
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "staffs")
 public class Staff {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int staffid;
-
-    @Column(nullable = false)
+    private Long id;
     private String staffname;
-
-    @Column(nullable = false)
+    private String staffemail;
     private String staffphone;
 
-    @Column(nullable = false)
-    private String staffemail;
+    @ManyToOne
+    @JoinColumn(name = "role_id")  // Mapping với entity Role
+    private Role role;
 
-    @Column(nullable = false)
-    private String role;
+    // Constructors, Getters, and Setters
 
-    @Column(nullable = false)
-    private String staffschdule;
-
-    @Column(nullable = false)
-    private String staffpassword;
-
-    // Thêm thuộc tính mới cho đường dẫn ảnh
-    @Column()
-    private String imagePath;
-
-    // Getter và Setter cho imagePath
-    public String getImagePath() {
-        return imagePath;
+    public Staff() {
     }
 
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
+    public Staff(Long id, String staffname, String staffemail, String staffphone, Role role) {
+        this.id = id;
+        this.staffname = staffname;
+        this.staffemail = staffemail;
+        this.staffphone = staffphone;
+        this.role = role;
     }
 
-    // Các getter và setter khác
-    public int getStaffid() {
-        return staffid;
+    public Long getId() {
+        return id;
     }
 
-    public void setStaffid(int staffid) {
-        this.staffid = staffid;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getStaffname() {
@@ -57,14 +44,6 @@ public class Staff {
         this.staffname = staffname;
     }
 
-    public String getStaffphone() {
-        return staffphone;
-    }
-
-    public void setStaffphone(String staffphone) {
-        this.staffphone = staffphone;
-    }
-
     public String getStaffemail() {
         return staffemail;
     }
@@ -73,27 +52,19 @@ public class Staff {
         this.staffemail = staffemail;
     }
 
-    public String getRole() {
+    public String getStaffphone() {
+        return staffphone;
+    }
+
+    public void setStaffphone(String staffphone) {
+        this.staffphone = staffphone;
+    }
+
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
-    }
-
-    public String getStaffschdule() {
-        return staffschdule;
-    }
-
-    public void setStaffschdule(String staffschdule) {
-        this.staffschdule = staffschdule;
-    }
-
-    public String getStaffpassword() {
-        return staffpassword;
-    }
-
-    public void setStaffpassword(String staffpassword) {
-        this.staffpassword = staffpassword;
     }
 }

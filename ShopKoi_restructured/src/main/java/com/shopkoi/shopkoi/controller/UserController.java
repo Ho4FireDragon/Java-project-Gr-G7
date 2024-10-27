@@ -3,55 +3,66 @@ package com.shopkoi.shopkoi.controller;
 import com.shopkoi.shopkoi.Service.UserService;
 import com.shopkoi.shopkoi.model.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-@Controller
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/users")
 public class UserController {
 
     @Autowired
-    private UserService service;
+    private UserService userService;
 
-    // Hiển thị danh sách người dùng
-    @GetMapping("/users")
-    public String showUsersList(Model model) {
-        model.addAttribute("ListUser", service.listAll());
-        return "users";
+    // Lấy danh sách tất cả người dùng
+    @GetMapping
+    public ResponseEntity<List<User>> getAllUsers() {
+        List<User> userList = userService.listAll();
+        return ResponseEntity.ok(userList);  // Trả về danh sách người dùng dưới dạng JSON
     }
 
-    // Hiển thị form thêm người dùng
-    @GetMapping("/users/newuser")
-    public String addNewUser(Model model) {
-        model.addAttribute("User", new User());
-        return "newuser";
-    }
-
-    // Lưu người dùng mới
-    @PostMapping("/users/save")
-    public String saveUser(@ModelAttribute("User") User user, RedirectAttributes redirectAttributes) {
-        try {
-            service.save(user);
-            redirectAttributes.addFlashAttribute("message", "Người dùng đã được thêm thành công!");
-        } catch (IllegalArgumentException e) {
-            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
+    // Lấy người dùng theo ID
+    @GetMapping("/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable Long id) {
+        User user = userService.getUser(id);
+        if (user != null) {
+            return ResponseEntity.ok(user);  // Trả về người dùng theo ID
+        } else {
+            return ResponseEntity.notFound().build();  // Trả về 404 nếu không tìm thấy người dùng
         }
-        return "redirect:/users";
     }
 
-    // Hiển thị form sửa người dùng
-    @GetMapping("/users/edit/{id}")
-    public String editUser(@PathVariable int id, Model model) {
-        model.addAttribute("User", service.get(id)); // Lấy thông tin người dùng theo ID
-        return "newuser";
+    // Thêm người dùng mới
+    @PostMapping
+    public ResponseEntity<User> addNewUser(@RequestBody User user) {
+        User newUser = userService.saveUser(user);
+        return ResponseEntity.status(HttpStatus.CREATED).body(newUser);  // Trả về người dùng mới tạo
     }
 
-    // Xóa người dùng
-    @GetMapping("/users/delete/{id}")
-    public String deleteUser(@PathVariable int id, RedirectAttributes redirectAttributes) {
-        service.delete(id); // Xóa người dùng theo ID
-        redirectAttributes.addFlashAttribute("message", "Người dùng đã được xóa thành công!");
-        return "redirect:/users";
+    // Cập nhật người dùng
+    @PutMapping("/{id}")
+    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User userDetails) {
+        User existingUser = userService.getUser(id);
+        if (existingUser != null) {
+            existingUser.setUsername(userDetails.getUsername());
+            existingUser.setPassword(userDetails.getPassword());
+            existingUser.setFirstname(userDetails.getFirstname());
+            existingUser.setLastname(userDetails.getLastname());
+            existingUser.setEmail(userDetails.getEmail());
+
+            User updatedUser = userService.saveUser(existingUser);
+            return ResponseEntity.ok(updatedUser);  // Trả về người dùng đã cập nhật
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    // Xóa người dùng theo ID
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+        userService.delete(id);
+        return ResponseEntity.noContent().build();  // Trả về 204 No Content sau khi xóa thành công
     }
 }

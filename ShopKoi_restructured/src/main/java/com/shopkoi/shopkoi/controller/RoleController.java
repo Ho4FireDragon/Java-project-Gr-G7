@@ -3,50 +3,61 @@ package com.shopkoi.shopkoi.controller;
 import com.shopkoi.shopkoi.model.entity.Role;
 import com.shopkoi.shopkoi.Service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
-@RequestMapping("/role")
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/roles")  // Chỉ định định tuyến cho API roles
 public class RoleController {
 
     @Autowired
     private RoleService roleService;
 
-    // Hiển thị danh sách Role
+    // Lấy danh sách tất cả các role (GET)
     @GetMapping
-    public String showRoleList(Model model) {
-        model.addAttribute("ListRole", roleService.listAll());
-        return "role";
+    public ResponseEntity<List<Role>> getAllRoles() {
+        List<Role> roles = roleService.listAll();
+        return ResponseEntity.ok(roles);  // Trả về danh sách role dưới dạng JSON
     }
 
-    // Form thêm role mới
-    @GetMapping("/new")
-    public String newRole(Model model) {
-        model.addAttribute("Role", new Role());
-        return "newrole";
+    // Thêm role mới (POST)
+    @PostMapping
+    public ResponseEntity<Role> createRole(@RequestBody Role role) {
+        Role newRole = roleService.save(role);
+        return ResponseEntity.status(HttpStatus.CREATED).body(newRole);  // Trả về role vừa được tạo
     }
 
-    // Lưu hoặc cập nhật role
-    @PostMapping("/save")
-    public String saveRole(@ModelAttribute("Role") Role role) {
-        roleService.save(role);
-        return "redirect:/role";
+    // Cập nhật role theo ID (PUT)
+    @PutMapping("/{id}")
+    public ResponseEntity<Role> updateRole(@PathVariable Long id, @RequestBody Role roleDetails) {
+        Role existingRole = roleService.get(id);  // Lấy role hiện tại theo ID
+        if (existingRole != null) {
+            existingRole.setName(roleDetails.getName());  // Cập nhật thông tin role
+            Role updatedRole = roleService.save(existingRole);
+            return ResponseEntity.ok(updatedRole);  // Trả về role đã cập nhật
+        } else {
+            return ResponseEntity.notFound().build();  // Trả về mã 404 nếu không tìm thấy role
+        }
     }
 
-    // Xóa role theo ID
-    @GetMapping("/delete/{id}")
-    public String deleteRole(@PathVariable Long id) {
-        roleService.delete(id);
-        return "redirect:/role";
+    // Xóa role theo ID (DELETE)
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteRole(@PathVariable Long id) {
+        roleService.delete(id);  // Xóa role theo ID
+        return ResponseEntity.noContent().build();  // Trả về mã trạng thái 204 khi xóa thành công
     }
 
-    // Sửa role theo ID
-    @GetMapping("/edit/{id}")
-    public String editRole(@PathVariable Long id, Model model) {
-        Role role = roleService.get(id);
-        model.addAttribute("Role", role);
-        return "newrole";
+    // Lấy role theo ID (GET)
+    @GetMapping("/{id}")
+    public ResponseEntity<Role> getRoleById(@PathVariable Long id) {
+        Role role = roleService.get(id);  // Lấy role theo ID
+        if (role != null) {
+            return ResponseEntity.ok(role);  // Trả về role dưới dạng JSON
+        } else {
+            return ResponseEntity.notFound().build();  // Trả về mã 404 nếu không tìm thấy
+        }
     }
 }
