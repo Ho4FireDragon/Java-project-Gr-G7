@@ -13,26 +13,23 @@ public class ServiceService {
     @Autowired
     private ServiceRepository serviceRepository;
 
-    // Lấy danh sách tất cả các dịch vụ
+    // Lấy danh sách tất cả
     public List<ServiceEntity> getAllServices() {
         return serviceRepository.findAll();
     }
 
-    // Lưu hoặc cập nhật dịch vụ và trả về đối tượng dịch vụ đã lưu
+    // Lưu hoặc cập nhật
     public ServiceEntity saveService(ServiceEntity service) {
-        // Thực hiện lưu đối tượng ServiceEntity vào cơ sở dữ liệu
-        return serviceRepository.save(service);  // Trả về đối tượng đã lưu
+        return serviceRepository.save(service);
     }
 
-    // Lấy dịch vụ theo ID
+    // Lấy theo ID
     public ServiceEntity getServiceById(Long id) {
-        // Trả về dịch vụ nếu tìm thấy theo ID hoặc null nếu không tìm thấy
         return serviceRepository.findById(id).orElse(null);
     }
 
-    // Xóa dịch vụ theo ID
+    // Xóa theo ID
     public void deleteService(Long id) {
-        // Thực hiện xóa dịch vụ theo ID
         serviceRepository.deleteById(id);
     }
 }

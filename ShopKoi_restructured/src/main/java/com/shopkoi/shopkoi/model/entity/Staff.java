@@ -15,8 +15,6 @@ public class Staff {
     @JoinColumn(name = "role_id")  // Mapping với entity Role
     private Role role;
 
-    // Constructors, Getters, and Setters
-
     public Staff() {
     }
 

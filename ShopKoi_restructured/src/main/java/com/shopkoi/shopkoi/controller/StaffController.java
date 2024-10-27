@@ -20,7 +20,7 @@ public class StaffController {
     @GetMapping
     public ResponseEntity<List<Staff>> getAllStaff() {
         List<Staff> staffList = staffService.listAll();
-        return ResponseEntity.ok(staffList);  // Trả về danh sách nhân viên dưới dạng JSON
+        return ResponseEntity.ok(staffList);
     }
 
     // Lấy nhân viên theo ID
@@ -28,9 +28,9 @@ public class StaffController {
     public ResponseEntity<Staff> getStaffById(@PathVariable Long id) {
         Staff staff = staffService.getStaff(id);
         if (staff != null) {
-            return ResponseEntity.ok(staff);  // Trả về nhân viên theo ID
+            return ResponseEntity.ok(staff);
         } else {
-            return ResponseEntity.notFound().build();  // Trả về 404 nếu không tìm thấy nhân viên
+            return ResponseEntity.notFound().build();
         }
     }
 
@@ -38,7 +38,7 @@ public class StaffController {
     @PostMapping
     public ResponseEntity<Staff> addNewStaff(@RequestBody Staff staff) {
         Staff newStaff = staffService.saveStaff(staff);
-        return ResponseEntity.status(HttpStatus.CREATED).body(newStaff);  // Trả về nhân viên mới tạo
+        return ResponseEntity.status(HttpStatus.CREATED).body(newStaff);
     }
 
     // Cập nhật nhân viên
@@ -62,6 +62,6 @@ public class StaffController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteStaff(@PathVariable Long id) {
         staffService.delete(id);
-        return ResponseEntity.noContent().build();  // Trả về 204 No Content sau khi xóa thành công
+        return ResponseEntity.noContent().build();  
     }
 }

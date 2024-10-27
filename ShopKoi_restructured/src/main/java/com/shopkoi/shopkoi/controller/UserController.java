@@ -20,7 +20,7 @@ public class UserController {
     @GetMapping
     public ResponseEntity<List<User>> getAllUsers() {
         List<User> userList = userService.listAll();
-        return ResponseEntity.ok(userList);  // Trả về danh sách người dùng dưới dạng JSON
+        return ResponseEntity.ok(userList);
     }
 
     // Lấy người dùng theo ID
@@ -28,9 +28,9 @@ public class UserController {
     public ResponseEntity<User> getUserById(@PathVariable Long id) {
         User user = userService.getUser(id);
         if (user != null) {
-            return ResponseEntity.ok(user);  // Trả về người dùng theo ID
+            return ResponseEntity.ok(user);
         } else {
-            return ResponseEntity.notFound().build();  // Trả về 404 nếu không tìm thấy người dùng
+            return ResponseEntity.notFound().build();
         }
     }
 
@@ -38,7 +38,7 @@ public class UserController {
     @PostMapping
     public ResponseEntity<User> addNewUser(@RequestBody User user) {
         User newUser = userService.saveUser(user);
-        return ResponseEntity.status(HttpStatus.CREATED).body(newUser);  // Trả về người dùng mới tạo
+        return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
     }
 
     // Cập nhật người dùng
@@ -53,7 +53,7 @@ public class UserController {
             existingUser.setEmail(userDetails.getEmail());
 
             User updatedUser = userService.saveUser(existingUser);
-            return ResponseEntity.ok(updatedUser);  // Trả về người dùng đã cập nhật
+            return ResponseEntity.ok(updatedUser);
         } else {
             return ResponseEntity.notFound().build();
         }
@@ -63,6 +63,6 @@ public class UserController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
         userService.delete(id);
-        return ResponseEntity.noContent().build();  // Trả về 204 No Content sau khi xóa thành công
+        return ResponseEntity.noContent().build();  
     }
 }

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/roles")  // Chỉ định định tuyến cho API roles
+@RequestMapping("/api/roles")
 public class RoleController {
 
     @Autowired
@@ -20,26 +20,26 @@ public class RoleController {
     @GetMapping
     public ResponseEntity<List<Role>> getAllRoles() {
         List<Role> roles = roleService.listAll();
-        return ResponseEntity.ok(roles);  // Trả về danh sách role dưới dạng JSON
+        return ResponseEntity.ok(roles);
     }
 
     // Thêm role mới (POST)
     @PostMapping
     public ResponseEntity<Role> createRole(@RequestBody Role role) {
         Role newRole = roleService.save(role);
-        return ResponseEntity.status(HttpStatus.CREATED).body(newRole);  // Trả về role vừa được tạo
+        return ResponseEntity.status(HttpStatus.CREATED).body(newRole);
     }
 
     // Cập nhật role theo ID (PUT)
     @PutMapping("/{id}")
     public ResponseEntity<Role> updateRole(@PathVariable Long id, @RequestBody Role roleDetails) {
-        Role existingRole = roleService.get(id);  // Lấy role hiện tại theo ID
+        Role existingRole = roleService.get(id);
         if (existingRole != null) {
-            existingRole.setName(roleDetails.getName());  // Cập nhật thông tin role
+            existingRole.setName(roleDetails.getName());
             Role updatedRole = roleService.save(existingRole);
-            return ResponseEntity.ok(updatedRole);  // Trả về role đã cập nhật
+            return ResponseEntity.ok(updatedRole);
         } else {
-            return ResponseEntity.notFound().build();  // Trả về mã 404 nếu không tìm thấy role
+            return ResponseEntity.notFound().build();
         }
     }
 
@@ -47,17 +47,17 @@ public class RoleController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteRole(@PathVariable Long id) {
         roleService.delete(id);  // Xóa role theo ID
-        return ResponseEntity.noContent().build();  // Trả về mã trạng thái 204 khi xóa thành công
+        return ResponseEntity.noContent().build();
     }
 
     // Lấy role theo ID (GET)
     @GetMapping("/{id}")
     public ResponseEntity<Role> getRoleById(@PathVariable Long id) {
-        Role role = roleService.get(id);  // Lấy role theo ID
+        Role role = roleService.get(id);
         if (role != null) {
-            return ResponseEntity.ok(role);  // Trả về role dưới dạng JSON
+            return ResponseEntity.ok(role);
         } else {
-            return ResponseEntity.notFound().build();  // Trả về mã 404 nếu không tìm thấy
+            return ResponseEntity.notFound().build();
         }
     }
 }

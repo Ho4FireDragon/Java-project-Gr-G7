@@ -13,7 +13,6 @@ public class User {
     private String lastname;
     private String email;
 
-    // Constructors, Getters, and Setters
 
     public User() {
     }
