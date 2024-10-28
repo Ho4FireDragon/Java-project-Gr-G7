@@ -1,0 +1,56 @@
+Role
+http://localhost:8080/api/roles
+{ "name": "Admin" }
+
+Service
+http://localhost:8080/api/services
+{
+    "id": 10,
+    "nameservice": "a",
+    "productcode": "f",
+    "price": 100000.0,
+    "summary": "đ",
+    "content": "a",
+    "status": "e",
+    "imagePath": "staff-images/fff.png"
+}
+
+Staff
+http://localhost:8080/api/staff
+{
+  "staffname": "Tên",
+  "staffemail": "a@example.com",
+  "staffphone": "3232",
+  "role": {
+    "id": 2,
+    "name": "Admin"
+  }
+}
+
+
+http://localhost:8080/api/users
+{
+  "username": "user01",
+  "password": "password123",
+  "firstname": "Nguyen",
+  "lastname": "Van A",
+  "email": "user01@example.com"
+}
+
+
+Customer
+http://localhost:8080/api/customers
+{
+  "userId": 8,
+  "firstname": "Le",
+  "lastname": "Hoa",
+  "email": "hoale@example.com",
+  "phone": "123456789",
+  "address": "QUAN 12 HCM"
+}
+
+
+
+Booking
+http://localhost:8080/api/bookings
+PUT

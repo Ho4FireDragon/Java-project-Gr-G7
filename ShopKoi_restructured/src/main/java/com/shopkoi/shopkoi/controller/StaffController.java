@@ -1,89 +1,75 @@
 package com.shopkoi.shopkoi.controller;
 
-import com.shopkoi.shopkoi.Service.RoleService;
 import com.shopkoi.shopkoi.Service.StaffService;
+import com.shopkoi.shopkoi.Service.StaffSchedule;
 import com.shopkoi.shopkoi.model.entity.Staff;
-import com.shopkoi.shopkoi.util.FileUploadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.io.IOException;
+import java.util.List;
 
-@Controller
+@RestController
+@RequestMapping("/api/staff")
 public class StaffController {
 
     @Autowired
     private StaffService staffService;
 
-    @Autowired
-    private RoleService roleService;
-
-    @GetMapping("/staff")
-    public String showStaffList(Model model) {
-        model.addAttribute("ListStaff", staffService.listAll());
-        return "staff";
+    // Lấy danh sách tất cả nhân viên
+    @GetMapping
+    public ResponseEntity<List<Staff>> getAllStaff() {
+        List<Staff> staffList = staffService.listAll();
+        return ResponseEntity.ok(staffList);
     }
 
-    @GetMapping("/staff/new")
-    public String newStaff(Model model) {
-        model.addAttribute("Staff", new Staff());
-        model.addAttribute("roles", roleService.listAll());
-        return "newstaff";
+    // Lấy danh sách tất cả các giá trị của StaffSchedule
+    @GetMapping("/schedules")
+    public ResponseEntity<List<StaffSchedule>> getAllSchedules() {
+        return ResponseEntity.ok(List.of(StaffSchedule.values()));
     }
 
-    @GetMapping("/staff/editstaff/{id}")
-    public String editStaff(@PathVariable int id, Model model) {
+    // Lấy nhân viên theo ID
+    @GetMapping("/{id}")
+    public ResponseEntity<Staff> getStaffById(@PathVariable Long id) {
+        Staff staff = staffService.getStaff(id);
+        if (staff != null) {
+            return ResponseEntity.ok(staff);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    // Thêm nhân viên mới
+    @PostMapping
+    public ResponseEntity<Staff> addNewStaff(@RequestBody Staff staff) {
+        Staff newStaff = staffService.saveStaff(staff);
+        return ResponseEntity.status(HttpStatus.CREATED).body(newStaff);
+    }
+
+    // Cập nhật nhân viên
+    @PutMapping("/{id}")
+    public ResponseEntity<Staff> updateStaff(@PathVariable Long id, @RequestBody Staff staffDetails) {
         Staff existingStaff = staffService.getStaff(id);
         if (existingStaff != null) {
-            model.addAttribute("Staff", existingStaff);
-            model.addAttribute("roles", roleService.listAll());
-            return "newstaff";
+            existingStaff.setStaffname(staffDetails.getStaffname());
+            existingStaff.setStaffemail(staffDetails.getStaffemail());
+            existingStaff.setStaffphone(staffDetails.getStaffphone());
+            existingStaff.setRole(staffDetails.getRole());
+            existingStaff.setStaffschedule(staffDetails.getStaffschedule());
+
+            Staff updatedStaff = staffService.saveStaff(existingStaff);
+            return ResponseEntity.ok(updatedStaff);
         } else {
-            model.addAttribute("errorMessage", "Staff không tồn tại.");
-            return "redirect:/staff";
+            return ResponseEntity.notFound().build();
         }
     }
 
-    @PostMapping("/staff/save")
-    public String saveOrUpdateStaff(@ModelAttribute("Staff") Staff staff,
-                                    @RequestParam("imageFile") MultipartFile imageFile,
-                                    RedirectAttributes redirectAttributes) {
-        try {
-            if (!imageFile.isEmpty()) {
-                String fileName = imageFile.getOriginalFilename();
-                String uploadDir = "staff-images/";
-
-                if (staff.getImagePath() != null && !staff.getImagePath().isEmpty()) {
-                    String oldImagePath = staff.getImagePath();
-                    java.io.File oldImageFile = new java.io.File(oldImagePath);
-                    if (oldImageFile.exists()) {
-                        boolean deleted = oldImageFile.delete();
-                        if (!deleted) {
-                            System.out.println("Không thể xóa ảnh cũ: " + oldImagePath);
-                        }
-                    }
-                }
-
-                FileUploadUtil.saveFile(uploadDir, fileName, imageFile);
-                staff.setImagePath(uploadDir + fileName);
-            }
-
-            staffService.saveStaff(staff);
-            redirectAttributes.addFlashAttribute("message", "Nhân viên đã được lưu thành công!");
-        } catch (IOException e) {
-            redirectAttributes.addFlashAttribute("errorMessage", "Có lỗi xảy ra khi lưu ảnh: " + e.getMessage());
-        }
-        return "redirect:/staff";
-    }
-
-    @GetMapping("/staff/delete/{id}")
-    public String deleteStaff(@PathVariable int id, RedirectAttributes redirectAttributes) {
+    // Xóa nhân viên theo ID
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteStaff(@PathVariable Long id) {
         staffService.delete(id);
-        redirectAttributes.addFlashAttribute("message", "Nhân viên đã được xóa thành công!");
-        return "redirect:/staff";
+        return ResponseEntity.noContent().build();
     }
 }
