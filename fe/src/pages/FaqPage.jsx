@@ -63,3 +63,65 @@ const comments = [
         },
     },
 ]
+
+// Component Comment để hiển thị chi tiết từng bình luận
+const Comment = ({ name, date, text, response }) => (
+    <div className="comment">
+        <div className="first_CommentPart">
+            <img src={response.avatarOne} alt={`${response.name}'s avatar`} className="avatar" />
+            <p>
+                <a href="" className="response_Name">
+                    <strong>{name}</strong>
+                </a>
+                <div className="date_Info">- {date}</div>
+            </p>
+        </div>
+        <p>{text}</p>
+        {response && (
+            <div className="response">
+                <img src={response.avatar} alt={`${response.name}'s avatar`} className="avatar" />
+                <div>
+                    <p>
+                        <a href="" className="response_Name">
+                            <strong>{response.name}</strong>
+                        </a>{' '}
+                        - {response.date}
+                    </p>
+                    <p>{response.text}</p>
+                </div>
+            </div>
+        )}
+    </div>
+)
+
+// Component CommentList để hiển thị danh sách các bình luận
+const CommentList = () => (
+    <div>
+        <h3 className="practice_ManagerFaQ">13 thoughts on “Frequently Asked Questions”</h3>
+        {comments.map((comment, index) => (
+            <Comment key={index} name={comment.name} date={comment.date} text={comment.text} response={comment.response} />
+        ))}
+    </div>
+)
+
+export default function FaqPage() {
+    return (
+        <div>
+            <div className="header_aboutUs">
+                <h1 className="text_Header">Frequently Asked Questions</h1>
+            </div>
+            {faqData.map((item, index) => (
+                <Accordion key={index}>
+                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                        <Typography>{item.question}</Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <Typography>{item.answer}</Typography>
+                    </AccordionDetails>
+                </Accordion>
+            ))}
+            {/* Thêm phần CommentList bên dưới */}
+            <CommentList />
+        </div>
+    )
+}
