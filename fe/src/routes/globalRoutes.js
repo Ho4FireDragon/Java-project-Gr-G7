@@ -8,11 +8,15 @@ import AppointmentPage from '../pages/AppointmentPage'
 import LoginPage from '../pages/LoginPage'
 import RegisterPage from '../pages/RegisterPage'
 
+import FaqPage from '../pages/FaqPage'
+import services from '../pages/services'
+
 export const globalRoutes = [
     { path: config.routes.home, element: HomePage },
     { path: config.routes.about, element: AboutPage },
     { path: config.routes.appointment, element: AppointmentPage },
-
+    { path: config.routes.faq, element: FaqPage },
+    { path: config.routes.services, element: services },
     { path: config.routes.login, element: LoginPage, layout: EmptyLayout },
     { path: config.routes.register, element: RegisterPage, layout: EmptyLayout },
 ]
