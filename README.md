@@ -1,4 +1,4 @@
-# Phần mềm quản lý dịch vụ thú y cá Koi của trung tâm | Group 8
+# Phần mềm quản lý dịch vụ thú y cá Koi của trung tâm | Group G(7)
 
 ## Giới thiệu đồ án
 
