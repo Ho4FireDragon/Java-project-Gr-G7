@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - Koi Care Center</title>
+  <link rel="stylesheet" href="path/to/adminlte.min.css">
+  <style>
+    /* Custom CSS for styling the register page */
+    body {
+      background-image: url('../img/Koi4.jpg');
+      background-size: cover;
+      background-attachment: fixed;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .register-box {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .register-logo a {
+      color: #007bff;
+    }
+    .btn-primary {
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+  </style>
+</head>
+<body class="hold-transition register-page">
+  <div class="register-box">
+    <div class="register-logo">
+      <a href="index.html"><b>Koi Care</b> Center</a>
+    </div>
+    <div class="card">
+      <div class="card-body register-card-body">
+        <p class="login-box-msg">Register a new membership</p>
+
+        <form id="registerForm">
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Full name" id="registerName" required>
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-user"></span>
+              </div>
+            </div>
+          </div>
+          <div class="input-group mb-3">
+            <input type="email" class="form-control" placeholder="Email" id="registerEmail" required>
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-envelope"></span>
+              </div>
+            </div>
+          </div>
+          <div class="input-group mb-3">
+            <input type="password" class="form-control" placeholder="Password" id="registerPassword" required>
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+              </div>
+            </div>
+          </div>
+          <div class="input-group mb-3">
+            <input type="password" class="form-control" placeholder="Retype password" id="registerPassword2" required>
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-8">
+              <div class="icheck-primary">
+                <input type="checkbox" id="agreeTerms" name="terms" value="agree" required>
+                <label for="agreeTerms">
+                  I agree to the <a href="#">terms</a>
+                </label>
+              </div>
+            </div>
+            <!-- /.col -->
+            <div class="col-4">
+              <button type="submit" class="btn btn-primary btn-block">Register</button>
+            </div>
+            <!-- /.col -->
+          </div>
+        </form>
+
+        <a href="login.html" class="text-center">I already have a membership</a>
+      </div>
+      <!-- /.form-box -->
+    </div><!-- /.card -->
+  </div>
+  <!-- /.register-box -->
+
+  <!-- REQUIRED SCRIPTS -->
+  <script src="path/to/adminlte.min.js"></script>
+  <script>
+    document.getElementById('registerForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      alert('Registration functionality not implemented yet.');
+    });
+  </script>
+</body>
+</html>

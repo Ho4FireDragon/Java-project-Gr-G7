@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Koi Care Center</title>
+  <link rel="stylesheet" href="path/to/adminlte.min.css">
+  <style>
+    /* Custom CSS for styling the login page */
+    body {
+      background-image: url('../img/Koi4.jpg');
+      background-size: cover;
+      background-attachment: fixed;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .login-box {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .login-logo a {
+      color: #007bff;
+    }
+    .btn-primary {
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+  </style>
+</head>
+<body class="hold-transition login-page">
+  <div class="login-box">
+    <div class="login-logo">
+      <a href="index.html"><b>Koi Care</b> Center</a>
+    </div>
+    <!-- /.login-logo -->
+    <div class="card">
+      <div class="card-body login-card-body">
+        <p class="login-box-msg">Sign in to start your session</p>
+
+        <form id="loginForm">
+          <div class="input-group mb-3">
+            <input type="email" class="form-control" placeholder="Email" id="loginEmail" required>
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-envelope"></span>
+              </div>
+            </div>
+          </div>
+          <div class="input-group mb-3">
+            <input type="password" class="form-control" placeholder="Password" id="loginPassword" required>
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-8">
+              <div class="icheck-primary">
+                <input type="checkbox" id="remember">
+                <label for="remember">
+                  Remember Me
+                </label>
+              </div>
+            </div>
+            <!-- /.col -->
+            <div class="col-4">
+              <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+            </div>
+            <!-- /.col -->
+          </div>
+        </form>
+
+        <p class="mb-1">
+          <a href="#">I forgot my password</a>
+        </p>
+        <p class="mb-0">
+          <a href="register.html" class="text-center">Register a new membership</a>
+        </p>
+      </div>
+      <!-- /.login-card-body -->
+    </div>
+  </div>
+  <!-- /.login-box -->
+
+  <!-- REQUIRED SCRIPTS -->
+  <script src="path/to/adminlte.min.js"></script>
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      alert('Login functionality not implemented yet.');
+    });
+  </script>
+</body>
+</html>
