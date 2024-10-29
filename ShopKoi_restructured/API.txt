@@ -54,3 +54,12 @@ http://localhost:8080/api/customers
 Booking
 http://localhost:8080/api/bookings
 PUT
+
+Feedback
+http://localhost:8080/api/feedback
+{
+    "booking": { "bookingId": 1 },
+    "customer": { "customerId": 1 },
+    "rating": 5,
+    "comment": "Great service!"
+}
