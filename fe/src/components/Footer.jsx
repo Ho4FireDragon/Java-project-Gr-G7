@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { config } from '../configs'
 
-function Footer() {
+function Footer(fixedFooter = true) {
     const footerMenus = [
         {
             title: 'Menu',
