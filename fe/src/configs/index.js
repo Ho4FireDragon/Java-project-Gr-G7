@@ -4,6 +4,7 @@ export const config = {
         home: '/',
         about: '/about',
         faq: '/faq',
+        services: '/services',
         our_services: '/our-services',
         appointment: '/appointment',
 
