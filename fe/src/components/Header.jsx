@@ -8,7 +8,7 @@ function Header() {
     const headerbar = [
         { label: 'About us', path: config.routes.about },
         { label: 'Faq', path: config.routes.faq },
-        { label: 'Our services', path: config.routes.our_services },
+        { label: 'services', path: config.routes.services },
     ]
 
     return (
