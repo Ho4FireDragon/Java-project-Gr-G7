@@ -1,9 +1,15 @@
 Role
 http://localhost:8080/api/roles
+http://localhost:8080/api/roles/create
+http://localhost:8080/api/roles/update/{id}
+http://localhost:8080/api/roles/delete/{id}
 { "name": "Admin" }
 
 Service
 http://localhost:8080/api/services
+http://localhost:8080/api/services/create
+http://localhost:8080/api/services/update/{id}
+http://localhost:8080/api/services/delete/{id}
 {
     "id": 10,
     "nameservice": "a",
@@ -17,29 +23,26 @@ http://localhost:8080/api/services
 
 Staff
 http://localhost:8080/api/staff
+http://localhost:8080/api/staff/create
+http://localhost:8080/api/staff/update/{id}
+http://localhost:8080/api/staff/delete/{id}
+
 {
-  "staffname": "Tên",
-  "staffemail": "a@example.com",
-  "staffphone": "3232",
-  "role": {
-    "id": 2,
-    "name": "Admin"
-  }
+  "staffName": "D.Thinh",
+  "staffEmail": "johndoe@example.com",
+  "staffPhone": "1234567890",
+  "roleId": 2,
+  "staffSchedule": "NGHI",
+  "staffPassword": "password123"
 }
 
-
-http://localhost:8080/api/users
-{
-  "username": "user01",
-  "password": "password123",
-  "firstname": "Nguyen",
-  "lastname": "Van A",
-  "email": "user01@example.com"
-}
 
 
 Customer
 http://localhost:8080/api/customers
+http://localhost:8080/api/customers/create
+http://localhost:8080/api/customers/update/{id}
+http://localhost:8080/api/customers/delete/{id}
 {
     "firstname": "John",
     "lastname": "Doe",
@@ -54,6 +57,9 @@ http://localhost:8080/api/customers
 
 Booking
 http://localhost:8080/api/bookings
+http://localhost:8080/api/bookings/create
+http://localhost:8080/api/bookings/update/{id}
+http://localhost:8080/api/bookings/delete/{id}
 {
     "customerId": 2,
     "staffId": 7,
@@ -64,6 +70,9 @@ http://localhost:8080/api/bookings
 
 Feedback
 http://localhost:8080/api/feedback
+http://localhost:8080/api/feedback/create
+http://localhost:8080/api/feedback/update/{id}
+http://localhost:8080/api/feedback/delete/{id}
 {
     "bookingid": 1 ,
     "customerid": 2,
@@ -71,4 +80,23 @@ http://localhost:8080/api/feedback
     "comment": "Great service!"
 }
 
+BlogSlug
+http://localhost:8080/api/blogslug
+http://localhost:8080/api/blogslug/create
+http://localhost:8080/api/blogslug/update/{id}
+http://localhost:8080/api/blogslug/delete/{id}
+{
+  "title": "Ca Koi",
+  "description": "Updated description for the blog."
+}
+
 Blog
+http://localhost:8080/api/blog
+http://localhost:8080/api/blog/create
+http://localhost:8080/api/blog/update/{id}
+http://localhost:8080/api/blog/delete/{id}
+{
+  "blogTitle": "First Blog Post",
+  "blogContent": "Content o day",
+  "blogSlugId": 1
+}

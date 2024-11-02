@@ -28,7 +28,7 @@ public class BlogSlugController {
 
 
     // Thêm role mới (POST)
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<BlogSlug> createRole(@RequestBody BlogSlug blogSlug) {
         BlogSlug newblogSlug = blogSlugRepository.save(blogSlug);
         return ResponseEntity.status(HttpStatus.CREATED).body(newblogSlug);

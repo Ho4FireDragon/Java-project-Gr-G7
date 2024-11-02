@@ -44,7 +44,7 @@ public class RoleController {
     }
 
     // Xóa role theo ID (DELETE)
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteRole(@PathVariable Long id) {
         roleService.delete(id);  // Xóa role theo ID
         return ResponseEntity.noContent().build();

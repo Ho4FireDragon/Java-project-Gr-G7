@@ -1,6 +1,7 @@
 package com.shopkoi.shopkoi.model.entity;
 
 import com.shopkoi.shopkoi.Service.StaffSchedule;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity
@@ -15,8 +16,9 @@ public class Staff {
     private String staffemail;
     private String staffphone;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "role_id")  // Mapping với entity Role
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})  // Bỏ qua các thuộc tính proxy khi chuyển đổi JSON
     private Role role;
 
     @Enumerated(EnumType.STRING)
@@ -25,7 +27,7 @@ public class Staff {
 
     private String staffpassword;
 
-
+    // Constructors
     public Staff() {
     }
 
@@ -39,6 +41,7 @@ public class Staff {
         this.staffpassword = staffpassword;
     }
 
+    // Getters và Setters
     public Long getId() {
         return id;
     }

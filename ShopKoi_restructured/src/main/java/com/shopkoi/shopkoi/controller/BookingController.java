@@ -76,7 +76,7 @@ public class BookingController {
     }
 
     // Cập nhật booking
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Booking> updateBooking(
             @PathVariable Long id,
             @RequestBody BookingRequest bookingRequest) {
@@ -107,7 +107,7 @@ public class BookingController {
     }
 
     // Xóa booking
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteBooking(@PathVariable Long id) {
         bookingService.deleteBooking(id);
         return ResponseEntity.noContent().build();

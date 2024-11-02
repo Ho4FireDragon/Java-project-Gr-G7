@@ -74,7 +74,7 @@ public class FeedbackController {
     }
 
     // cap nhat feedback
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Feedback> UpdateFeedback(@PathVariable Long id, @RequestBody FeedbackRequest feedbackrequest) {
         Feedback feedback = feedbackService.FindbyFeedbackId(id);
         if (feedback != null) {
@@ -103,7 +103,7 @@ public class FeedbackController {
 
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Feedback> DeleteFeedback(@PathVariable Long id) {
         feedbackService.Delete(id);
         return ResponseEntity.noContent().build();
