@@ -52,9 +52,6 @@ http://localhost:8080/api/customers/delete/{id}
     "password": "password123"
 }
 
-
-
-
 Booking
 http://localhost:8080/api/bookings
 http://localhost:8080/api/bookings/create
