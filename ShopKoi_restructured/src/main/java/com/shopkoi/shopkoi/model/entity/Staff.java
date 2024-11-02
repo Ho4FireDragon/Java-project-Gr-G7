@@ -23,19 +23,22 @@ public class Staff {
     @Column(name = "staffschedule")
     private StaffSchedule staffschedule;
 
+    private String staffpassword;
+
+
     public Staff() {
     }
 
-    public Staff(Long id, String staffname, String staffemail, String staffphone, Role role, StaffSchedule staffschedule) {
+    public Staff(Long id, String staffname, String staffemail, String staffphone, Role role, StaffSchedule staffschedule, String staffpassword) {
         this.id = id;
         this.staffname = staffname;
         this.staffemail = staffemail;
         this.staffphone = staffphone;
         this.role = role;
         this.staffschedule = staffschedule;
+        this.staffpassword = staffpassword;
     }
 
-    // Getters và Setters
     public Long getId() {
         return id;
     }
@@ -82,5 +85,13 @@ public class Staff {
 
     public void setStaffschedule(StaffSchedule staffschedule) {
         this.staffschedule = staffschedule;
+    }
+
+    public String getStaffpassword() {
+        return staffpassword;
+    }
+
+    public void setStaffpassword(String staffpassword) {
+        this.staffpassword = staffpassword;
     }
 }

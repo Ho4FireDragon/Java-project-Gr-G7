@@ -41,25 +41,34 @@ http://localhost:8080/api/users
 Customer
 http://localhost:8080/api/customers
 {
-  "userId": 8,
-  "firstname": "Le",
-  "lastname": "Hoa",
-  "email": "hoale@example.com",
-  "phone": "123456789",
-  "address": "QUAN 12 HCM"
+    "firstname": "John",
+    "lastname": "Doe",
+    "email": "john.doe@example.com",
+    "phone": "1234567890",
+    "address": "123 Main St",
+    "password": "password123"
 }
+
 
 
 
 Booking
 http://localhost:8080/api/bookings
-PUT
+{
+    "customerId": 2,
+    "staffId": 7,
+    "serviceId": 3,
+    "bookingDate": "2024-11-10"
+}
+
 
 Feedback
 http://localhost:8080/api/feedback
 {
-    "booking": { "bookingId": 1 },
-    "customer": { "customerId": 1 },
+    "bookingid": 1 ,
+    "customerid": 2,
     "rating": 5,
     "comment": "Great service!"
 }
+
+Blog

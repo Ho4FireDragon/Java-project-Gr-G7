@@ -37,7 +37,7 @@ public class FeedbackController {
     }
 
     //tao feedback moi
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<Feedback> createFeedback(@RequestBody FeedbackRequest feedbackRequest) {
         Long bookingId = feedbackRequest.getBookingid();
         Long customerId = feedbackRequest.getCustomerid();

@@ -17,23 +17,21 @@ public class Customer {
     private String phone;
     private String address;
 
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    private String password;
 
     public Customer() {
     }
 
-    public Customer(String firstname, String lastname, String email, String phone, String address, User user) {
+    public Customer(Long id, String firstname, String lastname, String email, String phone, String address, String password) {
+        this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
         this.phone = phone;
         this.address = address;
-        this.user = user;
+        this.password = password;
     }
 
-    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -82,11 +80,11 @@ public class Customer {
         this.address = address;
     }
 
-    public User getUser() {
-        return user;
+    public String getPassword() {
+        return password;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

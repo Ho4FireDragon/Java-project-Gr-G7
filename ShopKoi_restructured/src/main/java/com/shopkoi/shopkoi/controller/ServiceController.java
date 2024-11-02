@@ -31,7 +31,7 @@ public class ServiceController {
     }
 
     // Thêm dịch vụ mới (với ảnh)
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<ServiceEntity> addNewService(
             @RequestParam("nameservice") String nameservice,
             @RequestParam("productcode") String productcode,
@@ -56,7 +56,7 @@ public class ServiceController {
     }
 
     // Cập nhật
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<ServiceEntity> updateService(
             @PathVariable("id") Long id,
             @RequestParam("nameservice") String nameservice,
@@ -89,7 +89,7 @@ public class ServiceController {
     }
 
     // Xóa dịch vụ theo ID
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteService(@PathVariable("id") Long id) {
         serviceService.deleteService(id);
         return ResponseEntity.noContent().build();

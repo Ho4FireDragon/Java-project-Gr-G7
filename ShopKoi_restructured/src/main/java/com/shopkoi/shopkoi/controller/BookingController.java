@@ -3,9 +3,10 @@ package com.shopkoi.shopkoi.controller;
 import com.shopkoi.shopkoi.Service.BookingService;
 import com.shopkoi.shopkoi.Service.CustomerService;
 import com.shopkoi.shopkoi.model.entity.*;
+import com.shopkoi.shopkoi.repository.BookingRepository;
+import com.shopkoi.shopkoi.repository.CustomerRepository;
 import com.shopkoi.shopkoi.repository.ServiceRepository;
 import com.shopkoi.shopkoi.repository.StaffRepository;
-import com.shopkoi.shopkoi.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,14 +25,15 @@ public class BookingController {
     @Autowired
     private CustomerService customerService;
 
-    @Autowired
-    private UserRepository userRepository;
 
     @Autowired
     private StaffRepository staffRepository;
 
     @Autowired
     private ServiceRepository serviceRepository;
+
+    @Autowired
+    private CustomerRepository customerRepository;
 
     // Lấy tất cả booking
     @GetMapping
@@ -41,28 +43,24 @@ public class BookingController {
     }
 
     // Tạo booking mới
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<Booking> createBooking(@RequestBody BookingRequest bookingRequest) {
-        Long userId = bookingRequest.getUserId();
+        Long customerId = bookingRequest.getCustomerId();
         Long staffId = bookingRequest.getStaffId();
         Long serviceId = bookingRequest.getServiceId();
         String bookingDate = bookingRequest.getBookingDate();
-        String phone = bookingRequest.getPhone();
-        String address = bookingRequest.getAddress();
 
-        User user = userRepository.findById(userId).orElse(null);
         Staff staff = staffRepository.findById(staffId).orElse(null);
         ServiceEntity service = serviceRepository.findById(serviceId).orElse(null);
+        Customer customer = customerRepository.findById(customerId).orElse(null);
 
-        if (user == null || staff == null || service == null) {
+        if (customer == null || staff == null || service == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
 
-        // Tạo customer từ user và bổ sung phone, address
-        Customer customer = customerService.createCustomerFromUser(user, phone, address);
 
         // Tạo booking
-        Booking newBooking = bookingService.createBooking(customer, staff, service, bookingDate);
+        Booking newBooking = bookingService.createBooking(customer,staff , service, bookingDate);
         return ResponseEntity.status(HttpStatus.CREATED).body(newBooking);
     }
 

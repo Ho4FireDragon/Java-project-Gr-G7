@@ -24,14 +24,14 @@ public class RoleController {
     }
 
     // Thêm role mới (POST)
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<Role> createRole(@RequestBody Role role) {
         Role newRole = roleService.save(role);
         return ResponseEntity.status(HttpStatus.CREATED).body(newRole);
     }
 
     // Cập nhật role theo ID (PUT)
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Role> updateRole(@PathVariable Long id, @RequestBody Role roleDetails) {
         Role existingRole = roleService.get(id);
         if (existingRole != null) {
