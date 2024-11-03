@@ -103,3 +103,22 @@ http://localhost:8080/api/blog/delete/{id}
   "blogContent": "Content o day",
   "blogSlugId": 1
 }
+
+http://localhost:8080/api/auth/login-staff
+{
+    "email": "test1@example.com",
+    "password": "456"
+}
+
+http://localhost:8080/api/auth/login-customer
+{
+    "email": "test1@example.com"
+    "password": "456"
+}
+http://localhost:8080/api/auth/login-custom
+{
+    "email": "user01@example.com",
+    "password": "456"
+}
+
+
