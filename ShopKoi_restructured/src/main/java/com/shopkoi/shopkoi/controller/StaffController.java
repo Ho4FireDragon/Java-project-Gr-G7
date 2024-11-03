@@ -10,6 +10,8 @@ import com.shopkoi.shopkoi.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -75,6 +77,9 @@ public class StaffController {
             newStaff.setStaffschedule(staffRequest.getStaffSchedule());
             newStaff.setStaffpassword(staffRequest.getStaffPassword());
 
+            PasswordEncoder passwordEncoder=new BCryptPasswordEncoder(10);
+            newStaff.setStaffpassword(passwordEncoder.encode(newStaff.getStaffpassword()));
+
             // Save the new staff entity
             Staff savedStaff = staffService.saveStaff(newStaff);
             return ResponseEntity.status(HttpStatus.CREATED).body(savedStaff);
@@ -97,7 +102,12 @@ public class StaffController {
             existingStaff.setStaffphone(staffRequest.getStaffPhone());
             existingStaff.setRole(role); // Gán Role đã tìm được
             existingStaff.setStaffschedule(staffRequest.getStaffSchedule());
-            existingStaff.setStaffpassword(staffRequest.getStaffPassword());
+
+            PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
+            // Kiểm tra nếu mật khẩu đã thay đổi
+            if (!passwordEncoder.matches(staffRequest.getStaffPassword(), existingStaff.getStaffpassword())) {
+                existingStaff.setStaffpassword(passwordEncoder.encode(staffRequest.getStaffPassword()));
+            }
 
             // Lưu thay đổi
             Staff updatedStaff = staffService.saveStaff(existingStaff);
@@ -107,9 +117,25 @@ public class StaffController {
         }
     }
 
+    // API để cập nhật mật khẩu
+    @PutMapping("/update-password/{id}")
+    public ResponseEntity<String> updatePassword(@PathVariable Long id, @RequestBody String newPassword) {
+        Staff existingStaff = staffService.getStaff(id);
+        if (existingStaff != null) {
+            PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
+            // Mã hóa mật khẩu mới
+            existingStaff.setStaffpassword(passwordEncoder.encode(newPassword));
+            // Lưu thay đổi
+            staffService.saveStaff(existingStaff);
+            return ResponseEntity.ok("Password updated successfully");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Staff not found");
+        }
+    }
 
 
-        // Xóa nhân viên theo ID
+
+    // Xóa nhân viên theo ID
         @DeleteMapping("/delete/{id}")
         public ResponseEntity<Void> deleteStaff(@PathVariable Long id) {
         staffService.delete(id);

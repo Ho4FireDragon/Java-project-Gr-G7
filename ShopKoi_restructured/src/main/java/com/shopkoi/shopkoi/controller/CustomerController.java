@@ -6,6 +6,8 @@ import com.shopkoi.shopkoi.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,7 +39,8 @@ public class CustomerController {
         if (customer.getFirstname() == null || customer.getLastname() == null || customer.getEmail() == null) {
             return ResponseEntity.badRequest().build(); // Trả về lỗi nếu thông tin không hợp lệ
         }
-
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
+        customer.setPassword(passwordEncoder.encode(customer.getPassword()));
         // Lưu thông tin khách hàng mới
         Customer createdCustomer = customerService.saveCustomer(customer);
 
@@ -61,13 +64,54 @@ public class CustomerController {
     // Cập nhật thông tin khách hàng
     @PutMapping("/update/{id}")
     public ResponseEntity<Customer> updateCustomer(@PathVariable Long id, @RequestBody Customer customerDetails) {
-        Customer updatedCustomer = customerService.updateCustomer(id, customerDetails);
-        if (updatedCustomer != null) {
+        Customer existingCustomer = customerService.getCustomerById(id);
+        if (existingCustomer != null) {
+            // Cập nhật các thông tin khác của khách hàng
+            existingCustomer.setFirstname(customerDetails.getFirstname());
+            existingCustomer.setLastname(customerDetails.getLastname());
+            existingCustomer.setEmail(customerDetails.getEmail());
+
+            PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
+
+            // Kiểm tra nếu mật khẩu có thay đổi
+            if (!passwordEncoder.matches(customerDetails.getPassword(), existingCustomer.getPassword())) {
+                existingCustomer.setPassword(passwordEncoder.encode(customerDetails.getPassword()));
+            }
+
+            // Lưu thay đổi vào cơ sở dữ liệu
+            Customer updatedCustomer = customerService.saveCustomer(existingCustomer);
             return ResponseEntity.ok(updatedCustomer);
         } else {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.notFound().build(); // Trả về mã lỗi 404 nếu khách hàng không tồn tại
         }
     }
+
+
+    // Cập nhật mật khẩu cho khách hàng
+    @PutMapping("/update-password/{id}")
+    public ResponseEntity<String> updatePassword(@PathVariable Long id, @RequestBody Map<String, String> request) {
+        Customer customer = customerService.getCustomerById(id);
+        if (customer != null) {
+            String newPassword = request.get("newPassword");
+
+            // Kiểm tra xem mật khẩu mới có tồn tại trong yêu cầu không
+            if (newPassword == null || newPassword.isEmpty()) {
+                return ResponseEntity.badRequest().body("New password is required");
+            }
+
+            // Mã hóa mật khẩu mới
+            PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
+            customer.setPassword(passwordEncoder.encode(newPassword));
+
+            // Lưu mật khẩu mới
+            customerService.saveCustomer(customer);
+
+            return ResponseEntity.ok("Password updated successfully");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Customer not found");
+        }
+    }
+
 
 
     // Xóa khách hàng theo ID

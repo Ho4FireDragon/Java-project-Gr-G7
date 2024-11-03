@@ -27,12 +27,12 @@
     &quot;assignee&quot;: &quot;Ho4FireDragon&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/Ho4FireDragon/Java-project-Gr-G7.git&quot;,
-    &quot;accountId&quot;: &quot;f061fa12-8e9e-4469-8d2b-3229b906b79d&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Ho4FireDragon/Java-project-Gr-G7.git",
+    "accountId": "0f054339-8450-433e-8187-b09715f752e3"
   }
-}</component>
+}]]></component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="C:\xampp\php\php.exe" />
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
@@ -50,7 +50,7 @@
     "git-widget-placeholder": "main",
     "jdk.selected.JAVA_MODULE": "23",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/xampp/htdocs/Java-project-Gr-G7/ShopKoi_restructured",
+    "last_opened_file_path": "D:/project java/Java-project-Gr-G7/ShopKoi_restructured",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -87,6 +87,7 @@
       <workItem from="1729748276849" duration="225000" />
       <workItem from="1729748509735" duration="42000" />
       <workItem from="1729927612100" duration="23000" />
+      <workItem from="1730603921385" duration="37000" />
     </task>
     <task id="LOCAL-00001" summary="backend mvc project">
       <option name="closed" value="true" />

@@ -26,7 +26,6 @@ http://localhost:8080/api/staff
 http://localhost:8080/api/staff/create
 http://localhost:8080/api/staff/update/{id}
 http://localhost:8080/api/staff/delete/{id}
-
 {
   "staffName": "D.Thinh",
   "staffEmail": "johndoe@example.com",
@@ -35,6 +34,8 @@ http://localhost:8080/api/staff/delete/{id}
   "staffSchedule": "NGHI",
   "staffPassword": "password123"
 }
+http://localhost:8080/api/staff/update-password/{id}
+"newSecurePassword123"
 
 
 
@@ -51,6 +52,11 @@ http://localhost:8080/api/customers/delete/{id}
     "address": "123 Main St",
     "password": "password123"
 }
+http://localhost:8080/api/customers/update-password/{id}
+{
+  "newPassword": "newSecurePassword123"
+}
+
 
 Booking
 http://localhost:8080/api/bookings

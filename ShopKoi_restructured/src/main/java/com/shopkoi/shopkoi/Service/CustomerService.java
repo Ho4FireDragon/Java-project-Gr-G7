@@ -3,6 +3,8 @@ package com.shopkoi.shopkoi.Service;
 import com.shopkoi.shopkoi.model.entity.Customer;
 import com.shopkoi.shopkoi.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +17,8 @@ public class CustomerService {
 
     // Hàm lưu hoặc cập nhật thông tin khách hàng
     public Customer saveCustomer(Customer customer) {
+//        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
+//        passwordEncoder.encode(customer.getPassword());
         return customerRepository.save(customer);
     }
 
