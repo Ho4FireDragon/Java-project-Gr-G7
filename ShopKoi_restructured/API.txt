@@ -114,17 +114,19 @@ http://localhost:8080/api/auth/login-staff
 
 http://localhost:8080/api/auth/login-customer
 {
-<<<<<<< HEAD
+
     "email": "user01@example.com"
-=======
     "email": "test1@example.com",
->>>>>>> f58ae9921a498eed8bf200a6615141bf421982ee
     "password": "456"
 }
 
 http://localhost:8080/api/auth/logout-staff
 http://localhost:8080/api/auth/logout-customer
 
+http://localhost:8080/api/auth/introspect-customer
+{
+    "token": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJTaG9wS29pLmNvbSIsInN1YiI6IkhvYWxlZUBleGFtcGxlLmNvbSIsImV4cCI6MTczMDczOTE2MiwiaWF0IjoxNzMwNzI4MzYyLCJzdGFmZklkIjoic3RhZmYifQ.70DT340PXW2TSveljjhMqYymkfDR-UIxhqiAu5ZyERjtvmAjNTHXAX2w1LfDHRiv5X7wZBgj8lMJP5Y8Zur6w"
+}
 
 
 

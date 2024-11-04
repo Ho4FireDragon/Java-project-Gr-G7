@@ -3,21 +3,23 @@ package com.shopkoi.shopkoi.controller;
 import com.nimbusds.jose.JOSEException;
 import com.shopkoi.shopkoi.Service.AuthenticationService;
 import com.shopkoi.shopkoi.dto.AuthenticationRequest;
+import com.shopkoi.shopkoi.dto.IntrospectRequest;
 import com.shopkoi.shopkoi.dto.response.AuthenticationResponse;
+import com.shopkoi.shopkoi.dto.response.IntrospectResponse;
 import com.shopkoi.shopkoi.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-<<<<<<< HEAD
 import org.springframework.web.ErrorResponse;
-=======
 import org.springframework.security.core.context.SecurityContextHolder;
->>>>>>> f58ae9921a498eed8bf200a6615141bf421982ee
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.text.ParseException;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -28,42 +30,54 @@ public class AuthenticationController {
     private AuthenticationService authenticationService;
 
 
-    @PostMapping("/login-staff")
-    public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest authenticationRequest) {
-        try {
-            AuthenticationResponse response = authenticationService.authenticateStaff(authenticationRequest);
-            return ResponseEntity.ok(response); // Trả về response với token
-        } catch (JOSEException e) {
-            // Nếu xảy ra lỗi, có thể là do thông tin xác thực không hợp lệ
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body(new AuthenticationResponse("Invalid credentials", null));
-        } catch (Exception e) {
-            // Xử lý ngoại lệ khác nếu cần thiết
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new AuthenticationResponse("An error occurred", null));
-        }
-    }
+//    @PostMapping("/login-staff")
+//    public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest authenticationRequest) {
+//        try {
+//            AuthenticationResponse response = authenticationService.authenticateStaff(authenticationRequest);
+//            return ResponseEntity.ok(response); // Trả về response với token
+//        } catch (JOSEException e) {
+//            // Nếu xảy ra lỗi, có thể là do thông tin xác thực không hợp lệ
+//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+//                    .body(new AuthenticationResponse("Invalid credentials", null));
+//        } catch (Exception e) {
+//            // Xử lý ngoại lệ khác nếu cần thiết
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+//                    .body(new AuthenticationResponse("An error occurred", null));
+//        }
+//    }
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> f58ae9921a498eed8bf200a6615141bf421982ee
     @PostMapping("/login-customer")
     public ResponseEntity<AuthenticationResponse> authenticateCustomer(@RequestBody AuthenticationRequest authenticationRequest) {
         try {
+            // Gọi phương thức authenticateCustomer từ AuthenticationService để xác thực và lấy thông tin khách hàng
             AuthenticationResponse response = authenticationService.authenticateCustomer(authenticationRequest);
-            return ResponseEntity.ok(response); // Trả về response với token
+            return ResponseEntity.ok(response); // Trả về response với token và thông tin khách hàng
         } catch (JOSEException e) {
-            // Nếu xảy ra lỗi, có thể là do thông tin xác thực không hợp lệ
+            // Xử lý ngoại lệ do thông tin xác thực không hợp lệ
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body(new AuthenticationResponse("Invalid credentials", null));
+                    .body(AuthenticationResponse.builder()
+
+                            .token(null)
+                            .build());
         } catch (Exception e) {
-            // Xử lý ngoại lệ khác nếu cần thiết
+            // Xử lý các ngoại lệ khác nếu cần thiết
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new AuthenticationResponse("An error occurred", null));
+                    .body(AuthenticationResponse.builder()
+
+                            .token(null)
+                            .build());
         }
     }
+
+
+    //kiem tra tinh valid cua token
+    @PostMapping("/introspect-customer")
+    public ResponseEntity<IntrospectResponse> introspect(@RequestBody IntrospectRequest introspectRequest) throws ParseException, JOSEException {
+        var result = authenticationService.introspectCustomer(introspectRequest);
+        return ResponseEntity.ok(result);
+    }
+
+
 
     // Endpoint logout cho staff
     @PostMapping("/logout-staff")

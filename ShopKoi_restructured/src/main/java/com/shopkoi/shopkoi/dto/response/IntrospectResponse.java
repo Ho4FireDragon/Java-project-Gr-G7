@@ -1,6 +1,5 @@
 package com.shopkoi.shopkoi.dto.response;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,13 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class AuthenticationResponse {
-    private Long Id;
-    private String Name;
-    private String Phone;
-    private String Email;
-    private String Address;
-    private String token;
-
-
+public class IntrospectResponse {
+    private Boolean valid;
 }
