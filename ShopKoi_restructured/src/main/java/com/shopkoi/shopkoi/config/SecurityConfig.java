@@ -12,40 +12,6 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
-
-//public class SecurityConfig {
-//
-//    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//        http
-//                .authorizeRequests()
-//                .anyRequest().authenticated()
-//                .and()
-//                .formLogin()
-//                .permitAll()
-//                .and()
-//                .logout()
-//                .permitAll();
-//        return http.build();
-//    }
-//
-//    @Bean
-//    public AuthenticationManager authManager(HttpSecurity http) throws Exception {
-//        AuthenticationManagerBuilder authenticationManagerBuilder =
-//                http.getSharedObject(AuthenticationManagerBuilder.class);
-//        authenticationManagerBuilder
-//                .inMemoryAuthentication()
-//                .withUser("admin").password(passwordEncoder().encode("1234")).roles("USER");
-//        return authenticationManagerBuilder.build();
-//    }
-//
-//    @Bean
-//    public PasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
-//}
-
-
 public class SecurityConfig {
 
     @Bean
@@ -53,12 +19,26 @@ public class SecurityConfig {
         http
                 .csrf().disable() // Tắt CSRF để đơn giản hóa khi test qua Postman
                 .authorizeRequests()
-                .anyRequest().permitAll(); // Cho phép mọi request không cần xác thực
+                .anyRequest().permitAll() // Cho phép tất cả các request mà không cần xác thực
+                .and()
+                .logout()
+                .invalidateHttpSession(true) // Xóa session khi logout
+                .deleteCookies("JSESSIONID"); // Xóa cookie khi logout
         return http.build();
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public AuthenticationManager authManager(HttpSecurity http) throws Exception {
+        AuthenticationManagerBuilder authenticationManagerBuilder =
+                http.getSharedObject(AuthenticationManagerBuilder.class);
+        authenticationManagerBuilder
+                .inMemoryAuthentication()
+                .withUser("admin").password(passwordEncoder().encode("1234")).roles("USER");
+        return authenticationManagerBuilder.build();
     }
 }

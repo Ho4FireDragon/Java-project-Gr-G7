@@ -104,6 +104,8 @@ http://localhost:8080/api/blog/delete/{id}
   "blogSlugId": 1
 }
 
+
+Login
 http://localhost:8080/api/auth/login-staff
 {
     "email": "test1@example.com",
@@ -112,13 +114,12 @@ http://localhost:8080/api/auth/login-staff
 
 http://localhost:8080/api/auth/login-customer
 {
-    "email": "test1@example.com"
+    "email": "test1@example.com",
     "password": "456"
 }
-http://localhost:8080/api/auth/login-custom
-{
-    "email": "user01@example.com",
-    "password": "456"
-}
+
+http://localhost:8080/api/auth/logout-staff
+http://localhost:8080/api/auth/logout-customer
+
 
 
