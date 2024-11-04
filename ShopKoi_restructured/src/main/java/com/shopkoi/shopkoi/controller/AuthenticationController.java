@@ -9,7 +9,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+<<<<<<< HEAD
 import org.springframework.web.ErrorResponse;
+=======
+import org.springframework.security.core.context.SecurityContextHolder;
+>>>>>>> f58ae9921a498eed8bf200a6615141bf421982ee
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,8 +44,11 @@ public class AuthenticationController {
         }
     }
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> f58ae9921a498eed8bf200a6615141bf421982ee
     @PostMapping("/login-customer")
     public ResponseEntity<AuthenticationResponse> authenticateCustomer(@RequestBody AuthenticationRequest authenticationRequest) {
         try {
@@ -56,6 +63,22 @@ public class AuthenticationController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new AuthenticationResponse("An error occurred", null));
         }
+    }
+
+    // Endpoint logout cho staff
+    @PostMapping("/logout-staff")
+    public ResponseEntity<String> logoutStaff() {
+        // Xóa thông tin xác thực trong SecurityContext dành cho staff
+        SecurityContextHolder.clearContext();
+        return ResponseEntity.status(HttpStatus.OK).body("Staff logout successful");
+    }
+
+    // Endpoint logout cho customer
+    @PostMapping("/logout-customer")
+    public ResponseEntity<String> logoutCustomer() {
+        // Xóa thông tin xác thực trong SecurityContext dành cho customer
+        SecurityContextHolder.clearContext();
+        return ResponseEntity.status(HttpStatus.OK).body("Customer logout successful");
     }
 
 
