@@ -5,7 +5,7 @@ import Logo from '../components/Logo'
 const RegisterPage = () => (
     <div className="grid grid-cols-[950px_1fr]">
         <div className="relative">
-            <Link to={'/'} className="absolute top-8 left-0 block w-fit h-fit">
+            <Link to={'/'} className="absolute top-8 left-0 block w-fit h-fit" title="Go to Home">
                 <Logo width={200} height={82} />
             </Link>
             <div className="h-screen grid place-items-center">

@@ -3,13 +3,15 @@ import '../styles/Appointment.css'
 function AppointmentPage() {
     return (
         <div className="wrapper-appoinment">
-            <div className="title-apm">Request Appointment</div>
-            <div className="title-apm-innet">
+            <div className="title-apm">
+                <div className="container">Request Appointment</div>
+            </div>
+            <div className="title-apm-innet container">
                 <span>If you have a pressing concern, please call our office directly at (831) 278-1081.</span>
                 <span>Our phones and emails are answered 9am-3pm PST Monday through Saturday, but are closed most major holidays.</span>
                 <span>For clients in Santa Barbara, Ventura and Los Angeles counties, please fill out this form. We partner with the Aquatic Pet Vet to see clients in that service area.</span>
             </div>
-            <div className="login-form-container">
+            <div className="login-form-container container">
                 <h2 className="login-title">Fill out this form to request an appointment:</h2>
                 <form className="login-form">
                     <label>
