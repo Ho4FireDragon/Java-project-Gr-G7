@@ -4,17 +4,17 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuthContext } from '../contexts/AuthContext'
 
-export const useCustomerRegister = () => {
+export const useCustomerLogin = () => {
     const navigate = useNavigate()
     const [loading, setLoading] = useState(false)
     const { setAuthUser } = useAuthContext()
 
-    const customerRegister = async (newCustomer) => {
+    const customerLogin = async (authInfo) => {
         try {
             setLoading(true)
-            const response = await authApi.customerRegister(newCustomer)
+            const response = await authApi.customerLogin(authInfo)
             const { status, data } = response
-            if (status === 201) {
+            if (status === 200) {
                 setAuthUser(data)
                 localStorage.setItem('__user-information', JSON.stringify(data))
                 Swal.fire({
@@ -39,5 +39,5 @@ export const useCustomerRegister = () => {
         }
     }
 
-    return { loading, customerRegister }
+    return { loading, customerLogin }
 }
