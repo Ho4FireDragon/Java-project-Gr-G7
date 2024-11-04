@@ -36,7 +36,6 @@ public class AuthenticationController {
         }
     }
 
-
     @PostMapping("/login-customer")
     private ResponseEntity<AuthenticationResponse> authenticatecustomer(@RequestBody AuthenticationRequest authenticationRequest) {
         boolean result = authenticationService.authenticateCustomer(authenticationRequest);
