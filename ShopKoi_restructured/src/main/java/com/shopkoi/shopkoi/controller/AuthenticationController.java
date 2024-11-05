@@ -30,21 +30,27 @@ public class AuthenticationController {
     private AuthenticationService authenticationService;
 
 
-//    @PostMapping("/login-staff")
-//    public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest authenticationRequest) {
-//        try {
-//            AuthenticationResponse response = authenticationService.authenticateStaff(authenticationRequest);
-//            return ResponseEntity.ok(response); // Trả về response với token
-//        } catch (JOSEException e) {
-//            // Nếu xảy ra lỗi, có thể là do thông tin xác thực không hợp lệ
-//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-//                    .body(new AuthenticationResponse("Invalid credentials", null));
-//        } catch (Exception e) {
-//            // Xử lý ngoại lệ khác nếu cần thiết
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-//                    .body(new AuthenticationResponse("An error occurred", null));
-//        }
-//    }
+    @PostMapping("/login-staff")
+    public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest authenticationRequest) {
+        try {
+            AuthenticationResponse response = authenticationService.authenticateStaff(authenticationRequest);
+            return ResponseEntity.ok(response); // Trả về response với token
+        } catch (JOSEException e) {
+            // Nếu xảy ra lỗi, có thể là do thông tin xác thực không hợp lệ
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(AuthenticationResponse.builder()
+
+                            .token(null)
+                            .build());
+        } catch (Exception e) {
+            // Xử lý ngoại lệ khác nếu cần thiết
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(AuthenticationResponse.builder()
+
+                            .token(null)
+                            .build());
+        }
+    }
 
     @PostMapping("/login-customer")
     public ResponseEntity<AuthenticationResponse> authenticateCustomer(@RequestBody AuthenticationRequest authenticationRequest) {

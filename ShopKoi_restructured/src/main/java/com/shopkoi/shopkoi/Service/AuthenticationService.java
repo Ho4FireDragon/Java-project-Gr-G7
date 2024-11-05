@@ -47,8 +47,12 @@ public class AuthenticationService {
         var token = generateToken(authenticationRequest.getEmail());
 
         return AuthenticationResponse.builder()
-                    .token(token)
-                    .build();
+                .Id(staffemail.getId())
+                .Name(staffemail.getStaffname())
+                .Email(staffemail.getStaffemail())
+                .Phone(staffemail.getStaffphone())
+                .token(token)
+                .build();
     }
 
     public AuthenticationResponse authenticateCustomer(AuthenticationRequest authenticationRequest) throws JOSEException {
@@ -85,7 +89,7 @@ public class AuthenticationService {
                 .expirationTime(new Date(
                         Instant.now().plus(3, ChronoUnit.HOURS).toEpochMilli()
                 ))
-                .claim("staffId", "staff")
+                .claim("Id", "staff")
                 .build();
 
         Payload payload = new Payload(jwtClaimsSet.toJSONObject());
