@@ -120,4 +120,21 @@ public class AuthenticationService {
                 .build();
 
     }
+
+    public IntrospectResponse introspectStaff(IntrospectRequest introspectRequest) throws JOSEException, ParseException {
+        var token = introspectRequest.getToken();
+
+        JWSVerifier verifier = new MACVerifier(SIGNER_KEY.getBytes());
+
+        SignedJWT signedJWT = SignedJWT.parse(token);
+
+        Date expityTime = signedJWT.getJWTClaimsSet().getExpirationTime();
+
+        var verified = signedJWT.verify(verifier); //True or
+
+        return  IntrospectResponse.builder()
+                .valid(verified && expityTime.after(new Date()))
+                .build();
+
+    }
 }

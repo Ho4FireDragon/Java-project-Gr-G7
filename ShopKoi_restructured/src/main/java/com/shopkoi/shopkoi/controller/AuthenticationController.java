@@ -83,6 +83,12 @@ public class AuthenticationController {
         return ResponseEntity.ok(result);
     }
 
+    @PostMapping("/introspect-staff")
+    public ResponseEntity<IntrospectResponse> introspectstaff(@RequestBody IntrospectRequest introspectRequest) throws ParseException, JOSEException {
+        var result = authenticationService.introspectStaff(introspectRequest);
+        return ResponseEntity.ok(result);
+    }
+
 
 
     // Endpoint logout cho staff
