@@ -44,7 +44,7 @@ public class AuthenticationService {
         if (!authenticated) {
             throw new JOSEException("Invalid password");
         }
-        var token = generateToken(authenticationRequest.getEmail());
+        var token = generateToken(authenticationRequest.getEmail(),staffemail.getRightstaff());
 
         return AuthenticationResponse.builder()
                 .Id(staffemail.getId())
@@ -64,7 +64,7 @@ public class AuthenticationService {
         if (!authenticated) {
             throw new JOSEException("Invalid password");
         }
-        var token = generateToken(authenticationRequest.getEmail());
+        var token = generateToken(authenticationRequest.getEmail(), customeremail.getRightcustomer());
 
         return AuthenticationResponse.builder()
                 .Id(customeremail.getId())
@@ -79,7 +79,7 @@ public class AuthenticationService {
     @NonFinal
     protected static final String SIGNER_KEY = "bJAlGYJC+G5iUfD2OQv6u0fWXOeV67Dz0uz+O9BIlgOA1At7QEp/Zh9eqXUUoU+K\n";
 
-    private String generateToken(String email) throws JOSEException {
+    private String generateToken(String email, Right right) throws JOSEException {
         JWSHeader jwsHeader = new JWSHeader(JWSAlgorithm.HS512);
 
         JWTClaimsSet jwtClaimsSet = new JWTClaimsSet.Builder()
@@ -89,7 +89,7 @@ public class AuthenticationService {
                 .expirationTime(new Date(
                         Instant.now().plus(3, ChronoUnit.HOURS).toEpochMilli()
                 ))
-                .claim("Id", "staff")
+                .claim("scope", right)
                 .build();
 
         Payload payload = new Payload(jwtClaimsSet.toJSONObject());

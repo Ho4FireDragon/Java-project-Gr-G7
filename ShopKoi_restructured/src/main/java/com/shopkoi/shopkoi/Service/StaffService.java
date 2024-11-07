@@ -26,6 +26,7 @@ public class StaffService {
         if (role != null) {
             staff.setRole(role);  // Gán lại Role đã lấy từ DB
         }
+        staff.setRightstaff(Right.STAFF);
         return staffRepository.save(staff);
     }
 

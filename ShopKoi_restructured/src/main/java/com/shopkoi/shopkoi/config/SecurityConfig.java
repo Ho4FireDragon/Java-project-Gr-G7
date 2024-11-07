@@ -1,5 +1,6 @@
 package com.shopkoi.shopkoi.config;
 
+import com.shopkoi.shopkoi.Service.Right;
 import lombok.experimental.NonFinal;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,8 +28,23 @@ public class SecurityConfig {
             "/api/auth/logout-customer",
             "/api/auth/logout-staff",
             "/api/auth/introspect-customer",
-            "/api/auth/introspect-staff"
+            "/api/auth/introspect-staff",
+            "/api/customers/create"
     };
+
+    private final String[] AdminGetEndpoints = {"/api/customers",
+            "/api/customers/{id}",
+            "/api/staff",
+            "/api/staff/{id}",
+            "/api/blog",
+            "/api/blogslug",
+            "/api/bookings",
+            "/api/feedback",
+            "/api/roles",
+            "/api/services"
+    };
+
+    private final String[] AdminDeleteEndpoints = {"/api/customers/delete",};
 
     @NonFinal
     protected static final String SIGNER_KEY = "bJAlGYJC+G5iUfD2OQv6u0fWXOeV67Dz0uz+O9BIlgOA1At7QEp/Zh9eqXUUoU+K\n";
@@ -37,7 +53,9 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests(request ->
                 request.requestMatchers(HttpMethod.POST,PublicEndpoints).permitAll()
-                        .anyRequest().authenticated()) ;
+                        .requestMatchers(HttpMethod.GET,AdminGetEndpoints).hasAnyAuthority("SCOPE_ADMIN")
+                        .requestMatchers(HttpMethod.DELETE,AdminDeleteEndpoints).hasRole(Right.ADMIN.name())
+                        .anyRequest().authenticated());
                 httpSecurity.oauth2ResourceServer(login ->
                         login.jwt(jwtConfigurer -> jwtConfigurer.decoder(jwtDecoder()))
                 );
@@ -56,7 +74,7 @@ public class SecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+        return new BCryptPasswordEncoder(10);
     }
 
     @Bean

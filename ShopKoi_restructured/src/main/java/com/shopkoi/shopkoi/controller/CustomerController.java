@@ -1,11 +1,14 @@
 package com.shopkoi.shopkoi.controller;
 
 import com.shopkoi.shopkoi.Service.CustomerService;
+import com.shopkoi.shopkoi.dto.response.CustomerResponse;
 import com.shopkoi.shopkoi.model.entity.Customer;
 import com.shopkoi.shopkoi.repository.CustomerRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/customers")
 public class CustomerController {
@@ -31,12 +35,31 @@ public class CustomerController {
         List<Customer> customers = customerService.getAllCustomers();
         return ResponseEntity.ok(customers);
     }
+    @GetMapping("/me")
+    public ResponseEntity<CustomerResponse> getLoggedInCustomer() {
+        var authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName(); // Giả sử email là tên người dùng
+
+        Customer customer = customerService.getCustomerByEmail(email);
+
+        // Chuyển đổi từ Customer sang CustomerResponse
+        CustomerResponse customerResponse = new CustomerResponse();
+        customerResponse.setCustomerName(customer.getFirstname());
+        customerResponse.setCustomerEmail(customer.getEmail());
+        customerResponse.setCustomerPhone(customer.getPhone()); // Giả sử `phone` là thuộc tính của Customer
+        customerResponse.setCustomerAddress(customer.getAddress()); // Giả sử `address` là thuộc tính của Customer
+        customerResponse.setCustomerRight(customer.getRightcustomer().toString());
+
+        return ResponseEntity.ok(customerResponse);
+    }
+
+
 
     // Tạo mới một khách hàng
     @PostMapping("/create")
     public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
         // Kiểm tra xem thông tin khách hàng có hợp lệ không
-        if (customer.getFirstname() == null || customer.getLastname() == null || customer.getEmail() == null) {
+        if (customer.getFirstname() == null || customer.getEmail() == null) {
             return ResponseEntity.badRequest().build(); // Trả về lỗi nếu thông tin không hợp lệ
         }
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
@@ -68,7 +91,6 @@ public class CustomerController {
         if (existingCustomer != null) {
             // Cập nhật các thông tin khác của khách hàng
             existingCustomer.setFirstname(customerDetails.getFirstname());
-            existingCustomer.setLastname(customerDetails.getLastname());
             existingCustomer.setEmail(customerDetails.getEmail());
 
             PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);

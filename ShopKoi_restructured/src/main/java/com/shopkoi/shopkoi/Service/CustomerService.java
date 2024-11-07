@@ -7,6 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 
 @Service
@@ -17,8 +18,8 @@ public class CustomerService {
 
     // Hàm lưu hoặc cập nhật thông tin khách hàng
     public Customer saveCustomer(Customer customer) {
-//        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
-//        passwordEncoder.encode(customer.getPassword());
+        customer.setRightcustomer(Right.CUSTOMER);
+
         return customerRepository.save(customer);
     }
 
@@ -32,6 +33,7 @@ public class CustomerService {
         return customerRepository.findById(id).orElse(null);
     }
 
+    public Customer getCustomerByEmail(String email) {return customerRepository.findByEmail(email).orElse(null);}
 
     // Hàm xóa khách hàng
     public void deleteCustomer(Long id) {
@@ -46,7 +48,6 @@ public class CustomerService {
     public Customer updateCustomer(Long id, Customer customerDetails) {
         return customerRepository.findById(id).map(customer -> {
             customer.setFirstname(customerDetails.getFirstname());
-            customer.setLastname(customerDetails.getLastname());
             customer.setEmail(customerDetails.getEmail());
             customer.setPhone(customerDetails.getPhone());
             customer.setAddress(customerDetails.getAddress());

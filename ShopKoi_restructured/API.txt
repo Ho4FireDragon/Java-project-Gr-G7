@@ -41,6 +41,7 @@ http://localhost:8080/api/staff/update-password/{id}
 
 Customer
 http://localhost:8080/api/customers
+http://localhost:8080/api/customers/me //lay thong tin dang nhap hien tai
 http://localhost:8080/api/customers/create
 http://localhost:8080/api/customers/update/{id}
 http://localhost:8080/api/customers/delete/{id}
@@ -128,5 +129,11 @@ http://localhost:8080/api/auth/introspect-customer
     "token": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJTaG9wS29pLmNvbSIsInN1YiI6IkhvYWxlZUBleGFtcGxlLmNvbSIsImV4cCI6MTczMDczOTE2MiwiaWF0IjoxNzMwNzI4MzYyLCJzdGFmZklkIjoic3RhZmYifQ.70DT340PXW2TSveljjhMqYymkfDR-UIxhqiAu5ZyERjtvmAjNTHXAX2w1LfDHRiv5X7wZBgj8lMJP5Y8Zur6w"
 }
 
+
+Admin
+{
+    admin@gmail.com
+    123
+}
 
 

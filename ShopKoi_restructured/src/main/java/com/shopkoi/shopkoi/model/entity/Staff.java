@@ -1,12 +1,22 @@
 package com.shopkoi.shopkoi.model.entity;
 
+import com.shopkoi.shopkoi.Service.Right;
 import com.shopkoi.shopkoi.Service.StaffSchedule;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "staff")
 public class Staff {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,80 +31,17 @@ public class Staff {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})  // Bỏ qua các thuộc tính proxy khi chuyển đổi JSON
     private Role role;
 
+    private String staffadress;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "staffschedule")
     private StaffSchedule staffschedule;
 
     private String staffpassword;
 
-    // Constructors
-    public Staff() {
-    }
 
-    public Staff(Long id, String staffname, String staffemail, String staffphone, Role role, StaffSchedule staffschedule, String staffpassword) {
-        this.id = id;
-        this.staffname = staffname;
-        this.staffemail = staffemail;
-        this.staffphone = staffphone;
-        this.role = role;
-        this.staffschedule = staffschedule;
-        this.staffpassword = staffpassword;
-    }
+    @Enumerated(EnumType.STRING)
+    @Column(name = "rightstaff")
+    private Right rightstaff;
 
-    // Getters và Setters
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getStaffname() {
-        return staffname;
-    }
-
-    public void setStaffname(String staffname) {
-        this.staffname = staffname;
-    }
-
-    public String getStaffemail() {
-        return staffemail;
-    }
-
-    public void setStaffemail(String staffemail) {
-        this.staffemail = staffemail;
-    }
-
-    public String getStaffphone() {
-        return staffphone;
-    }
-
-    public void setStaffphone(String staffphone) {
-        this.staffphone = staffphone;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
-    public StaffSchedule getStaffschedule() {
-        return staffschedule;
-    }
-
-    public void setStaffschedule(StaffSchedule staffschedule) {
-        this.staffschedule = staffschedule;
-    }
-
-    public String getStaffpassword() {
-        return staffpassword;
-    }
-
-    public void setStaffpassword(String staffpassword) {
-        this.staffpassword = staffpassword;
-    }
 }
