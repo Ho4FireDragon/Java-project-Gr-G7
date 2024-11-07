@@ -7,10 +7,13 @@ import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.SignedJWT;
 import com.shopkoi.shopkoi.dto.AuthenticationRequest;
 import com.shopkoi.shopkoi.dto.IntrospectRequest;
+import com.shopkoi.shopkoi.dto.LogoutRequest;
 import com.shopkoi.shopkoi.dto.response.AuthenticationResponse;
 import com.shopkoi.shopkoi.dto.response.IntrospectResponse;
+import com.shopkoi.shopkoi.model.entity.InvalidateToken;
 import com.shopkoi.shopkoi.model.entity.Staff;
 import com.shopkoi.shopkoi.repository.CustomerRepository;
+import com.shopkoi.shopkoi.repository.InvalidateRepository;
 import com.shopkoi.shopkoi.repository.StaffRepository;
 import lombok.experimental.NonFinal;
 import org.slf4j.Logger;
@@ -24,6 +27,7 @@ import java.text.ParseException;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
+import java.util.UUID;
 
 @Service
 public class AuthenticationService {
@@ -34,6 +38,9 @@ public class AuthenticationService {
 
     @Autowired
     private StaffRepository staffRepository;
+
+    @Autowired
+    private InvalidateRepository invalidateRepository;
 
     public AuthenticationResponse authenticateStaff(AuthenticationRequest authenticationRequest) throws JOSEException {
         var staffemail = staffRepository.findByStaffemail(authenticationRequest.getEmail()).orElse(null);
@@ -89,6 +96,7 @@ public class AuthenticationService {
                 .expirationTime(new Date(
                         Instant.now().plus(3, ChronoUnit.HOURS).toEpochMilli()
                 ))
+                .jwtID(UUID.randomUUID().toString())
                 .claim("scope", right)
                 .build();
 
@@ -105,36 +113,67 @@ public class AuthenticationService {
     }
 
     public IntrospectResponse introspectCustomer(IntrospectRequest introspectRequest) throws JOSEException, ParseException {
-        var token = introspectRequest.getToken();
+       {
+            var token = introspectRequest.getToken();
+            boolean isValid = true;
 
-        JWSVerifier verifier = new MACVerifier(SIGNER_KEY.getBytes());
+            try {
+                verifyToken(token);
+            } catch (Exception e) {
+                isValid = false;
+            }
 
-        SignedJWT signedJWT = SignedJWT.parse(token);
-
-        Date expityTime = signedJWT.getJWTClaimsSet().getExpirationTime();
-
-        var verified = signedJWT.verify(verifier); //True or
-
-        return  IntrospectResponse.builder()
-                .valid(verified && expityTime.after(new Date()))
-                .build();
-
+            return IntrospectResponse.builder()
+                    .valid(isValid)
+                    .build();
+        }
     }
 
     public IntrospectResponse introspectStaff(IntrospectRequest introspectRequest) throws JOSEException, ParseException {
         var token = introspectRequest.getToken();
+        try {
+            verifyToken(token);
+        }
+        catch (Exception e) {
+            return  IntrospectResponse.builder()
+                    .valid(false)
+                    .build();
+        }
+        return  IntrospectResponse.builder()
+                .valid(true)
+                .build();
 
+    }
+
+    private SignedJWT verifyToken(String token) throws JOSEException, ParseException {
         JWSVerifier verifier = new MACVerifier(SIGNER_KEY.getBytes());
-
         SignedJWT signedJWT = SignedJWT.parse(token);
 
         Date expityTime = signedJWT.getJWTClaimsSet().getExpirationTime();
 
-        var verified = signedJWT.verify(verifier); //True or
+        var verified = signedJWT.verify(verifier);
 
-        return  IntrospectResponse.builder()
-                .valid(verified && expityTime.after(new Date()))
+        if(!verified && expityTime.after(new Date())) {
+            throw new JOSEException("Invalid token");
+        }
+
+        if (invalidateRepository.existsById(signedJWT.getJWTClaimsSet().getJWTID())){
+            throw new JOSEException("Invalid token");
+        }
+        return signedJWT;
+    }
+
+    public void logout(LogoutRequest logoutRequest) throws ParseException, JOSEException {
+        var signToken = verifyToken(logoutRequest.getToken());
+
+        String jid = signToken.getJWTClaimsSet().getJWTID();
+        Date expityTime = signToken.getJWTClaimsSet().getExpirationTime();
+
+        InvalidateToken invalidateToken = InvalidateToken.builder()
+                .id(jid)
+                .experiedTime(expityTime)
                 .build();
 
+        invalidateRepository.save(invalidateToken);
     }
 }

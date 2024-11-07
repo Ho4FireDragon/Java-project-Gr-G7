@@ -4,6 +4,7 @@ import com.nimbusds.jose.JOSEException;
 import com.shopkoi.shopkoi.Service.AuthenticationService;
 import com.shopkoi.shopkoi.dto.AuthenticationRequest;
 import com.shopkoi.shopkoi.dto.IntrospectRequest;
+import com.shopkoi.shopkoi.dto.LogoutRequest;
 import com.shopkoi.shopkoi.dto.response.AuthenticationResponse;
 import com.shopkoi.shopkoi.dto.response.IntrospectResponse;
 import com.shopkoi.shopkoi.exception.ErrorCode;
@@ -91,21 +92,28 @@ public class AuthenticationController {
 
 
 
-    // Endpoint logout cho staff
-    @PostMapping("/logout-staff")
-    public ResponseEntity<String> logoutStaff() {
-        // Xóa thông tin xác thực trong SecurityContext dành cho staff
-        SecurityContextHolder.clearContext();
-        return ResponseEntity.status(HttpStatus.OK).body("Staff logout successful");
+//    // Endpoint logout cho staff
+//    @PostMapping("/logout-staff")
+//    public ResponseEntity<String> logoutStaff() {
+//        // Xóa thông tin xác thực trong SecurityContext dành cho staff
+//        SecurityContextHolder.clearContext();
+//        return ResponseEntity.status(HttpStatus.OK).body("Staff logout successful");
+//    }
+//
+//    // Endpoint logout cho customer
+//    @PostMapping("/logout-customer")
+//    public ResponseEntity<String> logoutCustomer() {
+//        // Xóa thông tin xác thực trong SecurityContext dành cho customer
+//        SecurityContextHolder.clearContext();
+//        return ResponseEntity.status(HttpStatus.OK).body("Customer logout successful");
+//    }
+
+    @PostMapping("/logout-customer")
+    public ResponseEntity<Void> logoutCustomer(@RequestBody LogoutRequest logoutRequest) throws ParseException, JOSEException {
+        authenticationService.logout(logoutRequest);
+        return ResponseEntity.noContent().build();
     }
 
-    // Endpoint logout cho customer
-    @PostMapping("/logout-customer")
-    public ResponseEntity<String> logoutCustomer() {
-        // Xóa thông tin xác thực trong SecurityContext dành cho customer
-        SecurityContextHolder.clearContext();
-        return ResponseEntity.status(HttpStatus.OK).body("Customer logout successful");
-    }
 
 
 

@@ -2,6 +2,7 @@ package com.shopkoi.shopkoi.config;
 
 import com.shopkoi.shopkoi.Service.Right;
 import lombok.experimental.NonFinal;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -21,6 +22,9 @@ import javax.crypto.spec.SecretKeySpec;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
+    @Autowired
+    private CustomJwtDecoder jwtDecoder;
 
     private final String[] PublicEndpoints = {"/api/customers/create",
             "/api/auth/login-staff",
@@ -57,20 +61,20 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.DELETE,AdminDeleteEndpoints).hasRole(Right.ADMIN.name())
                         .anyRequest().authenticated());
                 httpSecurity.oauth2ResourceServer(login ->
-                        login.jwt(jwtConfigurer -> jwtConfigurer.decoder(jwtDecoder()))
+                        login.jwt(jwtConfigurer -> jwtConfigurer.decoder(jwtDecoder))
                 );
 
         httpSecurity.csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable());
         return httpSecurity.build();
     }
 
-    @Bean
-    JwtDecoder jwtDecoder() {
-        SecretKeySpec secretKeySpec = new SecretKeySpec(SIGNER_KEY.getBytes(), "HS512");
-        return NimbusJwtDecoder.withSecretKey(secretKeySpec)
-                .macAlgorithm(MacAlgorithm.HS512)
-                .build();
-    };
+//    @Bean
+//    JwtDecoder jwtDecoder() {
+//        SecretKeySpec secretKeySpec = new SecretKeySpec(SIGNER_KEY.getBytes(), "HS512");
+//        return NimbusJwtDecoder.withSecretKey(secretKeySpec)
+//                .macAlgorithm(MacAlgorithm.HS512)
+//                .build();
+//    };
 
     @Bean
     public PasswordEncoder passwordEncoder() {
