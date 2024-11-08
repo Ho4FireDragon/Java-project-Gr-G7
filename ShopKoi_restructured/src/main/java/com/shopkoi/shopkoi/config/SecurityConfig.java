@@ -33,7 +33,8 @@ public class SecurityConfig {
             "/api/auth/logout-staff",
             "/api/auth/introspect-customer",
             "/api/auth/introspect-staff",
-            "/api/customers/create"
+            "/api/customers/create",
+            "/api/auth/refreshtoken"
     };
 
     private final String[] AdminGetEndpoints = {"/api/customers",
@@ -41,14 +42,29 @@ public class SecurityConfig {
             "/api/staff",
             "/api/staff/{id}",
             "/api/blog",
+            "/api/blog/{id}",
             "/api/blogslug",
             "/api/bookings",
+            "/api/books/{id}",
             "/api/feedback",
+            "/api/feedback/{id}",
             "/api/roles",
+            "/api/roles/{id}",
             "/api/services"
     };
 
-    private final String[] AdminDeleteEndpoints = {"/api/customers/delete",};
+    private final String[] AdminDeleteEndpoints = {"/api/customers/delete",
+    "/api/staff/delete",
+
+    };
+
+    private final String[] AdminPutEndpoints = {"/api/customers/update",
+            "/api/staff/update",
+            "/api/roles/update",
+            "/api/services/update",
+            "/api/feedback/update",
+            "/api/blog/update",
+    };
 
     @NonFinal
     protected static final String SIGNER_KEY = "bJAlGYJC+G5iUfD2OQv6u0fWXOeV67Dz0uz+O9BIlgOA1At7QEp/Zh9eqXUUoU+K\n";
@@ -59,6 +75,7 @@ public class SecurityConfig {
                 request.requestMatchers(HttpMethod.POST,PublicEndpoints).permitAll()
                         .requestMatchers(HttpMethod.GET,AdminGetEndpoints).hasAnyAuthority("SCOPE_ADMIN")
                         .requestMatchers(HttpMethod.DELETE,AdminDeleteEndpoints).hasRole(Right.ADMIN.name())
+                        .requestMatchers(HttpMethod.PUT,AdminPutEndpoints).hasRole(Right.ADMIN.name())
                         .anyRequest().authenticated());
                 httpSecurity.oauth2ResourceServer(login ->
                         login.jwt(jwtConfigurer -> jwtConfigurer.decoder(jwtDecoder))

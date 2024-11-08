@@ -8,6 +8,7 @@ import com.nimbusds.jwt.SignedJWT;
 import com.shopkoi.shopkoi.dto.AuthenticationRequest;
 import com.shopkoi.shopkoi.dto.IntrospectRequest;
 import com.shopkoi.shopkoi.dto.LogoutRequest;
+import com.shopkoi.shopkoi.dto.RefreshTokenRequest;
 import com.shopkoi.shopkoi.dto.response.AuthenticationResponse;
 import com.shopkoi.shopkoi.dto.response.IntrospectResponse;
 import com.shopkoi.shopkoi.model.entity.InvalidateToken;
@@ -175,5 +176,37 @@ public class AuthenticationService {
                 .build();
 
         invalidateRepository.save(invalidateToken);
+    }
+
+    public AuthenticationResponse refreshToken(RefreshTokenRequest request)
+            throws Exception {
+        var signedJWT = verifyToken(request.getToken());
+
+        var jit = signedJWT.getJWTClaimsSet().getJWTID();
+        var expiryTime = signedJWT.getJWTClaimsSet().getExpirationTime();
+
+        InvalidateToken invalidatedToken = InvalidateToken.builder()
+                .id(jit)
+                .experiedTime(expiryTime)
+                .build();
+
+        invalidateRepository.save(invalidatedToken);
+
+        var customeremail = signedJWT.getJWTClaimsSet().getSubject();
+
+        var customer = customerRepository.findByEmail(customeremail).orElseThrow(
+                () -> new Exception()
+        );
+
+        var token = generateToken(customer.getEmail(),customer.getRightcustomer());
+
+        return AuthenticationResponse.builder()
+                .token(token)
+                .Id(customer.getId())
+                .Name(customer.getFirstname())
+                .Email(customer.getEmail())
+                .Address(customer.getAddress())
+                .Phone(customer.getPhone())
+                .build();
     }
 }

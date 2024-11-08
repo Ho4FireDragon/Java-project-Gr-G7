@@ -5,6 +5,7 @@ import com.shopkoi.shopkoi.Service.AuthenticationService;
 import com.shopkoi.shopkoi.dto.AuthenticationRequest;
 import com.shopkoi.shopkoi.dto.IntrospectRequest;
 import com.shopkoi.shopkoi.dto.LogoutRequest;
+import com.shopkoi.shopkoi.dto.RefreshTokenRequest;
 import com.shopkoi.shopkoi.dto.response.AuthenticationResponse;
 import com.shopkoi.shopkoi.dto.response.IntrospectResponse;
 import com.shopkoi.shopkoi.exception.ErrorCode;
@@ -113,6 +114,12 @@ public class AuthenticationController {
         authenticationService.logout(logoutRequest);
         return ResponseEntity.noContent().build();
     }
+
+    @PostMapping("/refreshtoken")
+    public ResponseEntity<AuthenticationResponse> refreshToken(@RequestBody RefreshTokenRequest refreshTokenRequest) throws Exception {
+        var result = authenticationService.refreshToken(refreshTokenRequest);
+        return ResponseEntity.ok(result);
+    };
 
 
 
