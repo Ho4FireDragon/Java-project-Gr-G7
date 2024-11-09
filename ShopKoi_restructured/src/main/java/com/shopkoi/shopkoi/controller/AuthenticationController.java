@@ -115,6 +115,12 @@ public class AuthenticationController {
         return ResponseEntity.noContent().build();
     }
 
+    @PostMapping("/logout-staff")
+    public ResponseEntity<Void> logoutStaff(@RequestBody LogoutRequest logoutRequest) throws ParseException, JOSEException {
+        authenticationService.logout(logoutRequest);
+        return ResponseEntity.noContent().build();
+    }
+
     @PostMapping("/refreshtoken")
     public ResponseEntity<AuthenticationResponse> refreshToken(@RequestBody RefreshTokenRequest refreshTokenRequest) throws Exception {
         var result = authenticationService.refreshToken(refreshTokenRequest);

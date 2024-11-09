@@ -1,5 +1,10 @@
 package com.shopkoi.shopkoi.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
 public class FeedbackRequest {
     private Long bookingid;
     private Long customerid;
@@ -13,38 +18,6 @@ public class FeedbackRequest {
         this.customerid = customerid;
         this.rating = rating;
         this.comment = comment;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
-
-    public int getRating() {
-        return rating;
-    }
-
-    public void setRating(int rating) {
-        this.rating = rating;
-    }
-
-    public Long getCustomerid() {
-        return customerid;
-    }
-
-    public void setCustomerid(Long customerid) {
-        this.customerid = customerid;
-    }
-
-    public Long getBookingid() {
-        return bookingid;
-    }
-
-    public void setBookingid(Long bookingid) {
-        this.bookingid = bookingid;
     }
 
 }

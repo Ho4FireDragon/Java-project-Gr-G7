@@ -1,5 +1,8 @@
 package com.shopkoi.shopkoi.dto;
 
+import lombok.Getter;
+
+@Getter
 public class BookingRequest {
     private Long customerId;
     private Long staffId;
@@ -17,32 +20,16 @@ public class BookingRequest {
 
    public BookingRequest() {}
 
-    public Long getCustomerId() {
-        return customerId;
-    }
-
     public void setCustomerId(Long customerId) {
         this.customerId = customerId;
-    }
-
-    public Long getStaffId() {
-        return staffId;
     }
 
     public void setStaffId(Long staffId) {
         this.staffId = staffId;
     }
 
-    public Long getServiceId() {
-        return serviceId;
-    }
-
     public void setServiceId(Long serviceId) {
         this.serviceId = serviceId;
-    }
-
-    public String getBookingDate() {
-        return bookingDate;
     }
 
     public void setBookingDate(String bookingDate) {

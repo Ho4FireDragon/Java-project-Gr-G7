@@ -1,7 +1,11 @@
 package com.shopkoi.shopkoi.model.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter
+@Getter
 @Entity
 @Table(name = "services")
 public class ServiceEntity {
@@ -33,67 +37,4 @@ public class ServiceEntity {
 
     // Getters và Setters
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNameservice() {
-        return nameservice;
-    }
-
-    public void setNameservice(String nameservice) {
-        this.nameservice = nameservice;
-    }
-
-    public String getProductcode() {
-        return productcode;
-    }
-
-    public void setProductcode(String productcode) {
-        this.productcode = productcode;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    public String getSummary() {
-        return summary;
-    }
-
-    public void setSummary(String summary) {
-        this.summary = summary;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getImagePath() {
-        return imagePath;
-    }
-
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
-    }
 }

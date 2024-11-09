@@ -1,7 +1,9 @@
 package com.shopkoi.shopkoi.dto;
 
 import com.shopkoi.shopkoi.Service.StaffSchedule;
+import lombok.Getter;
 
+@Getter
 public class StaffRequest {
     private String staffName;
     private String staffEmail;
@@ -21,48 +23,24 @@ public class StaffRequest {
 
     public StaffRequest() {}
 
-    public String getStaffName() {
-        return staffName;
-    }
-
     public void setStaffName(String staffName) {
         this.staffName = staffName;
-    }
-
-    public String getStaffEmail() {
-        return staffEmail;
     }
 
     public void setStaffEmail(String staffEmail) {
         this.staffEmail = staffEmail;
     }
 
-    public String getStaffPhone() {
-        return staffPhone;
-    }
-
     public void setStaffPhone(String staffPhone) {
         this.staffPhone = staffPhone;
-    }
-
-    public Long getRoleId() {
-        return roleId;
     }
 
     public void setRoleId(Long roleId) {
         this.roleId = roleId;
     }
 
-    public StaffSchedule getStaffSchedule() {
-        return staffSchedule;
-    }
-
     public void setStaffSchedule(StaffSchedule staffSchedule) {
         this.staffSchedule = staffSchedule;
-    }
-
-    public String getStaffPassword() {
-        return staffPassword;
     }
 
     public void setStaffPassword(String staffPassword) {
