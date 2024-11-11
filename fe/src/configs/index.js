@@ -2,6 +2,7 @@ export const config = {
     routes: {
         // Header navigates
         home: '/',
+        user: '/user',
         about: '/about',
         faq: '/faq',
         services: '/services',
@@ -19,5 +20,6 @@ export const config = {
         // Auth
         login: '/login',
         register: '/register',
+        admin:'/admin'
     },
 }
