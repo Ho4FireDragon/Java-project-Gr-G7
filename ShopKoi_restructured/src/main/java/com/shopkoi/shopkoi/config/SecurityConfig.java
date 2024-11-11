@@ -33,8 +33,9 @@ public class SecurityConfig {
             "/api/auth/logout-staff",
             "/api/auth/introspect-customer",
             "/api/auth/introspect-staff",
-            "/api/customers/create",
-            "/api/auth/refreshtoken"
+            "/api/staff/create",
+            "/api/auth/refreshtoken",
+            "/api/roles/create"
     };
 
     private final String[] AdminGetEndpoints = {"/api/customers",

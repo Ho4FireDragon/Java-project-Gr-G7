@@ -1,5 +1,6 @@
 package com.shopkoi.shopkoi.controller;
 
+import com.shopkoi.shopkoi.Service.ServiceStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,7 +39,7 @@ public class ServiceController {
             @RequestParam("price") Double price,
             @RequestParam("summary") String summary,
             @RequestParam("content") String content,
-            @RequestParam("status") String status,
+            @RequestParam("status") ServiceStatus status,
             @RequestParam("image") MultipartFile imageFile) throws IOException {
 
         String imagePath = saveImage(imageFile);
@@ -64,7 +65,7 @@ public class ServiceController {
             @RequestParam("price") Double price,
             @RequestParam("summary") String summary,
             @RequestParam("content") String content,
-            @RequestParam("status") String status,
+            @RequestParam("status") ServiceStatus status,
             @RequestParam(value = "image", required = false) MultipartFile imageFile) throws IOException {
 
         ServiceEntity existingService = serviceService.getServiceById(id);

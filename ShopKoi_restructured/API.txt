@@ -27,12 +27,12 @@ http://localhost:8080/api/staff/create
 http://localhost:8080/api/staff/update/{id}
 http://localhost:8080/api/staff/delete/{id}
 {
-  "staffName": "D.Thinh",
-  "staffEmail": "johndoe@example.com",
-  "staffPhone": "1234567890",
-  "roleId": 2,
-  "staffSchedule": "NGHI",
-  "staffPassword": "password123"
+    "staffName": "Nguyen Van A",
+    "staffEmail": "nguyenvana@example.com",
+    "staffPhone": "0123456789",
+    "roleId": 1,
+    "staffSchedule": ["MONDAY", "TUESDAY", "WEDNESDAY"],
+    "staffPassword": "123"
 }
 http://localhost:8080/api/staff/update-password/{id}
 "newSecurePassword123"

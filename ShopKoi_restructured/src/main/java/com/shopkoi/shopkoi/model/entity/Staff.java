@@ -9,6 +9,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Set;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -33,9 +35,10 @@ public class Staff {
 
     private String staffadress;
 
+    @ElementCollection(targetClass = StaffSchedule.class)
     @Enumerated(EnumType.STRING)
     @Column(name = "staffschedule")
-    private StaffSchedule staffschedule;
+    private Set<StaffSchedule> staffschedule;
 
     private String staffpassword;
 

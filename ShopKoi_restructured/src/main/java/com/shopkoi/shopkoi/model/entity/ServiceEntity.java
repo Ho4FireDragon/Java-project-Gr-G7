@@ -1,5 +1,6 @@
 package com.shopkoi.shopkoi.model.entity;
 
+import com.shopkoi.shopkoi.Service.ServiceStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,7 +30,7 @@ public class ServiceEntity {
     private String content;
 
     @Column(name = "status")
-    private String status;
+    private ServiceStatus status;
 
     // Thêm thuộc tính imagePath để lưu đường dẫn ảnh
     @Column(name = "image_path")
