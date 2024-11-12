@@ -10,7 +10,9 @@ import com.shopkoi.shopkoi.dto.response.AuthenticationResponse;
 import com.shopkoi.shopkoi.dto.response.IntrospectResponse;
 import com.shopkoi.shopkoi.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.NonFinal;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.ErrorResponse;
@@ -30,6 +32,7 @@ public class AuthenticationController {
 
     @Autowired
     private AuthenticationService authenticationService;
+
 
 
     @PostMapping("/login-staff")

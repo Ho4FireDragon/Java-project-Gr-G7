@@ -38,6 +38,10 @@ public class SecurityConfig {
             "/api/roles/create"
     };
 
+    private final String[] AdminPostEndpoints = {"/api/services/create",
+    };
+
+
     private final String[] AdminGetEndpoints = {"/api/customers",
             "/api/customers/{id}",
             "/api/staff",
@@ -74,6 +78,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests(request ->
                 request.requestMatchers(HttpMethod.POST,PublicEndpoints).permitAll()
+                        .requestMatchers(HttpMethod.GET,AdminPostEndpoints).hasAnyRole("SCOPE_ADMIN")
                         .requestMatchers(HttpMethod.GET,AdminGetEndpoints).hasAnyAuthority("SCOPE_ADMIN")
                         .requestMatchers(HttpMethod.DELETE,AdminDeleteEndpoints).hasRole(Right.ADMIN.name())
                         .requestMatchers(HttpMethod.PUT,AdminPutEndpoints).hasRole(Right.ADMIN.name())
