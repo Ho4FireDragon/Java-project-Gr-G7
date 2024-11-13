@@ -1,8 +1,13 @@
 package com.shopkoi.shopkoi.model.entity;
 
-
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.util.List;
+
+@Setter
+@Getter
 @Entity
 @Table(name = "BlogSlug")
 public class BlogSlug {
@@ -14,29 +19,8 @@ public class BlogSlug {
 
     private String Description;
 
-    public Long getBlogSlugId() {
-        return BlogSlugId;
-    }
-
-    public void setBlogSlugId(Long blogSlugId) {
-        BlogSlugId = blogSlugId;
-    }
-
-    public String getTitle() {
-        return Title;
-    }
-
-    public void setTitle(String title) {
-        Title = title;
-    }
-
-    public String getDescription() {
-        return Description;
-    }
-
-    public void setDescription(String description) {
-        Description = description;
-    }
+    @OneToMany(mappedBy = "blogSlug", cascade = CascadeType.REMOVE)
+    private List<Blog> blogs;
 
     public BlogSlug(Long blogSlugId, String title, String description) {
         BlogSlugId = blogSlugId;
