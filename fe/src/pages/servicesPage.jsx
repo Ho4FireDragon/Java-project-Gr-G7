@@ -1,4 +1,3 @@
-import React from 'react'
 import Accordion from '@mui/material/Accordion'
 import AccordionSummary from '@mui/material/AccordionSummary'
 import AccordionDetails from '@mui/material/AccordionDetails'
@@ -13,7 +12,7 @@ const faqData = [
 ]
 export default function servicesPage() {
     return (
-        <div>
+        <div className='container'>
             {faqData.map((item, index) => (
                 <Accordion key={index}>
                     <AccordionSummary expandIcon={<ExpandMoreIcon />}>

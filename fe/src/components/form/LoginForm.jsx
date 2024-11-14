@@ -3,6 +3,7 @@ import { useFormik } from 'formik'
 import { Input } from '@nextui-org/input'
 import { Button } from '@nextui-org/react'
 import { Link, useNavigate } from 'react-router-dom'
+import { useCustomerLogin } from '../../hooks/useCustomerLogin'
 
 const LoginSchema = Yup.object().shape({
     email: Yup.string().email('Invalid email').min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
@@ -10,7 +11,9 @@ const LoginSchema = Yup.object().shape({
 })
 
 function LoginForm() {
-    const navigate = useNavigate(); 
+    const navigate = useNavigate()
+    const { customerLogin } = useCustomerLogin()
+    
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -19,14 +22,14 @@ function LoginForm() {
         validationSchema: LoginSchema,
         onSubmit: (values) => {
             if (values.email === 'admin@gmail.com' && values.password === '1234567') {
-                navigate('/admin');
+                navigate('/admin')
             } else if (LoginSchema.isValidSync(values)) {
-                navigate('/user');
+                navigate('/user')
             } else {
-                alert('Invalid credentials');
+                alert('Invalid credentials')
             }
         },
-    });
+    })
 
     return (
         <form onSubmit={formik.handleSubmit} className="w-full flex flex-col gap-5">
@@ -60,7 +63,7 @@ function LoginForm() {
                 Login
             </Button>
         </form>
-    );
+    )
 }
 
-export default LoginForm;
+export default LoginForm

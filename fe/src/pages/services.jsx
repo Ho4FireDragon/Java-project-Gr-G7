@@ -1,5 +1,3 @@
-import React from 'react'
-
 export default function services() {
     const items = [
         {
@@ -89,7 +87,7 @@ export default function services() {
             <div className="header_aboutUs">
                 <h1 className="text_Header">Services</h1>
             </div>
-            <div className="First_PartServices">
+            <div className="container First_PartServices">
                 <div className="First_PartServices_Content">
                     <div className="main_Content_Fourth">
                         <div className="content_Wrapper_Fourth">
@@ -109,7 +107,7 @@ export default function services() {
                     </div>
                 </div>
             </div>
-            <div className="grid-container">
+            <div className="container grid-container">
                 {items.map((item) => (
                     <div key={item.id} className="grid-item">
                         <img style={{ width: '200px', height: '200px', marginRight: '100px' }} src={item.imageUrl} alt={`Image for ${item.text}`} />
@@ -125,7 +123,7 @@ export default function services() {
                 height={500}
                 className="iframe_Video"
                 src="https://www.youtube.com/embed/b9rf5ZwcV_E?rel=0&start&end&controls=1&mute=0&modestbranding=0&autoplay=1"
-                frameborder="0"
+                frameBorder="0"
             ></iframe>
             <div className="cta-section cta-sectionTwo">
                 <h2>Schedule Your Fish Exam</h2>

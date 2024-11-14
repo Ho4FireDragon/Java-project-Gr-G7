@@ -2,7 +2,6 @@ export const config = {
     routes: {
         // Header navigates
         home: '/',
-        user: '/user',
         about: '/about',
         faq: '/faq',
         services: '/services',
@@ -19,7 +18,12 @@ export const config = {
 
         // Auth
         login: '/login',
+        staff_login: '/staff/login',
         register: '/register',
-        admin:'/admin'
+
+        // Roles Page
+        user: '/user',
+        staff: '/staff',
+        admin: '/admin',
     },
 }

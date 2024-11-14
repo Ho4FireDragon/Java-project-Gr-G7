@@ -1,4 +1,3 @@
-import React from 'react'
 import Accordion from '@mui/material/Accordion'
 import AccordionSummary from '@mui/material/AccordionSummary'
 import AccordionDetails from '@mui/material/AccordionDetails'
@@ -110,18 +109,20 @@ export default function FaqPage() {
             <div className="header_aboutUs">
                 <h1 className="text_Header">Frequently Asked Questions</h1>
             </div>
-            {faqData.map((item, index) => (
-                <Accordion key={index}>
-                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                        <Typography>{item.question}</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        <Typography>{item.answer}</Typography>
-                    </AccordionDetails>
-                </Accordion>
-            ))}
-            {/* Thêm phần CommentList bên dưới */}
-            <CommentList />
+            <div className="container mb-20">
+                {faqData.map((item, index) => (
+                    <Accordion key={index}>
+                        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                            <Typography>{item.question}</Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <Typography>{item.answer}</Typography>
+                        </AccordionDetails>
+                    </Accordion>
+                ))}
+                {/* Thêm phần CommentList bên dưới */}
+                <CommentList />
+            </div>
         </div>
     )
 }
