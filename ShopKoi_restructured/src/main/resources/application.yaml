@@ -1,0 +1,4 @@
+
+jwt:
+  valid-duration: 30 #min
+  refreshable-duration: 30 #min

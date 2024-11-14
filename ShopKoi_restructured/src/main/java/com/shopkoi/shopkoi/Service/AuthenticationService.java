@@ -20,6 +20,7 @@ import lombok.experimental.NonFinal;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -42,6 +43,14 @@ public class AuthenticationService {
 
     @Autowired
     private InvalidateRepository invalidateRepository;
+
+    @Value("${jwt.refreshable-duration}")
+    @NonFinal
+    protected Long refreshDuration;
+
+    @Value("${jwt.valid-duration}")
+    @NonFinal
+    protected Long validDuration;
 
     public AuthenticationResponse authenticateStaff(AuthenticationRequest authenticationRequest) throws JOSEException {
         var staffemail = staffRepository.findByStaffemail(authenticationRequest.getEmail()).orElse(null);
@@ -95,7 +104,7 @@ public class AuthenticationService {
                 .issuer("ShopKoi.com")
                 .issueTime(new Date())
                 .expirationTime(new Date(
-                        Instant.now().plus(3, ChronoUnit.HOURS).toEpochMilli()
+                        Instant.now().plus(validDuration, ChronoUnit.MINUTES).toEpochMilli()
                 ))
                 .jwtID(UUID.randomUUID().toString())
                 .claim("scope", right)
@@ -119,7 +128,7 @@ public class AuthenticationService {
             boolean isValid = true;
 
             try {
-                verifyToken(token);
+                verifyToken(token,false);
             } catch (Exception e) {
                 isValid = false;
             }
@@ -133,7 +142,7 @@ public class AuthenticationService {
     public IntrospectResponse introspectStaff(IntrospectRequest introspectRequest) throws JOSEException, ParseException {
         var token = introspectRequest.getToken();
         try {
-            verifyToken(token);
+            verifyToken(token,false);
         }
         catch (Exception e) {
             return  IntrospectResponse.builder()
@@ -146,11 +155,14 @@ public class AuthenticationService {
 
     }
 
-    private SignedJWT verifyToken(String token) throws JOSEException, ParseException {
+    private SignedJWT verifyToken(String token, boolean isRefresh) throws JOSEException, ParseException {
         JWSVerifier verifier = new MACVerifier(SIGNER_KEY.getBytes());
         SignedJWT signedJWT = SignedJWT.parse(token);
 
-        Date expityTime = signedJWT.getJWTClaimsSet().getExpirationTime();
+        Date expityTime = (isRefresh)
+                ? new Date(signedJWT.getJWTClaimsSet().getIssueTime().toInstant().plus(refreshDuration, ChronoUnit.MINUTES).toEpochMilli())
+
+                : signedJWT.getJWTClaimsSet().getExpirationTime();
 
         var verified = signedJWT.verify(verifier);
 
@@ -165,22 +177,27 @@ public class AuthenticationService {
     }
 
     public void logout(LogoutRequest logoutRequest) throws ParseException, JOSEException {
-        var signToken = verifyToken(logoutRequest.getToken());
 
-        String jid = signToken.getJWTClaimsSet().getJWTID();
-        Date expityTime = signToken.getJWTClaimsSet().getExpirationTime();
+        try {
+            var signToken = verifyToken(logoutRequest.getToken(), true);
 
-        InvalidateToken invalidateToken = InvalidateToken.builder()
-                .id(jid)
-                .experiedTime(expityTime)
-                .build();
+            String jid = signToken.getJWTClaimsSet().getJWTID();
+            Date expityTime = signToken.getJWTClaimsSet().getExpirationTime();
 
-        invalidateRepository.save(invalidateToken);
+            InvalidateToken invalidateToken = InvalidateToken.builder()
+                    .id(jid)
+                    .experiedTime(expityTime)
+                    .build();
+
+            invalidateRepository.save(invalidateToken);
+        }catch (Exception e) {
+            log.info("Invalid token");
+        }
     }
 
     public AuthenticationResponse refreshToken(RefreshTokenRequest request)
             throws Exception {
-        var signedJWT = verifyToken(request.getToken());
+        var signedJWT = verifyToken(request.getToken(),true);
 
         var jit = signedJWT.getJWTClaimsSet().getJWTID();
         var expiryTime = signedJWT.getJWTClaimsSet().getExpirationTime();

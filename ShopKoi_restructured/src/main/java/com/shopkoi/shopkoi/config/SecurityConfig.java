@@ -38,7 +38,8 @@ public class SecurityConfig {
             "/api/roles/create"
     };
 
-    private final String[] AdminGetEndpoints = {"/api/customers",
+    private final String[] AdminGetEndpoints = {
+            "/api/customers",
             "/api/customers/{id}",
             "/api/staff",
             "/api/staff/{id}",
@@ -46,25 +47,46 @@ public class SecurityConfig {
             "/api/blog/{id}",
             "/api/blogslug",
             "/api/bookings",
-            "/api/books/{id}",
+            "/api/booking/{id}",
             "/api/feedback",
             "/api/feedback/{id}",
             "/api/roles",
             "/api/roles/{id}",
-            "/api/services"
+            "/api/services",
+            "/api/services/{id}"
     };
 
-    private final String[] AdminDeleteEndpoints = {"/api/customers/delete",
-    "/api/staff/delete",
+    private final String[] AdminDeleteEndpoints = {
+            "/api/customers/delete/{id}",
+            "/api/staff/delete/{id}",
+            "/api/blog/delete/{id}",
+            "/api/blogslug/delete/{id}",
+            "/api/bookings/delete/{id}",
+            "/api/feedback/delete/{id}",
+            "/api/roles/delete/{id}",
+            "/api/services/delete/{id}"
 
     };
 
-    private final String[] AdminPutEndpoints = {"/api/customers/update",
-            "/api/staff/update",
-            "/api/roles/update",
-            "/api/services/update",
-            "/api/feedback/update",
-            "/api/blog/update",
+    private final String[] AdminPutEndpoints = {
+            "/api/customers/update/{id}",
+            "/api/staff/update/{id}",
+            "/api/blog/update/{id}",
+            "/api/blogslug/update/{id}",
+            "/api/bookings/update/{id}",
+            "/api/feedback/update/{id}",
+            "/api/roles/update/{id}",
+            "/api/services/update/{id}"
+    };
+    private final String[] AdminPostEndpoints = {
+            "/api/customers/create",
+            "/api/staff/create",
+            "/api/blog/create",
+            "/api/blogslug/create",
+            "/api/bookings/create",
+            "/api/feedback/create",
+            "/api/roles/create",
+            "/api/services/create"
     };
 
     @NonFinal
@@ -76,6 +98,7 @@ public class SecurityConfig {
                 request.requestMatchers(HttpMethod.POST,PublicEndpoints).permitAll()
                         .requestMatchers(HttpMethod.GET,AdminGetEndpoints).hasAnyAuthority("SCOPE_ADMIN")
                         .requestMatchers(HttpMethod.DELETE,AdminDeleteEndpoints).hasRole(Right.ADMIN.name())
+                        .requestMatchers(HttpMethod.POST,AdminPostEndpoints).hasRole(Right.ADMIN.name())
                         .requestMatchers(HttpMethod.PUT,AdminPutEndpoints).hasRole(Right.ADMIN.name())
                         .anyRequest().authenticated());
                 httpSecurity.oauth2ResourceServer(login ->
