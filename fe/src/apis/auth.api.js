@@ -14,7 +14,7 @@ const authApi = {
         return await axiosClient.post(url, authInfo)
     },
     logout: async (params) => {
-        const url = `users/logout/:id`
+        const url = `/users/logout/:id`
         return await axiosClient.get(url, { params })
     },
 }
