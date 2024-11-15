@@ -13,4 +13,12 @@ public class WebConfig implements WebMvcConfigurer {
         //file  staff-images
         registry.addResourceHandler("/staff-images/**").addResourceLocations("file:staff-images/");
     }
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOrigins("http://localhost:3000") // Add your new site here
+                .allowedMethods("GET", "POST", "PUT", "DELETE")
+                .allowedHeaders("*")
+                .allowCredentials(true);
+    }
 }
