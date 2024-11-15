@@ -12,12 +12,13 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
-import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.cors.CorsConfigurationSource;
 
-import javax.crypto.spec.SecretKeySpec;
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -26,7 +27,8 @@ public class SecurityConfig {
     @Autowired
     private CustomJwtDecoder jwtDecoder;
 
-    private final String[] PublicEndpoints = {"/api/customers/create",
+    private final String[] PublicEndpoints = {
+            "/api/customers/create",
             "/api/auth/login-staff",
             "/api/auth/login-customer",
             "/api/auth/logout-customer",
@@ -65,7 +67,6 @@ public class SecurityConfig {
             "/api/feedback/delete/{id}",
             "/api/roles/delete/{id}",
             "/api/services/delete/{id}"
-
     };
 
     private final String[] AdminPutEndpoints = {
@@ -78,6 +79,7 @@ public class SecurityConfig {
             "/api/roles/update/{id}",
             "/api/services/update/{id}"
     };
+
     private final String[] AdminPostEndpoints = {
             "/api/customers/create",
             "/api/staff/create",
@@ -94,28 +96,35 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.authorizeHttpRequests(request ->
-                request.requestMatchers(HttpMethod.POST,PublicEndpoints).permitAll()
-                        .requestMatchers(HttpMethod.GET,AdminGetEndpoints).hasAnyAuthority("SCOPE_ADMIN")
-                        .requestMatchers(HttpMethod.DELETE,AdminDeleteEndpoints).hasRole(Right.ADMIN.name())
-                        .requestMatchers(HttpMethod.POST,AdminPostEndpoints).hasRole(Right.ADMIN.name())
-                        .requestMatchers(HttpMethod.PUT,AdminPutEndpoints).hasRole(Right.ADMIN.name())
-                        .anyRequest().authenticated());
-                httpSecurity.oauth2ResourceServer(login ->
-                        login.jwt(jwtConfigurer -> jwtConfigurer.decoder(jwtDecoder))
-                );
+        httpSecurity
+                .authorizeHttpRequests(request ->
+                        request.requestMatchers(HttpMethod.POST, PublicEndpoints).permitAll()
+                                .requestMatchers(HttpMethod.GET, AdminGetEndpoints).hasAnyAuthority("SCOPE_ADMIN")
+                                .requestMatchers(HttpMethod.DELETE, AdminDeleteEndpoints).hasRole(Right.ADMIN.name())
+                                .requestMatchers(HttpMethod.POST, AdminPostEndpoints).hasRole(Right.ADMIN.name())
+                                .requestMatchers(HttpMethod.PUT, AdminPutEndpoints).hasRole(Right.ADMIN.name())
+                                .anyRequest().authenticated())
+                .oauth2ResourceServer(login ->
+                        login.jwt(jwtConfigurer -> jwtConfigurer.decoder(jwtDecoder)))
+                .csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable())
+                .cors(); // Enable CORS support
 
-        httpSecurity.csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable());
         return httpSecurity.build();
     }
 
-//    @Bean
-//    JwtDecoder jwtDecoder() {
-//        SecretKeySpec secretKeySpec = new SecretKeySpec(SIGNER_KEY.getBytes(), "HS512");
-//        return NimbusJwtDecoder.withSecretKey(secretKeySpec)
-//                .macAlgorithm(MacAlgorithm.HS512)
-//                .build();
-//    };
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(List.of("http://localhost:3000")); // Add allowed origins
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS")); // Add allowed methods
+        configuration.setAllowedHeaders(List.of("Content-Type", "Authorization", "Content-Type", "Cache-Control", "Access-Control-Allow-Origin"));
+        configuration.setAllowCredentials(true); // Allow cookies or authorization headers
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration); // Apply configuration globally
+        return source;
+    }
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {

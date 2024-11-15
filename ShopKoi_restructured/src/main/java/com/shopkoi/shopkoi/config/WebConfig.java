@@ -13,12 +13,13 @@ public class WebConfig implements WebMvcConfigurer {
         //file  staff-images
         registry.addResourceHandler("/staff-images/**").addResourceLocations("file:staff-images/");
     }
+
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedOrigins("http://localhost:3000") // Add your new site here
-                .allowedMethods("GET", "POST", "PUT", "DELETE")
-                .allowedHeaders("*")
-                .allowCredentials(true);
+        registry.addMapping("/**") // Cho phép tất cả các endpoint
+                .allowedOrigins("http://localhost:3000") // Chỉ cho phép từ localhost:3000
+                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Các phương thức HTTP được phép
+                .allowedHeaders("*") // Cho phép tất cả các header
+                .allowCredentials(true); // Cho phép gửi cookie
     }
 }
