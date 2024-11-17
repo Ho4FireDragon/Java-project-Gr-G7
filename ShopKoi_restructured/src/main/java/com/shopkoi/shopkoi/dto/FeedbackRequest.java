@@ -1,23 +1,21 @@
 package com.shopkoi.shopkoi.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Setter
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class FeedbackRequest {
     private Long bookingid;
     private Long customerid;
+    private Long staffid;
     private int rating;
     private String comment;
 
-    public FeedbackRequest() {}
 
-    public FeedbackRequest(Long bookingid, Long customerid, int rating, String comment) {
-        this.bookingid = bookingid;
-        this.customerid = customerid;
-        this.rating = rating;
-        this.comment = comment;
-    }
 
 }

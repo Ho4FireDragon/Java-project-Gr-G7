@@ -38,11 +38,11 @@ public class SecurityConfig {
             "/api/staff/create",
             "/api/auth/refreshtoken",
             "/api/roles/create",
+            "/api/customers/me"
 
     };
 
     private final  String[] PublicGetEndpoints = {
-            "/api/customers/me"
     };
 
     private final String[] AdminGetEndpoints = {
@@ -106,14 +106,14 @@ public class SecurityConfig {
                         request.requestMatchers(HttpMethod.POST, PublicEndpoints).permitAll()
                                 .requestMatchers(HttpMethod.GET, PublicGetEndpoints).permitAll()
                                 .requestMatchers(HttpMethod.GET, AdminGetEndpoints).hasAnyAuthority("SCOPE_ADMIN")
-                                .requestMatchers(HttpMethod.DELETE, AdminDeleteEndpoints).hasRole(Right.ADMIN.name())
-                                .requestMatchers(HttpMethod.POST, AdminPostEndpoints).hasRole(Right.ADMIN.name())
-                                .requestMatchers(HttpMethod.PUT, AdminPutEndpoints).hasRole(Right.ADMIN.name())
+                                .requestMatchers(HttpMethod.DELETE, AdminDeleteEndpoints).hasAnyAuthority("SCOPE_ADMIN")
+                                .requestMatchers(HttpMethod.POST, AdminPostEndpoints).hasAnyAuthority("SCOPE_ADMIN")
+                                .requestMatchers(HttpMethod.PUT, AdminPutEndpoints).hasAnyAuthority("SCOPE_ADMIN")
                                 .anyRequest().authenticated())
                 .oauth2ResourceServer(login ->
                         login.jwt(jwtConfigurer -> jwtConfigurer.decoder(jwtDecoder)))
-                .csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable());
-//                .cors(); // Enable CORS support
+                .csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable())
+                .cors(); // Enable CORS support
 
         return httpSecurity.build();
     }

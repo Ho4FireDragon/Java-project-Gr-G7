@@ -49,6 +49,9 @@ public class BookingController {
         Long staffId = bookingRequest.getStaffId();
         Long serviceId = bookingRequest.getServiceId();
         String bookingDate = bookingRequest.getBookingDate();
+        String bookingDetail = bookingRequest.getBookingDetail();
+        Double distance = bookingRequest.getDistance();
+
 
         Staff staff = staffRepository.findById(staffId).orElse(null);
         ServiceEntity service = serviceRepository.findById(serviceId).orElse(null);
@@ -60,7 +63,7 @@ public class BookingController {
 
 
         // Tạo booking
-        Booking newBooking = bookingService.createBooking(customer,staff , service, bookingDate);
+        Booking newBooking = bookingService.createBooking(customer,staff , service, bookingDate, bookingDetail, distance);
         return ResponseEntity.status(HttpStatus.CREATED).body(newBooking);
     }
 

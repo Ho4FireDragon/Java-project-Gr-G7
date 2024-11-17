@@ -65,10 +65,14 @@ http://localhost:8080/api/bookings/update/{id}
 http://localhost:8080/api/bookings/delete/{id}
 {
     "customerId": 2,
-    "staffId": 7,
-    "serviceId": 3,
-    "bookingDate": "2024-11-10"
+    "staffId": 2,
+    "serviceId": 2,
+    "bookingDate": "2024-11-18T10:00:00",
+    "bookingDetail": "Koi fish checkup",
+    "distance": 15.5
 }
+
+
 
 
 Feedback
@@ -77,11 +81,13 @@ http://localhost:8080/api/feedback/create
 http://localhost:8080/api/feedback/update/{id}
 http://localhost:8080/api/feedback/delete/{id}
 {
-    "bookingid": 1 ,
+    "bookingid": 1,
     "customerid": 2,
-    "rating": 5,
-    "comment": "Great service!"
+    "staffid": 2,
+    "rating": 4,
+    "comment": "Dịch vụ tuyệt vời!"
 }
+
 
 BlogSlug
 http://localhost:8080/api/blogslug
