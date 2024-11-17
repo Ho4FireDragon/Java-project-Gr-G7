@@ -11,6 +11,7 @@ import com.shopkoi.shopkoi.dto.LogoutRequest;
 import com.shopkoi.shopkoi.dto.RefreshTokenRequest;
 import com.shopkoi.shopkoi.dto.response.AuthenticationResponse;
 import com.shopkoi.shopkoi.dto.response.IntrospectResponse;
+import com.shopkoi.shopkoi.model.entity.Customer;
 import com.shopkoi.shopkoi.model.entity.InvalidateToken;
 import com.shopkoi.shopkoi.model.entity.Staff;
 import com.shopkoi.shopkoi.repository.CustomerRepository;
@@ -29,6 +30,8 @@ import java.text.ParseException;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -226,4 +229,17 @@ public class AuthenticationService {
                 .Phone(customer.getPhone())
                 .build();
     }
+
+    public Customer CurrentUser(String token) throws JOSEException, ParseException {
+        JWSVerifier verifier = new MACVerifier(SIGNER_KEY.getBytes());
+        SignedJWT signedJWT = SignedJWT.parse(token);
+        String customerEmail = signedJWT.getJWTClaimsSet().getSubject();
+
+        // Tìm kiếm khách hàng dựa trên email
+        Optional<Customer> customerOptional = customerRepository.findByEmail(customerEmail);
+
+        // Nếu không tìm thấy, ném ngoại lệ
+        return customerOptional.orElseThrow(() -> new NoSuchElementException("Customer not found with email: " + customerEmail));
+    }
+
 }

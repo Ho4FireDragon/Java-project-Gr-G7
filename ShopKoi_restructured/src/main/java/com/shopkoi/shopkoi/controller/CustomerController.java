@@ -1,20 +1,32 @@
 package com.shopkoi.shopkoi.controller;
 
+import com.nimbusds.jose.JOSEException;
+import com.nimbusds.jose.JWSVerifier;
+import com.nimbusds.jose.crypto.MACVerifier;
+import com.nimbusds.jwt.JWTClaimsSet;
+import com.nimbusds.jwt.SignedJWT;
+import com.shopkoi.shopkoi.Service.AuthenticationService;
 import com.shopkoi.shopkoi.Service.CustomerService;
+import com.shopkoi.shopkoi.dto.RefreshTokenRequest;
 import com.shopkoi.shopkoi.dto.response.CustomerResponse;
 import com.shopkoi.shopkoi.model.entity.Customer;
 import com.shopkoi.shopkoi.repository.CustomerRepository;
+import lombok.experimental.NonFinal;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Slf4j
 @RestController
@@ -27,6 +39,13 @@ public class CustomerController {
     @Autowired
     private CustomerRepository customerRepository;
 
+    @Autowired
+    private AuthenticationService authenticationService;
+
+    @Value("${jwt.signJWT}")
+    @NonFinal
+    protected String signJWT;
+
 
 
     // Lấy danh sách tất cả khách hàng
@@ -35,23 +54,28 @@ public class CustomerController {
         List<Customer> customers = customerService.getAllCustomers();
         return ResponseEntity.ok(customers);
     }
-    @GetMapping("/me")
-    public ResponseEntity<CustomerResponse> getLoggedInCustomer() {
-        var authentication = SecurityContextHolder.getContext().getAuthentication();
-        String email = authentication.getName(); // Giả sử email là tên người dùng
 
-        Customer customer = customerService.getCustomerByEmail(email);
 
-        // Chuyển đổi từ Customer sang CustomerResponse
-        CustomerResponse customerResponse = new CustomerResponse();
-        customerResponse.setCustomerName(customer.getFirstname());
-        customerResponse.setCustomerEmail(customer.getEmail());
-        customerResponse.setCustomerPhone(customer.getPhone()); // Giả sử `phone` là thuộc tính của Customer
-        customerResponse.setCustomerAddress(customer.getAddress()); // Giả sử `address` là thuộc tính của Customer
-        customerResponse.setCustomerRight(customer.getRightcustomer().toString());
+    @PostMapping("/me")
+    public ResponseEntity<Customer> getLoggedInCustomer(@RequestBody Map<String, String> request) throws ParseException, JOSEException {
+        String token = request.get("token");
 
-        return ResponseEntity.ok(customerResponse);
+        // Parse token để lấy thông tin
+        SignedJWT signedJWT = SignedJWT.parse(token);
+        JWTClaimsSet claimsSet = signedJWT.getJWTClaimsSet();
+
+        // Lấy thông tin từ payload
+        String email = claimsSet.getSubject();
+        System.out.println("Email từ token: " + email);
+
+        // Xử lý thông tin tiếp theo...
+        Customer currentUser = authenticationService.CurrentUser(token);
+
+        return ResponseEntity.ok(currentUser);
     }
+
+
+
 
 
 

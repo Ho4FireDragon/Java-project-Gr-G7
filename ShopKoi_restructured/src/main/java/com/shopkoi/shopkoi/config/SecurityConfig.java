@@ -37,7 +37,12 @@ public class SecurityConfig {
             "/api/auth/introspect-staff",
             "/api/staff/create",
             "/api/auth/refreshtoken",
-            "/api/roles/create"
+            "/api/roles/create",
+
+    };
+
+    private final  String[] PublicGetEndpoints = {
+            "/api/customers/me"
     };
 
     private final String[] AdminGetEndpoints = {
@@ -99,6 +104,7 @@ public class SecurityConfig {
         httpSecurity
                 .authorizeHttpRequests(request ->
                         request.requestMatchers(HttpMethod.POST, PublicEndpoints).permitAll()
+                                .requestMatchers(HttpMethod.GET, PublicGetEndpoints).permitAll()
                                 .requestMatchers(HttpMethod.GET, AdminGetEndpoints).hasAnyAuthority("SCOPE_ADMIN")
                                 .requestMatchers(HttpMethod.DELETE, AdminDeleteEndpoints).hasRole(Right.ADMIN.name())
                                 .requestMatchers(HttpMethod.POST, AdminPostEndpoints).hasRole(Right.ADMIN.name())
@@ -106,8 +112,8 @@ public class SecurityConfig {
                                 .anyRequest().authenticated())
                 .oauth2ResourceServer(login ->
                         login.jwt(jwtConfigurer -> jwtConfigurer.decoder(jwtDecoder)))
-                .csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable())
-                .cors(); // Enable CORS support
+                .csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable());
+//                .cors(); // Enable CORS support
 
         return httpSecurity.build();
     }
