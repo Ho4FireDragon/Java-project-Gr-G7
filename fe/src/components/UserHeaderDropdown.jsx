@@ -17,6 +17,11 @@ function UserHeaderDropdown() {
         },
         {
             id: 3,
+            label: 'History booking',
+            path: config.routes.user_history_booking,
+        },
+        {
+            id: 4,
             label: 'Logout',
             action: () => {
                 customerLogout()

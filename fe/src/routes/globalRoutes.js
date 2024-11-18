@@ -17,10 +17,11 @@ import LoginPage from '../pages/LoginPage'
 import RegisterPage from '../pages/RegisterPage'
 // Roles Page
 import UserPage from '../pages/UserPage'
-import Admin from '../pages/Admin'
-import Staff from '../pages/Staff'
 import UserInformation from '../pages/UserInformation'
 import UserBookingAppointment from '../pages/UserBookingAppointment'
+import UserHistoryBooking from '../pages/UserHistoryBooking'
+import Admin from '../pages/Admin'
+import Staff from '../pages/Staff'
 
 export const globalRoutes = [
     // Public Pages
@@ -36,6 +37,7 @@ export const globalRoutes = [
     { path: config.routes.user, element: UserPage },
     { path: config.routes.user_information, element: UserInformation, layout: DefaultLayout, guard: CustomerGuard },
     { path: config.routes.user_booking_appointment, element: UserBookingAppointment, layout: DefaultLayout, guard: CustomerGuard },
+    { path: config.routes.user_history_booking, element: UserHistoryBooking, layout: DefaultLayout, guard: CustomerGuard },
     // Staff Pages
     { path: config.routes.staff, element: Staff, layout: DashboardLayout, guard: StaffGuard },
     // Admin Pages
