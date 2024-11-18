@@ -10,10 +10,13 @@ import { useFindDoctor } from '../../hooks/useFindDoctor'
 import { DAYS_OF_WEEK } from '../../constants/daysOfWeek'
 import { parseDate } from '@internationalized/date'
 import { useAuthContext } from '../../contexts/AuthContext'
+import { Input } from '@nextui-org/react'
 
 const BookingSchema = Yup.object().shape({
     bookingDate: Yup.date().required('Booking date is required'),
     serviceId: Yup.string().required('Please select a service'),
+    bookingDetail: Yup.string().required('Booking Detail is required'),
+    distance: Yup.string().required('Distance is required'),
 })
 
 function CustomerBookingAppointmentForm() {
@@ -26,6 +29,8 @@ function CustomerBookingAppointmentForm() {
         initialValues: {
             bookingDate: '2024-11-18',
             serviceId: '',
+            bookingDetail: '',
+            distance: '',
         },
         validationSchema: BookingSchema,
         onSubmit: (values) => {
@@ -34,6 +39,8 @@ function CustomerBookingAppointmentForm() {
                 serviceId: values.serviceId,
                 staffId: staffId,
                 customerId: authUser.id,
+                distance: values.distance,
+                bookingDetail: values.bookingDetail,
             }
             // TODO: Connect API Bookings
             console.log('Booking submitted:', newBooking)
@@ -67,12 +74,15 @@ function CustomerBookingAppointmentForm() {
                         labelPlacement="outside"
                         name="serviceId"
                         id="serviceId"
+                        isRequired
                         onChange={formik.handleChange}
                         value={formik.values.serviceId}
                         classNames={{
                             base: 'w-full',
                             trigger: 'h-12',
                         }}
+                        errorMessage={formik.errors.serviceId}
+                        isInvalid={formik.errors.serviceId ? true : false}
                         renderValue={(items) => {
                             return items.map((item) => (
                                 <div key={item.key} className="flex items-center gap-2">
@@ -99,6 +109,7 @@ function CustomerBookingAppointmentForm() {
                     </Select>
                     <DatePicker
                         label="When do you need my help?"
+                        isRequired
                         labelPlacement="outside"
                         showMonthAndYearPickers
                         className="w-full"
@@ -110,6 +121,8 @@ function CustomerBookingAppointmentForm() {
                             const formart = day.toISOString().split('T')[0]
                             return formik.setFieldValue('bookingDate', formart)
                         }}
+                        errorMessage={formik.errors.bookingDate}
+                        isInvalid={formik.errors.bookingDate ? true : false}
                         aria-label="date"
                     />
                 </div>
@@ -123,7 +136,30 @@ function CustomerBookingAppointmentForm() {
                         {doctors.length > 0 && <DoctorsAvailableTable data={doctors} setStaffId={setStaffId} staffId={staffId} />}
                     </div>
                 )}
-                <Textarea label="Note" aria-label="note" placeholder="Tell me about your detailed requirements here" name="note" onChange={formik.handleChange} value={formik.values.note} />
+
+                <Input
+                    isRequired
+                    label="Distance"
+                    name="distance"
+                    labelPlacement="outside-left"
+                    onChange={formik.handleChange}
+                    value={formik.values.distance}
+                    errorMessage={formik.errors.distance}
+                    isInvalid={formik.errors.distance ? true : false}
+                    className="max-w-xs"
+                    endContent={<p className="text-sm">km</p>}
+                />
+                <Textarea
+                    label="Booking Detail"
+                    aria-label="booking detail"
+                    placeholder="Let me know about your detailed requirements here"
+                    name="bookingDetail"
+                    id="bookingDetail"
+                    onChange={formik.handleChange}
+                    value={formik.values.bookingDetail}
+                    errorMessage={formik.errors.bookingDetail}
+                    isInvalid={formik.errors.bookingDetail ? true : false}
+                />
                 <Button type="submit" color="primary" className="font-semibold">
                     Create Booking
                 </Button>
