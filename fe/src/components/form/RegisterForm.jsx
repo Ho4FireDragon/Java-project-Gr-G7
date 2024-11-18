@@ -7,7 +7,6 @@ import { useCustomerRegister } from '../../hooks/useCustomerRegister'
 
 const RegisterValidationSchema = Yup.object().shape({
     firstName: Yup.string().min(2, 'Too Short!').max(20, 'Too Long!').required('Required'),
-    lastName: Yup.string().min(2, 'Too Short!').max(20, 'Too Long!').required('Required'),
     phone: Yup.string().min(9, 'Phone number is invalid!').max(9, 'Phone number is invalid!').required('Required'),
     email: Yup.string().email('Invalid email').min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
     address: Yup.string().min(1, 'Too Short!').max(255, 'Too Long!').required('Required'),
@@ -22,7 +21,6 @@ function RegisterForm() {
     const formik = useFormik({
         initialValues: {
             firstName: '',
-            lastName: '',
             email: '',
             phone: '',
             address: '',
@@ -33,44 +31,30 @@ function RegisterForm() {
         onSubmit: (values) => {
             const newCustomer = {
                 firstname: values.firstName,
-                lastname: values.lastName,
                 email: values.email,
                 phone: values.phone,
                 address: values.address,
                 password: values.password,
             }
-            console.log(newCustomer);
-            
+            console.log(newCustomer)
+
             customerRegister(newCustomer)
         },
     })
 
     return (
         <form onSubmit={formik.handleSubmit} className="w-full flex flex-col gap-5">
-            <div className="flex items-center justify-between gap-5">
-                <Input
-                    isRequired
-                    label="First Name"
-                    name="firstName"
-                    id="firstName"
-                    type="text"
-                    onChange={formik.handleChange}
-                    value={formik.values.firstName}
-                    errorMessage={formik.errors.firstName}
-                    isInvalid={formik.errors.firstName ? true : false}
-                />
-                <Input
-                    isRequired
-                    label="Last Name"
-                    name="lastName"
-                    id="lastName"
-                    type="text"
-                    onChange={formik.handleChange}
-                    value={formik.values.lastName}
-                    errorMessage={formik.errors.lastName}
-                    isInvalid={formik.errors.lastName ? true : false}
-                />
-            </div>
+            <Input
+                isRequired
+                label="Full Name"
+                name="firstName"
+                id="firstName"
+                type="text"
+                onChange={formik.handleChange}
+                value={formik.values.firstName}
+                errorMessage={formik.errors.firstName}
+                isInvalid={formik.errors.firstName ? true : false}
+            />
             <Input
                 isRequired
                 label="Email"

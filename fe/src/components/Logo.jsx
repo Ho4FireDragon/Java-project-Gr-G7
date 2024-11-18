@@ -7,19 +7,8 @@ Logo.propTypes = {
 
 function Logo({ width = 384, height = 246 }) {
     return (
-        <svg
-            version="1.0"
-            xmlns="http://www.w3.org/2000/svg"
-            width={width + 'px'}
-            height={height + 'px'}
-            viewBox="0 0 384.000000 246.000000"
-            preserveAspectRatio="xMidYMid meet"
-        >
-            <g
-                transform="translate(0.000000,246.000000) scale(0.100000,-0.100000)"
-                fill="#000000"
-                stroke="none"
-            >
+        <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width={width + 'px'} height={height + 'px'} viewBox="0 0 384.000000 246.000000" preserveAspectRatio="xMidYMid meet">
+            <g transform="translate(0.000000,246.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
                 <path
                     d="M1275 1622 c-209 -360 -421 -724 -471 -810 -50 -87 -163 -282 -252
 -435 -89 -153 -162 -280 -162 -282 0 -6 2362 7 2448 14 l82 6 -43 75 c-24 41

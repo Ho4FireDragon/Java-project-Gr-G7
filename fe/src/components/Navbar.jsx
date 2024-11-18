@@ -99,30 +99,28 @@ function Navbar() {
         <div className="bg-primary text-white">
             <div className="container grid grid-cols-[340px_1fr] gap-5 items-center">
                 <Searchbar />
-                <div>
-                    <ul className="flex items-center justify-start">
-                        {navigates.map((navigate, index) => (
-                            <li key={index} className="group relative py-[6px]">
-                                <div className="px-4 flex items-center justify-start gap-2">
-                                    <a href={navigate.path}>{navigate.label}</a>
-                                    {navigate.children && <Icon icon="fluent:chevron-down-12-filled" className="group-hover:rotate-180 transition duration-300" />}
-                                </div>
-                                {/* Dropdown */}
-                                {navigate.children && (
-                                    <ul className="hidden group-hover:block border-t absolute top-full left-0 bg-primary w-[208px] z-20">
-                                        {navigate.children.map((dropdownItem, index) => (
-                                            <li key={index} className="px-4 py-[14px] hover:bg-primary-200 transition duration-200">
-                                                <Link to={dropdownItem.path} className="block">
-                                                    {dropdownItem.label}
-                                                </Link>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                )}
-                            </li>
-                        ))}
-                    </ul>
-                </div>
+                <ul className="flex items-center justify-end">
+                    {navigates.map((navigate, index) => (
+                        <li key={index} className="group relative py-[6px]">
+                            <div className="px-4 flex items-center justify-start gap-2">
+                                <a href={navigate.path}>{navigate.label}</a>
+                                {navigate.children && <Icon icon="fluent:chevron-down-12-filled" className="group-hover:rotate-180 transition duration-300" />}
+                            </div>
+                            {/* Dropdown */}
+                            {navigate.children && (
+                                <ul className="hidden group-hover:block border-t absolute top-full left-0 bg-primary w-[208px] z-20">
+                                    {navigate.children.map((dropdownItem, index) => (
+                                        <li key={index} className="px-4 py-[14px] hover:bg-primary-200 transition duration-200">
+                                            <Link to={dropdownItem.path} className="block">
+                                                {dropdownItem.label}
+                                            </Link>
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
+                        </li>
+                    ))}
+                </ul>
             </div>
         </div>
     )

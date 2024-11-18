@@ -28,6 +28,7 @@ public class SecurityConfig {
     private CustomJwtDecoder jwtDecoder;
 
     private final String[] PublicEndpoints = {
+            "/api/staff",
             "/api/customers/create",
             "/api/auth/login-staff",
             "/api/auth/login-customer",
@@ -37,13 +38,13 @@ public class SecurityConfig {
             "/api/auth/introspect-staff",
             "/api/staff/create",
             "/api/auth/refreshtoken",
-            "/api/roles/create"
+            "/api/roles/create",
+            "/api/bookings/create"
     };
 
     private final String[] AdminGetEndpoints = {
             "/api/customers",
             "/api/customers/{id}",
-            "/api/staff",
             "/api/staff/{id}",
             "/api/blog",
             "/api/blog/{id}",
@@ -85,7 +86,6 @@ public class SecurityConfig {
             "/api/staff/create",
             "/api/blog/create",
             "/api/blogslug/create",
-            "/api/bookings/create",
             "/api/feedback/create",
             "/api/roles/create",
             "/api/services/create"

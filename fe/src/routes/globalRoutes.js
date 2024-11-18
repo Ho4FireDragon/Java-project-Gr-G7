@@ -1,8 +1,11 @@
 import { config } from '../configs'
 
+// Guards
+import { CustomerGuard, StaffGuard } from '../guards'
 // Layouts
 import EmptyLayout from '../components/layouts/EmptyLayout'
 import DefaultLayout from '../components/layouts/DefaultLayout'
+import DashboardLayout from '../components/layouts/DashboardLayout'
 // Public Page
 import HomePage from '../pages/HomePage'
 import AboutPage from '../pages/AboutPage'
@@ -16,16 +19,25 @@ import RegisterPage from '../pages/RegisterPage'
 import UserPage from '../pages/UserPage'
 import Admin from '../pages/Admin'
 import Staff from '../pages/Staff'
+import UserInformation from '../pages/UserInformation'
+import UserBookingAppointment from '../pages/UserBookingAppointment'
 
 export const globalRoutes = [
+    // Public Pages
     { path: config.routes.home, element: HomePage, layout: DefaultLayout },
     { path: config.routes.about, element: AboutPage, layout: DefaultLayout },
     { path: config.routes.appointment, element: AppointmentPage, layout: DefaultLayout },
     { path: config.routes.faq, element: FaqPage, layout: DefaultLayout },
     { path: config.routes.services, element: Services, layout: DefaultLayout },
+    // Auth Pages
     { path: config.routes.login, element: LoginPage, layout: EmptyLayout },
     { path: config.routes.register, element: RegisterPage, layout: EmptyLayout },
-    { path: config.routes.staff, element: Staff, layout: EmptyLayout },
-    { path: config.routes.admin, element: Admin, layout: EmptyLayout },
+    // User Pages
     { path: config.routes.user, element: UserPage },
+    { path: config.routes.user_information, element: UserInformation, layout: DefaultLayout, guard: CustomerGuard },
+    { path: config.routes.user_booking_appointment, element: UserBookingAppointment, layout: DefaultLayout, guard: CustomerGuard },
+    // Staff Pages
+    { path: config.routes.staff, element: Staff, layout: DashboardLayout, guard: StaffGuard },
+    // Admin Pages
+    { path: config.routes.admin, element: Admin, layout: EmptyLayout },
 ]

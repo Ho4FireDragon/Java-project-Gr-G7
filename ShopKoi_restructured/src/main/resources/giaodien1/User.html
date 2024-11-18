@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tài khoản - Thrine</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header_section">
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-lg custom_nav-container">
+                <a class="navbar-brand" href="index.html">
+                    <h3>Nhóm 7</h3>
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Trang chủ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html"> Về chúng tôi </a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="service.html"> Dịch vụ </a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="appointment.html"> Lịch hẹn </a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="FAQ.html"> FAQ </a>
+                          </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="User.html">User</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- User Account Section -->
+    <section class="user_account_section layout_padding">
+        <div class="container">
+            <div class="heading_container heading_center">
+                <h2>Tài khoản người dùng</h2>
+                <p>Đăng nhập, đăng ký đều ở phía dưới.</p>
+            </div>
+
+            <!-- Registration Form -->
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Đăng ký</h3>
+                    <form id="registrationForm" method="post" action="signup_process.java">
+                        <div class="form-group">
+                            <label for="username">Tên đăng nhập:</label>
+                            <input type="text" class="form-control" id="username" name="username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Mật khẩu:</label>
+                            <input type="password" class="form-control" id="password" name="password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="role">Vai trò:</label>
+                            <select class="form-control" id="role" name="role" required>
+                                <option value="customer">Khách hàng</option>
+                                <option value="doctor">Bác sĩ</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Đăng ký</button>
+                    </form>
+                </div>
+
+                <!-- Login Form -->
+                <div class="col-md-6">
+                    <h3>Đăng nhập</h3>
+                    <form id="loginForm" method="post" action="login_process.java">
+                        <div class="form-group">
+                            <label for="loginUsername">Tên đăng nhập:</label>
+                            <input type="text" class="form-control" id="loginUsername" name="username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="loginPassword">Mật khẩu:</label>
+                            <input type="password" class="form-control" id="loginPassword" name="password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Đăng nhập</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Logout Section -->
+            <div class="logout_section mt-5">
+                <h3>Đăng xuất</h3>
+                <form method="post" action="logout_process.java">
+                    <button type="submit" class="btn btn-danger">Đăng xuất</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <!-- map section -->
+
+  <section class="map_section">
+    <div class="map">
+      <div id="googleMap"></div>
+    </div>
+  </section>
+
+  <!-- end map section -->
+
+  <!-- info section -->
+  <section class="info_section layout_padding">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="info_menu">
+            <h5>
+              QUICK LINKS
+            </h5>
+            <ul class="navbar-nav  ">
+              <li class="nav-item ">
+                <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="about.html"> About </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="service.html"> Services </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="appointment.html"> Appointment </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="FAQ.html"> FAQ </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="info_course">
+            <h5>
+              
+            </h5>
+            <p>
+              
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-5 offset-md-1">
+          <div class="info_news">
+            <h5>
+              Nếu như có vấn đề gì xin hãy cho chúng tôi biết
+            </h5>
+            <div class="info_contact">
+              <a href="">
+                <i class="fa fa-map-marker" aria-hidden="true"></i> Location
+              </a>
+              <a href="">
+                <i class="fa fa-envelope" aria-hidden="true"></i> demo@gmail.com
+              </a>
+              <a href="">
+                <i class="fa fa-phone" aria-hidden="true"></i> Call : +01 1234567890
+              </a>
+            </div>
+            <form action="">
+              <input type="text" placeholder="Enter Your email" />
+              <button>
+                Subscribe
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- end info section -->
+
+  <!-- footer section -->
+  <footer class="container-fluid footer_section">
+    <div class="container">
+      <p>
+        &copy; <span id="displayYear"></span> All Rights Reserved By
+        <a href="https://html.design/">Nhóm 7</a>
+      </p>
+    </div>
+  </footer>
+  <!-- footer section -->
+
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/custom.js"></script>
+</body>
+</html>
