@@ -3,10 +3,13 @@ import authApi from '../apis/auth.api'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuthContext } from '../contexts/AuthContext'
+import { config } from '../configs'
+import { useCookies } from 'react-cookie'
 
 export const useCustomerLogin = () => {
     const navigate = useNavigate()
     const [loading, setLoading] = useState(false)
+    const [, setCookie] = useCookies(['token'])
     const { setAuthUser } = useAuthContext()
 
     const customerLogin = async (authInfo) => {
@@ -15,15 +18,17 @@ export const useCustomerLogin = () => {
             const response = await authApi.customerLogin(authInfo)
             const { status, data } = response
             if (status === 200) {
-                setAuthUser(data)
-                localStorage.setItem('__user-information', JSON.stringify(data))
+                const { token, ...userData } = data
+                setAuthUser(userData)
+                setCookie('token', token, { path: '/' })
+                localStorage.setItem('__user-information', JSON.stringify(userData))
                 Swal.fire({
                     title: 'Successfully!',
-                    text: 'Register successfully !!!',
+                    text: 'Login successfully !!!',
                     confirmButtonText: 'Go to Home',
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        navigate('/')
+                        navigate(config.routes.home)
                     }
                 })
             }

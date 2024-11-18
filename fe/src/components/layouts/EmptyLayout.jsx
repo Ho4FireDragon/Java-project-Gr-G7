@@ -6,7 +6,7 @@ EmptyLayout.propTypes = {
 
 function EmptyLayout({ children }) {
     return (
-        <div id="w-screen h-screen">
+        <div className="w-screen h-screen">
             <main>{children}</main>
         </div>
     )
