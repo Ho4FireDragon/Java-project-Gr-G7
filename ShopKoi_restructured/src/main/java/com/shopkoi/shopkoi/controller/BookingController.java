@@ -2,6 +2,7 @@ package com.shopkoi.shopkoi.controller;
 
 import com.shopkoi.shopkoi.Service.BookingService;
 import com.shopkoi.shopkoi.Service.CustomerService;
+import com.shopkoi.shopkoi.Service.PaymentMethod;
 import com.shopkoi.shopkoi.model.entity.*;
 import com.shopkoi.shopkoi.repository.BookingRepository;
 import com.shopkoi.shopkoi.repository.CustomerRepository;
@@ -51,6 +52,7 @@ public class BookingController {
         String bookingDate = bookingRequest.getBookingDate();
         String bookingDetail = bookingRequest.getBookingDetail();
         Double distance = bookingRequest.getDistance();
+        PaymentMethod paymentMethod = bookingRequest.getPaymentMethod();
 
 
         Staff staff = staffRepository.findById(staffId).orElse(null);
@@ -63,7 +65,7 @@ public class BookingController {
 
 
         // Tạo booking
-        Booking newBooking = bookingService.createBooking(customer,staff , service, bookingDate, bookingDetail, distance);
+        Booking newBooking = bookingService.createBooking(customer,staff , service, bookingDate, bookingDetail, distance, paymentMethod);
         return ResponseEntity.status(HttpStatus.CREATED).body(newBooking);
     }
 

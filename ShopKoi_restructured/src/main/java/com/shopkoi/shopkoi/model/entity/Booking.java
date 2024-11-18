@@ -1,9 +1,12 @@
 package com.shopkoi.shopkoi.model.entity;
 
+import com.shopkoi.shopkoi.Service.PaymentMethod;
+import com.shopkoi.shopkoi.Service.StaffSchedule;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 
 @Getter
 @Setter
@@ -16,15 +19,15 @@ public class Booking {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id")
+    @JoinColumn(name = "customer_id",nullable = true)
     private Customer customer;
 
     @ManyToOne
-    @JoinColumn(name = "staff_id")
+    @JoinColumn(name = "staff_id",nullable = true)
     private Staff staff;
 
     @ManyToOne
-    @JoinColumn(name = "service_id")
+    @JoinColumn(name = "service_id",nullable = true)
     private ServiceEntity service;
 
     private String bookingDate;
@@ -33,12 +36,20 @@ public class Booking {
 
     private Double distance;
 
-    public Booking(Customer customer, Staff staff, ServiceEntity service, String bookingDate, String bookingDetail, Double distance) {
+    @Enumerated(EnumType.STRING)
+    @Column
+    private PaymentMethod paymentMethod;
+
+
+    public Booking(Customer customer, Staff staff, ServiceEntity service, String bookingDate, String bookingDetail, Double distance, PaymentMethod paymentMethod) {
         this.customer = customer;
         this.staff = staff;
         this.service = service;
         this.bookingDate = bookingDate;
         this.bookingDetail = bookingDetail;
         this.distance = distance;
+        this.paymentMethod = paymentMethod;
     }
 }
+
+

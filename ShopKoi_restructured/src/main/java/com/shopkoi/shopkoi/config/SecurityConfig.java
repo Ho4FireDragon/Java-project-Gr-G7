@@ -29,6 +29,7 @@ public class SecurityConfig {
 
     private final String[] PublicEndpoints = {
             "/api/customers/create",
+            "/api/staff/create",
             "/api/auth/login-staff",
             "/api/auth/login-customer",
             "/api/auth/logout-customer",
@@ -42,7 +43,7 @@ public class SecurityConfig {
 
     };
 
-    private final  String[] PublicGetEndpoints = {
+    private final String[] PublicGetEndpoints = {
     };
 
     private final String[] AdminGetEndpoints = {

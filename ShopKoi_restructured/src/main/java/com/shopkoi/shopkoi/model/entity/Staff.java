@@ -4,6 +4,7 @@ import com.shopkoi.shopkoi.Service.Right;
 import com.shopkoi.shopkoi.Service.StaffSchedule;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,13 +26,15 @@ public class Staff {
     private Long id;
 
     private String staffname;
-    private String staffemail;
-    private String staffphone;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "role_id")  // Mapping với entity Role
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})  // Bỏ qua các thuộc tính proxy khi chuyển đổi JSON
-    private Role role;
+
+    @Column(nullable = false)
+    @NotNull(message = "Email cannot be null")
+    private String staffemail;
+
+    @Column(nullable = false)
+    @NotNull(message = "Phone number cannot be null")
+    private String staffphone;
 
     private String staffadress;
 
@@ -40,6 +43,9 @@ public class Staff {
     @Column(name = "staffschedule")
     private Set<StaffSchedule> staffschedule;
 
+
+    @Column(nullable = false)
+    @NotNull(message = "Phone number cannot be null")
     private String staffpassword;
 
 

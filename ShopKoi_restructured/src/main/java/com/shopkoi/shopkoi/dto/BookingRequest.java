@@ -1,5 +1,6 @@
 package com.shopkoi.shopkoi.dto;
 
+import com.shopkoi.shopkoi.Service.PaymentMethod;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,13 +15,15 @@ public class BookingRequest {
     private String bookingDate;
     private String bookingDetail;
     private Double distance;
+    private PaymentMethod paymentMethod;
 
-    public BookingRequest(Long customerId, Long staffId, Long serviceId, String bookingDate, String bookingDetail, Double distance) {
+    public BookingRequest(Long customerId, Long staffId, Long serviceId, String bookingDate, String bookingDetail, Double distance, PaymentMethod paymentMethod) {
         this.customerId = customerId;
         this.staffId = staffId;
         this.serviceId = serviceId;
         this.bookingDate = bookingDate;
         this.bookingDetail = bookingDetail;
         this.distance = distance;
+        this.paymentMethod = paymentMethod;
     }
 }

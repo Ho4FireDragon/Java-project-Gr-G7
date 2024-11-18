@@ -1,12 +1,10 @@
 package com.shopkoi.shopkoi.controller;
 
-import com.shopkoi.shopkoi.Service.RoleService;
 import com.shopkoi.shopkoi.Service.StaffService;
 //import com.shopkoi.shopkoi.Service.StaffSchedule;
 import com.shopkoi.shopkoi.dto.StaffRequest;
-import com.shopkoi.shopkoi.model.entity.Role;
 import com.shopkoi.shopkoi.model.entity.Staff;
-import com.shopkoi.shopkoi.repository.RoleRepository;
+import com.shopkoi.shopkoi.repository.StaffRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,10 +25,7 @@ public class StaffController {
 //    private StaffSchedule staffSchedule;
 
     @Autowired
-    private RoleService roleService;
-
-    @Autowired
-    RoleRepository roleRepository;
+    private StaffRepository staffRepository;
 
     // Lấy danh sách tất cả nhân viên
     @GetMapping
@@ -60,62 +55,67 @@ public class StaffController {
 
 
 
-        @PostMapping("/create")
-        public ResponseEntity<Staff> addNewStaff(@RequestBody StaffRequest staffRequest) {
-            // Fetch the Role by roleId
-            Role role = roleRepository.getById(staffRequest.getRoleId());
-            if (role == null) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).build(); // Return bad request if role not found
-            }
-
-            // Create a new Staff entity from StaffRequest data
-            Staff newStaff = new Staff();
-            newStaff.setStaffname(staffRequest.getStaffName());
-            newStaff.setStaffemail(staffRequest.getStaffEmail());
-            newStaff.setStaffphone(staffRequest.getStaffPhone());
-            newStaff.setRole(role); // Set the fetched Role object
-            newStaff.setStaffschedule(staffRequest.getStaffSchedule());
-            newStaff.setStaffpassword(staffRequest.getStaffPassword());
-
-            PasswordEncoder passwordEncoder=new BCryptPasswordEncoder(10);
-            newStaff.setStaffpassword(passwordEncoder.encode(newStaff.getStaffpassword()));
-
-            // Save the new staff entity
-            Staff savedStaff = staffService.saveStaff(newStaff);
-            return ResponseEntity.status(HttpStatus.CREATED).body(savedStaff);
+    @PostMapping("/create")
+    public ResponseEntity<?> addNewStaff(@RequestBody StaffRequest staffRequest) {
+        // Kiểm tra nếu email đã tồn tại trong cơ sở dữ liệu
+        if (staffRepository.existsByStaffemail(staffRequest.getStaffEmail())) {
+            // Trả về thông báo lỗi
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("Email already exists");
         }
 
-    // Cập nhật nhân viên
-    @PutMapping("/update/{id}")
-    public ResponseEntity<Staff> updateStaff(@PathVariable Long id, @RequestBody StaffRequest staffRequest) {
-        Staff existingStaff = staffService.getStaff(id);
-        if (existingStaff != null) {
-            // Lấy role từ roleId trong StaffRequest
-            Role role = roleService.get(staffRequest.getRoleId());
-            if (role == null) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).build(); // Nếu role không tồn tại, trả về mã lỗi 400
-            }
+        // Tạo đối tượng Staff từ StaffRequest
+        Staff newStaff = new Staff();
+        newStaff.setStaffname(staffRequest.getStaffName());
+        newStaff.setStaffemail(staffRequest.getStaffEmail());
+        newStaff.setStaffphone(staffRequest.getStaffPhone());
+        newStaff.setStaffschedule(staffRequest.getStaffSchedule());
+        newStaff.setStaffpassword(staffRequest.getStaffPassword());
 
-            // Cập nhật thông tin nhân viên dựa trên StaffRequest
-            existingStaff.setStaffname(staffRequest.getStaffName());
-            existingStaff.setStaffemail(staffRequest.getStaffEmail());
-            existingStaff.setStaffphone(staffRequest.getStaffPhone());
-            existingStaff.setRole(role); // Gán Role đã tìm được
-            existingStaff.setStaffschedule(staffRequest.getStaffSchedule());
+        // Mã hóa mật khẩu trước khi lưu
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
+        newStaff.setStaffpassword(passwordEncoder.encode(newStaff.getStaffpassword()));
 
-            PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
-            // Kiểm tra nếu mật khẩu đã thay đổi
-            if (!passwordEncoder.matches(staffRequest.getStaffPassword(), existingStaff.getStaffpassword())) {
-                existingStaff.setStaffpassword(passwordEncoder.encode(staffRequest.getStaffPassword()));
-            }
+        // Lưu staff vào cơ sở dữ liệu
+        Staff savedStaff = staffService.saveStaff(newStaff);
 
-            // Lưu thay đổi
-            Staff updatedStaff = staffService.saveStaff(existingStaff);
-            return ResponseEntity.ok(updatedStaff);
-        } else {
-            return ResponseEntity.notFound().build(); // Trả về mã lỗi 404 nếu nhân viên không tồn tại
-        }
+        // Trả về phản hồi thành công
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedStaff);
     }
+
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Staff> updateStaff(@PathVariable Long id, @RequestBody Staff staffRequest) {
+        Staff existingStaff = staffService.getStaff(id);
+
+        if (existingStaff == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null); // Nhân viên không tồn tại
+        }
+
+        // Kiểm tra và cập nhật thông tin nhân viên
+        existingStaff.setStaffname(staffRequest.getStaffname());
+        existingStaff.setStaffemail(staffRequest.getStaffemail());
+        existingStaff.setStaffphone(staffRequest.getStaffphone());
+        existingStaff.setStaffschedule(staffRequest.getStaffschedule());
+
+        // Nếu mật khẩu không null hoặc không rỗng, kiểm tra và cập nhật
+        if (staffRequest.getStaffpassword() != null && !staffRequest.getStaffpassword().isEmpty()) {
+            PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
+
+            // Chỉ cập nhật nếu mật khẩu thay đổi
+            if (!passwordEncoder.matches(staffRequest.getStaffpassword(), existingStaff.getStaffpassword())) {
+                existingStaff.setStaffpassword(passwordEncoder.encode(staffRequest.getStaffpassword()));
+            }
+        }
+
+        // Lưu nhân viên đã cập nhật
+        Staff updatedStaff = staffService.saveStaff(existingStaff);
+
+        return ResponseEntity.ok(updatedStaff);
+    }
+
+
+
 
     // API để cập nhật mật khẩu
     @PutMapping("/update-password/{id}")

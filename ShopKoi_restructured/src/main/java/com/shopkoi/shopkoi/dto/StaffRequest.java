@@ -16,7 +16,6 @@ public class StaffRequest {
     private String staffName;
     private String staffEmail;
     private String staffPhone;
-    private Long roleId;
     private Set<StaffSchedule> staffSchedule;
     private String staffPassword;
 
