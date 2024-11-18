@@ -27,12 +27,15 @@ public class BookingService {
     }
 
     // Tạo mới booking với các tham số riêng lẻ
-    public Booking createBooking(Customer customer, Staff staff, ServiceEntity service, String bookingDate) {
+    public Booking createBooking(Customer customer, Staff staff, ServiceEntity service, String bookingDate, String bookingDetail, Double distance, PaymentMethod paymentMethod) {
         Booking booking = new Booking();
         booking.setCustomer(customer);
         booking.setStaff(staff);
         booking.setService(service);
         booking.setBookingDate(bookingDate);
+        booking.setBookingDetail(bookingDetail);
+        booking.setDistance(distance);
+        booking.setPaymentMethod(paymentMethod);
 
         return bookingRepository.save(booking);
     }
@@ -46,4 +49,6 @@ public class BookingService {
     public void deleteBooking(Long id) {
         bookingRepository.deleteById(id);
     }
+
+
 }

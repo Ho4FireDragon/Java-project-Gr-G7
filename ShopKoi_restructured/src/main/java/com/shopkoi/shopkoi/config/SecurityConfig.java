@@ -30,6 +30,7 @@ public class SecurityConfig {
     private final String[] PublicEndpoints = {
             "/api/staff",
             "/api/customers/create",
+            "/api/staff/create",
             "/api/auth/login-staff",
             "/api/auth/login-customer",
             "/api/auth/logout-customer",
@@ -39,7 +40,12 @@ public class SecurityConfig {
             "/api/staff/create",
             "/api/auth/refreshtoken",
             "/api/roles/create",
-            "/api/bookings/create"
+            "/api/bookings/create",
+            "/api/customers/me"
+
+    };
+
+    private final String[] PublicGetEndpoints = {
     };
 
     private final String[] AdminGetEndpoints = {
@@ -99,10 +105,11 @@ public class SecurityConfig {
         httpSecurity
                 .authorizeHttpRequests(request ->
                         request.requestMatchers(HttpMethod.POST, PublicEndpoints).permitAll()
+                                .requestMatchers(HttpMethod.GET, PublicGetEndpoints).permitAll()
                                 .requestMatchers(HttpMethod.GET, AdminGetEndpoints).hasAnyAuthority("SCOPE_ADMIN")
-                                .requestMatchers(HttpMethod.DELETE, AdminDeleteEndpoints).hasRole(Right.ADMIN.name())
-                                .requestMatchers(HttpMethod.POST, AdminPostEndpoints).hasRole(Right.ADMIN.name())
-                                .requestMatchers(HttpMethod.PUT, AdminPutEndpoints).hasRole(Right.ADMIN.name())
+                                .requestMatchers(HttpMethod.DELETE, AdminDeleteEndpoints).hasAnyAuthority("SCOPE_ADMIN")
+                                .requestMatchers(HttpMethod.POST, AdminPostEndpoints).hasAnyAuthority("SCOPE_ADMIN")
+                                .requestMatchers(HttpMethod.PUT, AdminPutEndpoints).hasAnyAuthority("SCOPE_ADMIN")
                                 .anyRequest().authenticated())
                 .oauth2ResourceServer(login ->
                         login.jwt(jwtConfigurer -> jwtConfigurer.decoder(jwtDecoder)))

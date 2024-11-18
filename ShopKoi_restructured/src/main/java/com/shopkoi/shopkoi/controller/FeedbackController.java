@@ -8,9 +8,11 @@ import com.shopkoi.shopkoi.dto.FeedbackRequest;
 import com.shopkoi.shopkoi.model.entity.Booking;
 import com.shopkoi.shopkoi.model.entity.Customer;
 import com.shopkoi.shopkoi.model.entity.Feedback;
+import com.shopkoi.shopkoi.model.entity.Staff;
 import com.shopkoi.shopkoi.repository.BookingRepository;
 import com.shopkoi.shopkoi.repository.CustomerRepository;
 import com.shopkoi.shopkoi.repository.FeedbackRepository;
+import com.shopkoi.shopkoi.repository.StaffRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +30,8 @@ public class FeedbackController {
     @Autowired private BookingRepository bookingRepository;
 
     @Autowired private BookingService bookingService;
+    @Autowired
+    private StaffRepository staffRepository;
 
     //in ra tat ca feedback
     @GetMapping
@@ -41,12 +45,14 @@ public class FeedbackController {
     public ResponseEntity<Feedback> createFeedback(@RequestBody FeedbackRequest feedbackRequest) {
         Long bookingId = feedbackRequest.getBookingid();
         Long customerId = feedbackRequest.getCustomerid();
+        Long staffId = feedbackRequest.getStaffid();
         Integer rating = feedbackRequest.getRating();
         String comment = feedbackRequest.getComment();
 
         // Kiểm tra xem booking và customer có tồn tại không
         Booking booking = bookingRepository.findById(bookingId).orElse(null);
         Customer customer = customerRepository.findById(customerId).orElse(null);
+        Staff staff = staffRepository.findById(staffId).orElse(null);
 
         if (booking == null || customer == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
@@ -54,7 +60,7 @@ public class FeedbackController {
         }
 
         // Tạo feedback mới và lưu nó
-        Feedback newFeedback = new Feedback(booking, customer, rating, comment);
+        Feedback newFeedback = new Feedback(booking, customer, staff, rating, comment);
         Feedback savedFeedback = feedbackService.saveFeedback(newFeedback);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(savedFeedback);

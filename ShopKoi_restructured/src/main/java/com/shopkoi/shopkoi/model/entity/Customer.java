@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 import jakarta.persistence.criteria.Order;
 import lombok.*;
 
+import java.util.List;
+
 
 @Getter
 @Setter
@@ -31,5 +33,6 @@ public class Customer {
     @Enumerated(EnumType.STRING)
     @Column(name = "rightcustomer")
     private Right rightcustomer;
+
 
 }

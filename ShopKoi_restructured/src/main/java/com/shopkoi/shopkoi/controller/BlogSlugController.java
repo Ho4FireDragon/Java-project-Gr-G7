@@ -2,14 +2,11 @@ package com.shopkoi.shopkoi.controller;
 
 
 import com.shopkoi.shopkoi.Service.BlogSlugService;
-import com.shopkoi.shopkoi.Service.RoleService;
 import com.shopkoi.shopkoi.model.entity.BlogSlug;
-import com.shopkoi.shopkoi.model.entity.Role;
 import com.shopkoi.shopkoi.repository.BlogSlugRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
