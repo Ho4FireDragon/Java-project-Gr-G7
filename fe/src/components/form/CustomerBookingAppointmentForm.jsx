@@ -1,7 +1,6 @@
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
-import { Avatar, Button, Select, SelectItem, Textarea } from '@nextui-org/react'
-import { SERVICES } from '../../constants/ourServices'
+import { Avatar, Button, RadioGroup, Select, SelectItem, Textarea } from '@nextui-org/react'
 import { formatMoney } from '../../ultils/formatMoney'
 import { DatePicker } from '@nextui-org/date-picker'
 import { useState } from 'react'
@@ -11,29 +10,40 @@ import { DAYS_OF_WEEK } from '../../constants/daysOfWeek'
 import { parseDate } from '@internationalized/date'
 import { useAuthContext } from '../../contexts/AuthContext'
 import { Input } from '@nextui-org/react'
+import PropTypes from 'prop-types'
+import { CustomRadio } from '../input-fields/CustomRadio'
+import { useCreateBooking } from '../../hooks/useCreateBooking'
 
 const BookingSchema = Yup.object().shape({
     bookingDate: Yup.date().required('Booking date is required'),
     serviceId: Yup.string().required('Please select a service'),
     bookingDetail: Yup.string().required('Booking Detail is required'),
     distance: Yup.string().required('Distance is required'),
+    paymentMethod: Yup.string().required('Payment Method is required'),
 })
 
-function CustomerBookingAppointmentForm() {
+CustomerBookingAppointmentForm.propTypes = {
+    services: PropTypes.array.isRequired,
+}
+
+function CustomerBookingAppointmentForm({ services }) {
     const { authUser } = useAuthContext()
     const [doctors, setDoctors] = useState([])
     const [isShowDoctors, setIsShowDoctors] = useState(false)
     const [staffId, setStaffId] = useState('')
     const { findDoctor } = useFindDoctor()
+    const { createBooking } = useCreateBooking()
+
     const formik = useFormik({
         initialValues: {
             bookingDate: '2024-11-18',
             serviceId: '',
             bookingDetail: '',
             distance: '',
+            paymentMethod: 'CASH',
         },
         validationSchema: BookingSchema,
-        onSubmit: (values) => {
+        onSubmit: async (values) => {
             const newBooking = {
                 bookingDate: values.bookingDate,
                 serviceId: values.serviceId,
@@ -41,9 +51,14 @@ function CustomerBookingAppointmentForm() {
                 customerId: authUser.id,
                 distance: values.distance,
                 bookingDetail: values.bookingDetail,
+                paymentMethod: values.paymentMethod,
             }
-            // TODO: Connect API Bookings
-            console.log('Booking submitted:', newBooking)
+            await createBooking(newBooking)
+            // Reset Form
+            formik.resetForm()
+            setDoctors([])
+            setStaffId('')
+            setIsShowDoctors(false)
         },
     })
 
@@ -67,7 +82,7 @@ function CustomerBookingAppointmentForm() {
                 <p className="text-center font-bold text-xl uppercase">Booking Appointment Form</p>
                 <div className="grid grid-cols-2 gap-5">
                     <Select
-                        items={SERVICES}
+                        items={services}
                         label="What service do you need?"
                         aria-label="service"
                         placeholder="Select a service"
@@ -153,13 +168,36 @@ function CustomerBookingAppointmentForm() {
                     label="Booking Detail"
                     aria-label="booking detail"
                     placeholder="Let me know about your detailed requirements here"
-                    name="bookingDetail"
-                    id="bookingDetail"
+                    labelPlacement="outside"
+                    isRequired
                     onChange={formik.handleChange}
                     value={formik.values.bookingDetail}
+                    name="bookingDetail"
+                    id="bookingDetail"
                     errorMessage={formik.errors.bookingDetail}
                     isInvalid={formik.errors.bookingDetail ? true : false}
                 />
+                <RadioGroup
+                    defaultValue={'CASH'}
+                    label="Payment Method"
+                    isRequired
+                    className="text-sm"
+                    description="Select the payment method you will use for this service"
+                    name="paymentMethod"
+                    id="paymentMethod"
+                    errorMessage={formik.errors.paymentMethod}
+                    isInvalid={formik.errors.paymentMethod ? true : false}
+                    value={formik.values.paymentMethod}
+                    onValueChange={(value) => {
+                        return formik.setFieldValue('paymentMethod', value)
+                    }}
+                >
+                    <CustomRadio value="CASH">Cash</CustomRadio>
+                    <CustomRadio value="BANK_TRANSFER">Bank Transfer</CustomRadio>
+                    <CustomRadio value="CREDIT_CARD">Credit Card</CustomRadio>
+                    <CustomRadio value="MOMO">Momo</CustomRadio>
+                    <CustomRadio value="PAYPAL">Paypal</CustomRadio>
+                </RadioGroup>
                 <Button type="submit" color="primary" className="font-semibold">
                     Create Booking
                 </Button>

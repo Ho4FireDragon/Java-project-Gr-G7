@@ -28,7 +28,7 @@ function ServicePriceTable({ data }) {
                         </TableCell>
                         <TableCell>{item.image_path}</TableCell>
                         <TableCell>
-                            <p className={`${item.status.toLowerCase() === 'available' ? 'text-green-600' : 'text-red-600'}`}>{item.status}</p>
+                            <p className={`${item.status.toLowerCase() === 'active' ? 'text-green-600' : 'text-red-600'} font-semibold`}>{item.status}</p>
                         </TableCell>
                     </TableRow>
                 ))}
