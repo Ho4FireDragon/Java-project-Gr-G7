@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Role
 http://localhost:8080/api/roles
 http://localhost:8080/api/roles/create
@@ -142,3 +143,150 @@ Admin
 }
 
 
+=======
+Role
+http://localhost:8080/api/roles
+http://localhost:8080/api/roles/create
+http://localhost:8080/api/roles/update/{id}
+http://localhost:8080/api/roles/delete/{id}
+{ "name": "Admin" }
+
+Service
+http://localhost:8080/api/services
+http://localhost:8080/api/services/create
+http://localhost:8080/api/services/update/{id}
+http://localhost:8080/api/services/delete/{id}
+{
+    "nameservice": "a",
+    "productcode": "f",
+    "price": 100000.0,
+    "summary": "đ",
+    "content": "a",
+    "status": "ACTIVE",
+    "imagePath": "staff-images/fff.png"
+}
+
+Staff
+http://localhost:8080/api/staff
+http://localhost:8080/api/staff/create
+http://localhost:8080/api/staff/update/{id}
+http://localhost:8080/api/staff/delete/{id}
+{
+    "staffName": "Nguyen Van A",
+    "staffEmail": "nguyenvana@example.com",
+    "staffPhone": "0123456789",
+    "roleId": 1,
+    "staffSchedule": ["MONDAY", "TUESDAY", "WEDNESDAY"],
+    "staffPassword": "123"
+}
+http://localhost:8080/api/staff/update-password/{id}
+"newSecurePassword123"
+
+
+
+Customer
+http://localhost:8080/api/customers
+http://localhost:8080/api/customers/me //lay thong tin dang nhap hien tai
+http://localhost:8080/api/customers/create
+http://localhost:8080/api/customers/update/{id}
+http://localhost:8080/api/customers/delete/{id}
+{
+    "firstname": "John",
+    "email": "john.doe@example.com",
+    "phone": "1234567890",
+    "address": "123 Main St",
+    "password": "password123"
+}
+http://localhost:8080/api/customers/update-password/{id}
+{
+  "newPassword": "newSecurePassword123"
+}
+
+
+Booking
+http://localhost:8080/api/bookings
+http://localhost:8080/api/bookings/create
+http://localhost:8080/api/bookings/update/{id}
+http://localhost:8080/api/bookings/delete/{id}
+{
+  "customerId": 1,
+  "staffId": 2,
+  "serviceId": 3,
+  "bookingDate": "2024-11-20",
+  "bookingDetail": "Booking for koi health checkup",
+  "distance": 10.5,
+  "paymentMethod": "CASH"
+}
+
+
+
+
+
+Feedback
+http://localhost:8080/api/feedback
+http://localhost:8080/api/feedback/create
+http://localhost:8080/api/feedback/update/{id}
+http://localhost:8080/api/feedback/delete/{id}
+{
+    "bookingid": 1,
+    "customerid": 2,
+    "staffid": 2,
+    "rating": 4,
+    "comment": "Dịch vụ tuyệt vời!"
+}
+
+
+BlogSlug
+http://localhost:8080/api/blogslug
+http://localhost:8080/api/blogslug/create
+http://localhost:8080/api/blogslug/update/{id}
+http://localhost:8080/api/blogslug/delete/{id}
+{
+  "title": "Ca Koi",
+  "description": "Updated description for the blog."
+}
+
+Blog
+http://localhost:8080/api/blog
+http://localhost:8080/api/blog/create
+http://localhost:8080/api/blog/update/{id}
+http://localhost:8080/api/blog/delete/{id}
+{
+  "blogTitle": "First Blog Post",
+  "blogContent": "Content o day",
+  "blogSlugId": 1
+}
+
+
+Login
+http://localhost:8080/api/auth/login-staff
+{
+    "email": "test1@example.com",
+    "password": "456"
+}
+
+http://localhost:8080/api/auth/login-customer
+{
+
+    "email": "user01@example.com"
+    "email": "test1@example.com",
+    "password": "456"
+}
+
+http://localhost:8080/api/auth/logout-staff
+http://localhost:8080/api/auth/logout-customer
+
+http://localhost:8080/api/auth/introspect-customer
+{
+    "token": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJTaG9wS29pLmNvbSIsInN1YiI6IkhvYWxlZUBleGFtcGxlLmNvbSIsImV4cCI6MTczMDczOTE2MiwiaWF0IjoxNzMwNzI4MzYyLCJzdGFmZklkIjoic3RhZmYifQ.70DT340PXW2TSveljjhMqYymkfDR-UIxhqiAu5ZyERjtvmAjNTHXAX2w1LfDHRiv5X7wZBgj8lMJP5Y8Zur6w"
+}
+
+
+Admin
+{
+    admin@gmail.com
+    123
+}
+
+
+>>>>>>> 7591b3c4a1a7d0731a8bf043986a97a20ddcd2b9

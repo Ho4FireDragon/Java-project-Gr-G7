@@ -44,7 +44,6 @@ public class AuthenticationController {
             // Nếu xảy ra lỗi, có thể là do thông tin xác thực không hợp lệ
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                     .body(AuthenticationResponse.builder()
-
                             .token(null)
                             .build());
         } catch (Exception e) {
