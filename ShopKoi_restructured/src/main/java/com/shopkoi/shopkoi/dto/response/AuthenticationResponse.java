@@ -16,7 +16,7 @@ public class AuthenticationResponse {
     private String Phone;
     private String Email;
     private String Address;
-    private String token;
+    public String token;
 
 
 }

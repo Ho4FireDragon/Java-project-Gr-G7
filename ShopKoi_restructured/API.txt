@@ -11,13 +11,12 @@ http://localhost:8080/api/services/create
 http://localhost:8080/api/services/update/{id}
 http://localhost:8080/api/services/delete/{id}
 {
-    "id": 10,
     "nameservice": "a",
     "productcode": "f",
     "price": 100000.0,
     "summary": "đ",
     "content": "a",
-    "status": "e",
+    "status": "ACTIVE",
     "imagePath": "staff-images/fff.png"
 }
 
@@ -64,13 +63,15 @@ http://localhost:8080/api/bookings/create
 http://localhost:8080/api/bookings/update/{id}
 http://localhost:8080/api/bookings/delete/{id}
 {
-    "customerId": 2,
-    "staffId": 2,
-    "serviceId": 2,
-    "bookingDate": "2024-11-18T10:00:00",
-    "bookingDetail": "Koi fish checkup",
-    "distance": 15.5
+  "customerId": 1,
+  "staffId": 2,
+  "serviceId": 3,
+  "bookingDate": "2024-11-20",
+  "bookingDetail": "Booking for koi health checkup",
+  "distance": 10.5,
+  "paymentMethod": "CASH"
 }
+
 
 
 

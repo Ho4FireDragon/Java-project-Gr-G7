@@ -39,17 +39,20 @@ public class SecurityConfig {
             "/api/staff/create",
             "/api/auth/refreshtoken",
             "/api/roles/create",
-            "/api/customers/me"
+            "/api/customers/me",
+            "/api/bookings/create",
+
 
     };
 
     private final String[] PublicGetEndpoints = {
+            "/api/staff"
     };
 
     private final String[] AdminGetEndpoints = {
             "/api/customers",
             "/api/customers/{id}",
-            "/api/staff",
+
             "/api/staff/{id}",
             "/api/blog",
             "/api/blog/{id}",
@@ -91,7 +94,6 @@ public class SecurityConfig {
             "/api/staff/create",
             "/api/blog/create",
             "/api/blogslug/create",
-            "/api/bookings/create",
             "/api/feedback/create",
             "/api/roles/create",
             "/api/services/create"

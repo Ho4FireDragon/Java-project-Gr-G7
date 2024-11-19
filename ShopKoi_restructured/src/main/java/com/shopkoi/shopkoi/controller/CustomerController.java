@@ -116,6 +116,8 @@ public class CustomerController {
             // Cập nhật các thông tin khác của khách hàng
             existingCustomer.setFirstname(customerDetails.getFirstname());
             existingCustomer.setEmail(customerDetails.getEmail());
+            existingCustomer.setPhone(customerDetails.getPhone());
+            existingCustomer.setAddress(customerDetails.getAddress());
 
             PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
 
