@@ -70,6 +70,7 @@ public class StaffController {
         newStaff.setStaffemail(staffRequest.getStaffEmail());
         newStaff.setStaffphone(staffRequest.getStaffPhone());
         newStaff.setStaffschedule(staffRequest.getStaffSchedule());
+        newStaff.setProfilephoto(staffRequest.getProfilephoto());
         newStaff.setStaffpassword(staffRequest.getStaffPassword());
 
         // Mã hóa mật khẩu trước khi lưu
@@ -97,6 +98,7 @@ public class StaffController {
         existingStaff.setStaffemail(staffRequest.getStaffemail());
         existingStaff.setStaffphone(staffRequest.getStaffphone());
         existingStaff.setStaffschedule(staffRequest.getStaffschedule());
+        existingStaff.setProfilephoto(staffRequest.getProfilephoto());
 
         // Nếu mật khẩu không null hoặc không rỗng, kiểm tra và cập nhật
         if (staffRequest.getStaffpassword() != null && !staffRequest.getStaffpassword().isEmpty()) {

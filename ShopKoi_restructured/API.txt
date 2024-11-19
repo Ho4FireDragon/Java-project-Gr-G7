@@ -63,13 +63,14 @@ http://localhost:8080/api/bookings/create
 http://localhost:8080/api/bookings/update/{id}
 http://localhost:8080/api/bookings/delete/{id}
 {
-  "customerId": 1,
-  "staffId": 2,
-  "serviceId": 3,
-  "bookingDate": "2024-11-20",
-  "bookingDetail": "Booking for koi health checkup",
-  "distance": 10.5,
-  "paymentMethod": "CASH"
+    "customerId": 1,
+    "staffId": 1,
+    "serviceId": 1,
+    "bookingDate": "2024-11-20",
+    "bookingDetail": "Routine checkup for Koi fish.",
+    "distance": 15.0,
+    "paymentMethod": "CASH",
+    "medicalid": [1]
 }
 
 
@@ -143,3 +144,10 @@ Admin
 }
 
 
+http://localhost:8080/api/medicine/create
+http://localhost:8080/api/medicine/update/1
+http://localhost:8080/api/medicine/1
+{
+  "medicineName": "Paracetamol",
+  "medicinePrice": "12000"
+}

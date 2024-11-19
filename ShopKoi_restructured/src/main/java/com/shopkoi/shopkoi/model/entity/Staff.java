@@ -48,6 +48,7 @@ public class Staff {
     @NotNull(message = "Phone number cannot be null")
     private String staffpassword;
 
+    private String profilephoto;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "rightstaff")

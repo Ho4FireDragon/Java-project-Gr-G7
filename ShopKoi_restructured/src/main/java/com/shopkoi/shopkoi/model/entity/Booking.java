@@ -3,14 +3,18 @@ package com.shopkoi.shopkoi.model.entity;
 import com.shopkoi.shopkoi.Service.PaymentMethod;
 import com.shopkoi.shopkoi.Service.StaffSchedule;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Set;
 
 
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "bookings")
 public class Booking {
@@ -40,16 +44,13 @@ public class Booking {
     @Column
     private PaymentMethod paymentMethod;
 
+    private boolean isAppointment;
 
-    public Booking(Customer customer, Staff staff, ServiceEntity service, String bookingDate, String bookingDetail, Double distance, PaymentMethod paymentMethod) {
-        this.customer = customer;
-        this.staff = staff;
-        this.service = service;
-        this.bookingDate = bookingDate;
-        this.bookingDetail = bookingDetail;
-        this.distance = distance;
-        this.paymentMethod = paymentMethod;
-    }
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "medicine_id")
+    private Set<Medicine> medical;
+
+
 }
 
 

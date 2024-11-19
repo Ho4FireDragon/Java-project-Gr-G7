@@ -1,14 +1,12 @@
 package com.shopkoi.shopkoi.Service;
 
-import com.shopkoi.shopkoi.model.entity.Booking;
-import com.shopkoi.shopkoi.model.entity.Customer;
-import com.shopkoi.shopkoi.model.entity.ServiceEntity;
-import com.shopkoi.shopkoi.model.entity.Staff;
+import com.shopkoi.shopkoi.model.entity.*;
 import com.shopkoi.shopkoi.repository.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class BookingService {
@@ -27,7 +25,7 @@ public class BookingService {
     }
 
     // Tạo mới booking với các tham số riêng lẻ
-    public Booking createBooking(Customer customer, Staff staff, ServiceEntity service, String bookingDate, String bookingDetail, Double distance, PaymentMethod paymentMethod) {
+    public Booking createBooking(Customer customer, Staff staff, ServiceEntity service, String bookingDate, String bookingDetail, Double distance, PaymentMethod paymentMethod, Set<Medicine> medicines) {
         Booking booking = new Booking();
         booking.setCustomer(customer);
         booking.setStaff(staff);
@@ -36,6 +34,8 @@ public class BookingService {
         booking.setBookingDetail(bookingDetail);
         booking.setDistance(distance);
         booking.setPaymentMethod(paymentMethod);
+        booking.setAppointment(false);
+        booking.setMedical(medicines);
 
         return bookingRepository.save(booking);
     }

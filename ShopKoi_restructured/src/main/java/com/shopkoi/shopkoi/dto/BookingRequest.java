@@ -1,12 +1,17 @@
 package com.shopkoi.shopkoi.dto;
 
 import com.shopkoi.shopkoi.Service.PaymentMethod;
+import com.shopkoi.shopkoi.model.entity.Medicine;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Set;
+
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 public class BookingRequest {
     private Long customerId;
@@ -17,13 +22,6 @@ public class BookingRequest {
     private Double distance;
     private PaymentMethod paymentMethod;
 
-    public BookingRequest(Long customerId, Long staffId, Long serviceId, String bookingDate, String bookingDetail, Double distance, PaymentMethod paymentMethod) {
-        this.customerId = customerId;
-        this.staffId = staffId;
-        this.serviceId = serviceId;
-        this.bookingDate = bookingDate;
-        this.bookingDetail = bookingDetail;
-        this.distance = distance;
-        this.paymentMethod = paymentMethod;
-    }
+    private Set<Long> medicalid;
+
 }

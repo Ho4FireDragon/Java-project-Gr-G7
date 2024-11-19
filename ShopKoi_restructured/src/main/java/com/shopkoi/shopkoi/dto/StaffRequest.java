@@ -18,6 +18,7 @@ public class StaffRequest {
     private String staffPhone;
     private Set<StaffSchedule> staffSchedule;
     private String staffPassword;
+    private String profilephoto;
 
 
 }

@@ -2,6 +2,7 @@ package com.shopkoi.shopkoi.controller;
 
 import com.shopkoi.shopkoi.Service.BookingService;
 import com.shopkoi.shopkoi.Service.CustomerService;
+import com.shopkoi.shopkoi.Service.MedicineService;
 import com.shopkoi.shopkoi.Service.PaymentMethod;
 import com.shopkoi.shopkoi.model.entity.*;
 import com.shopkoi.shopkoi.repository.BookingRepository;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import com.shopkoi.shopkoi.dto.BookingRequest;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/bookings")
@@ -36,6 +38,9 @@ public class BookingController {
     @Autowired
     private CustomerRepository customerRepository;
 
+    @Autowired
+    private MedicineService medicineService;
+
     // Lấy tất cả booking
     @GetMapping
     public ResponseEntity<List<Booking>> getAllBookings() {
@@ -46,6 +51,7 @@ public class BookingController {
     // Tạo booking mới
     @PostMapping("/create")
     public ResponseEntity<Booking> createBooking(@RequestBody BookingRequest bookingRequest) {
+        // Extract data from BookingRequest
         Long customerId = bookingRequest.getCustomerId();
         Long staffId = bookingRequest.getStaffId();
         Long serviceId = bookingRequest.getServiceId();
@@ -53,8 +59,9 @@ public class BookingController {
         String bookingDetail = bookingRequest.getBookingDetail();
         Double distance = bookingRequest.getDistance();
         PaymentMethod paymentMethod = bookingRequest.getPaymentMethod();
+        Set<Long> medicalIds = bookingRequest.getMedicalid();
 
-
+        // Validate required entities
         Staff staff = staffRepository.findById(staffId).orElse(null);
         ServiceEntity service = serviceRepository.findById(serviceId).orElse(null);
         Customer customer = customerRepository.findById(customerId).orElse(null);
@@ -63,11 +70,19 @@ public class BookingController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
 
+        // Map medical IDs to Medicine entities
+        Set<Medicine> medicines = medicineService.getMedicinesByIds(medicalIds);
+        if (medicines.size() != medicalIds.size()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
 
-        // Tạo booking
-        Booking newBooking = bookingService.createBooking(customer,staff , service, bookingDate, bookingDetail, distance, paymentMethod);
+        // Create booking
+        Booking newBooking = bookingService.createBooking(
+                customer, staff, service, bookingDate, bookingDetail, distance, paymentMethod, medicines);
+
         return ResponseEntity.status(HttpStatus.CREATED).body(newBooking);
     }
+
 
     // Lấy booking theo ID
     @GetMapping("/{id}")
