@@ -3,6 +3,7 @@ import authApi from '../apis/auth.api'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuthContext } from '../contexts/AuthContext'
+import { config } from '../configs'
 
 export const useStaffLogin = () => {
     const navigate = useNavigate()
@@ -19,11 +20,11 @@ export const useStaffLogin = () => {
                 localStorage.setItem('__user-information', JSON.stringify(data))
                 Swal.fire({
                     title: 'Successfully!',
-                    text: 'Register successfully !!!',
-                    confirmButtonText: 'Go to Home',
+                    text: 'Login successfully !!!',
+                    confirmButtonText: 'Go to Staff Dashboard',
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        navigate('/')
+                        navigate(config.routes.staff)
                     }
                 })
             }

@@ -21,9 +21,19 @@ export const config = {
         staff_login: '/staff/login',
         register: '/register',
 
-        // Roles Page
+        // User Pages
         user: '/user',
+        user_information: '/user/information',
+        user_booking_appointment: '/user/booking-appointment',
+        user_history_booking: '/user/history-booking',
+
+        // Staff Pages
         staff: '/staff',
+        staff_schedule: '/staff/schedule',
+        staff_booking: '/staff/booking',
+        staff_medical_service: '/staff/medical-service',
+
+        // Admin Pages
         admin: '/admin',
     },
 }

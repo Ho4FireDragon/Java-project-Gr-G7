@@ -1,4 +1,7 @@
 import axiosClient from './axiosClient'
+import Cookies from 'universal-cookie'
+
+const cookies = new Cookies(null, { path: '/' })
 
 const authApi = {
     customerRegister: async (newCustomer) => {
@@ -13,9 +16,13 @@ const authApi = {
         const url = `/auth/login-staff`
         return await axiosClient.post(url, authInfo)
     },
-    logout: async (params) => {
-        const url = `/users/logout/:id`
-        return await axiosClient.get(url, { params })
+    customerLogout: async () => {
+        const url = `/auth/logout-customer`
+        return await axiosClient.post(url, {
+            headers: {
+                Authorization: `Bearer ${cookies.get('token')}`,
+            },
+        })
     },
 }
 
