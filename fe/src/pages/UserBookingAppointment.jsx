@@ -1,9 +1,10 @@
 import CustomerBookingAppointmentForm from '../components/form/CustomerBookingAppointmentForm'
 import MovingPriceTable from '../components/tables/MovingPriceTable'
 import ServicePriceTable from '../components/tables/ServicePriceTable'
-import { SERVICES } from '../constants/ourServices'
+import { useGetServices } from '../hooks/useGetServices'
 
 function UserBookingAppointment() {
+    const { services } = useGetServices()
     return (
         <div className="my-5">
             <h1 className="text-2xl font-bold text-center py-5">Booking An Appointment</h1>
@@ -16,15 +17,15 @@ function UserBookingAppointment() {
                 </div>
                 <div className="mb-5">
                     <p className="mb-2 text-xl uppercase font-semibold">1. Our Services</p>
-                    <ServicePriceTable data={SERVICES} />
+                    <ServicePriceTable data={services} />
                 </div>
                 <div className="mb-5">
                     <p className="mb-2 text-xl uppercase font-semibold">2. Moving price list</p>
-                    <MovingPriceTable data={SERVICES} />
+                    <MovingPriceTable />
                 </div>
                 <div className="mb-5">
                     <p className="mb-2 py-3 text-xl uppercase font-semibold">3. Make an appointment</p>
-                    <CustomerBookingAppointmentForm />
+                    <CustomerBookingAppointmentForm services={services} />
                 </div>
             </div>
         </div>

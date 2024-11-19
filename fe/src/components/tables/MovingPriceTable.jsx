@@ -1,34 +1,29 @@
-import PropTypes from 'prop-types'
 import { Table, TableHeader, TableBody, TableColumn, TableRow, TableCell } from '@nextui-org/table'
 import { formatMoney } from '../../ultils/formatMoney'
 
-MovingPriceTable.propTypes = {
-    data: PropTypes.array.isRequired,
-}
-
-function MovingPriceTable({ data }) {
+function MovingPriceTable() {
+    const TABLEDATA = [
+        { id: 1, title: 'Under 1 kilometer', price: 7000 },
+        { id: 2, title: 'From 2 to 3 kilometers', price: 10000 },
+        { id: 3, title: 'From 3 to 4 kilometers', price: 20000 },
+        { id: 4, title: 'Over 4 kilometers', price: 40000 },
+    ]
     return (
-        <Table aria-label="Example static collection table">
+        <Table aria-label="Example static collection table" className='max-w-[1000px] mx-auto'>
             <TableHeader>
                 <TableColumn>CODE</TableColumn>
-                <TableColumn>Service name</TableColumn>
+                <TableColumn>Title</TableColumn>
                 <TableColumn>Price</TableColumn>
-                <TableColumn>Image</TableColumn>
-                <TableColumn>Status</TableColumn>
             </TableHeader>
             <TableBody>
-                {data.map((item) => (
+                {TABLEDATA.map((item) => (
                     <TableRow key={item.id}>
-                        <TableCell>{item.productcode}</TableCell>
+                        <TableCell>{item.id}</TableCell>
                         <TableCell>
-                            <p className="font-semibold">{item.nameservice}</p>
+                            <p className="font-semibold">{item.title}</p>
                         </TableCell>
                         <TableCell>
                             <p className="font-semibold">{formatMoney(item.price)}</p>
-                        </TableCell>
-                        <TableCell>{item.image_path}</TableCell>
-                        <TableCell>
-                            <p className={`${item.status.toLowerCase() === 'available' ? 'text-green-600' : 'text-red-600'}`}>{item.status}</p>
                         </TableCell>
                     </TableRow>
                 ))}
