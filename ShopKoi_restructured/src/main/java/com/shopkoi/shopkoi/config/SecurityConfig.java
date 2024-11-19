@@ -39,15 +39,9 @@ public class SecurityConfig {
             "/api/staff/create",
             "/api/auth/refreshtoken",
             "/api/roles/create",
-<<<<<<< HEAD
-            "/api/bookings/create",
-            "/api/customers/me"
-
-
-=======
             "/api/customers/me",
             "/api/bookings/create"
->>>>>>> 6862fd5b29ebec6ad5799e7f67a392adfcf9d083
+
     };
 
     private final String[] PublicGetEndpoints = {
