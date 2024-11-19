@@ -47,7 +47,6 @@ public class CustomerController {
     protected String signJWT;
 
 
-
     // Lấy danh sách tất cả khách hàng
     @GetMapping
     public ResponseEntity<List<Customer>> getAllCustomers() {
@@ -75,10 +74,6 @@ public class CustomerController {
     }
 
 
-
-
-
-
     // Tạo mới một khách hàng
     @PostMapping("/create")
     public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
@@ -94,7 +89,6 @@ public class CustomerController {
         // Trả về phản hồi với mã trạng thái 201 (Created) và thông tin khách hàng mới
         return ResponseEntity.status(HttpStatus.CREATED).body(createdCustomer);
     }
-
 
 
     // Lấy thông tin một khách hàng theo ID
@@ -161,7 +155,6 @@ public class CustomerController {
     }
 
 
-
     // Xóa khách hàng theo ID
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteCustomer(@PathVariable Long id) {
@@ -170,4 +163,3 @@ public class CustomerController {
     }
 
 }
-
