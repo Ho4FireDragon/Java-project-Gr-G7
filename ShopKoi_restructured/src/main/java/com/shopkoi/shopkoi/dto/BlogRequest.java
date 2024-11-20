@@ -1,23 +1,19 @@
 package com.shopkoi.shopkoi.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 public class BlogRequest {
     // Getters và Setters
     private String blogTitle;
     private String blogContent;
     private Long blogSlugId;
+    private String blogimage;
 
-    public void setBlogTitle(String blogTitle) {
-        this.blogTitle = blogTitle;
-    }
-
-    public void setBlogContent(String blogContent) {
-        this.blogContent = blogContent;
-    }
-
-    public void setBlogSlugId(Long blogSlugId) {
-        this.blogSlugId = blogSlugId;
-    }
 }

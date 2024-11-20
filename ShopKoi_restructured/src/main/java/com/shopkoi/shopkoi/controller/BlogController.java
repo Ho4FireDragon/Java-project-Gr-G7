@@ -36,6 +36,7 @@ public class BlogController {
         String blogTitle = blogRequest.getBlogTitle();
         String blogContent = blogRequest.getBlogContent();
         Long blogSlugId = blogRequest.getBlogSlugId();
+        String blogimage=blogRequest.getBlogimage();
 
         // Kiểm tra xem booking và customer có tồn tại không
         BlogSlug newBlogSlug = blogSlugRepository.findById(blogSlugId).orElse(null);
@@ -46,7 +47,7 @@ public class BlogController {
         }
 
         // Tạo feedback mới và lưu nó
-        Blog newBlog = new Blog(blogTitle, blogContent, newBlogSlug);
+        Blog newBlog = new Blog(blogTitle, blogContent, newBlogSlug ,blogimage);
         Blog savedBlog = blogRepository.save(newBlog);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(savedBlog);
@@ -62,6 +63,7 @@ public class BlogController {
         String blogTitle = blogRequest.getBlogTitle();
         String blogContent = blogRequest.getBlogContent();
         Long blogSlugId = blogRequest.getBlogSlugId();
+        String blogimage=blogRequest.getBlogimage();
 
         // Tìm BlogSlug mới nếu cần cập nhật
         BlogSlug blogSlug = blogSlugRepository.findById(blogSlugId)
@@ -71,6 +73,7 @@ public class BlogController {
         existingBlog.setBlogTitle(blogTitle);
         existingBlog.setBlogContent(blogContent);
         existingBlog.setBlogSlug(blogSlug);
+        existingBlog.setBlogimage(blogimage);
 
         // Lưu blog đã cập nhật vào cơ sở dữ liệu
         Blog updatedBlog = blogRepository.save(existingBlog);

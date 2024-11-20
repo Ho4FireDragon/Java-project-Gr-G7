@@ -3,6 +3,14 @@ package com.shopkoi.shopkoi.model.entity;
 
 import jakarta.persistence.*;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+
+@NoArgsConstructor
 @Entity
 @Table(name = "Blog")
 public class Blog {
@@ -19,45 +27,13 @@ public class Blog {
     @JoinColumn(name = "blog_slug_id")
     private BlogSlug blogSlug;
 
-    public Blog( String blogTitle, String blogContent, BlogSlug blogSlug) {
+    private String blogimage;
+
+
+    public Blog(String blogTitle, String blogContent, BlogSlug blogSlug, String blogimage) {
         BlogTitle = blogTitle;
         BlogContent = blogContent;
         this.blogSlug = blogSlug;
+        this.blogimage = blogimage;
     }
-
-    public Long getBlogId() {
-        return BlogId;
-    }
-
-    public void setBlogId(Long blogId) {
-        BlogId = blogId;
-    }
-
-    public String getBlogTitle() {
-        return BlogTitle;
-    }
-
-    public void setBlogTitle(String blogTitle) {
-        BlogTitle = blogTitle;
-    }
-
-    public String getBlogContent() {
-        return BlogContent;
-    }
-
-    public void setBlogContent(String blogContent) {
-        BlogContent = blogContent;
-    }
-
-    public BlogSlug getBlogSlug() {
-        return blogSlug;
-    }
-
-    public void setBlogSlug(BlogSlug blogSlug) {
-        this.blogSlug = blogSlug;
-    }
-
-    public Blog() {}
-
-
 }
