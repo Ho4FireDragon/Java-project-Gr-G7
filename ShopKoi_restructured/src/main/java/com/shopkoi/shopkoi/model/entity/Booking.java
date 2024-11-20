@@ -55,6 +55,9 @@ public class Booking {
     @Column(name = "medicine_id")
     private List<Medicine> medical;
 
+    private Long totalprice;
+
+    private boolean paymentStatus;
 
 }
 

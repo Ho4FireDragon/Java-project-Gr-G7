@@ -61,6 +61,7 @@ public class BookingController {
         Double distance = bookingRequest.getDistance();
         PaymentMethod paymentMethod = bookingRequest.getPaymentMethod();
         List<Long> medicalIds = bookingRequest.getMedicalid();
+        Long totalprice = bookingRequest.getTotalprice();
 
         // Validate required entities
         Staff staff = staffRepository.findById(staffId).orElse(null);
@@ -79,7 +80,7 @@ public class BookingController {
 
         // Create booking
         Booking newBooking = bookingService.createBooking(
-                customer, staff, service, bookingDate, bookingDetail, distance, paymentMethod, medicines);
+                customer, staff, service, bookingDate, bookingDetail, distance, paymentMethod, medicines, totalprice, false);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(newBooking);
     }
@@ -96,36 +97,60 @@ public class BookingController {
         }
     }
 
-    // Cập nhật booking
     @PutMapping("/update/{id}")
     public ResponseEntity<Booking> updateBooking(
             @PathVariable Long id,
             @RequestBody BookingRequest bookingRequest) {
 
+        // Tìm kiếm booking theo ID
         Booking booking = bookingService.getBookingById(id);
         if (booking == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
 
+        // Extract data từ BookingRequest
+        Long customerId = bookingRequest.getCustomerId();
         Long staffId = bookingRequest.getStaffId();
         Long serviceId = bookingRequest.getServiceId();
         String bookingDate = bookingRequest.getBookingDate();
+        String bookingDetail = bookingRequest.getBookingDetail();
+        Double distance = bookingRequest.getDistance();
+        PaymentMethod paymentMethod = bookingRequest.getPaymentMethod();
+        List<Long> medicalIds = bookingRequest.getMedicalid();
+        Long totalprice = bookingRequest.getTotalprice();
 
+        // Kiểm tra sự tồn tại của các entity cần thiết
         Staff staff = staffRepository.findById(staffId).orElse(null);
         ServiceEntity service = serviceRepository.findById(serviceId).orElse(null);
+        Customer customer = customerRepository.findById(customerId).orElse(null);
 
-        if (staff == null || service == null) {
+        if (customer == null || staff == null || service == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
 
+        // Map medical IDs to Medicine entities
+        List<Medicine> medicines = medicineService.getMedicinesByIds(medicalIds);
+        if (medicines.size() != medicalIds.size()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+
+        // Cập nhật các thuộc tính cho booking
+        booking.setCustomer(customer);
         booking.setStaff(staff);
         booking.setService(service);
         booking.setBookingDate(bookingDate);
+        booking.setBookingDetail(bookingDetail);
+        booking.setDistance(distance);
+        booking.setPaymentMethod(paymentMethod);
+        booking.setMedical(medicines);
+        booking.setTotalprice(totalprice);
 
+        // Lưu lại booking
         Booking updatedBooking = bookingService.saveBooking(booking);
 
         return ResponseEntity.ok(updatedBooking);
     }
+
 
     // Xóa booking
     @DeleteMapping("/delete/{id}")

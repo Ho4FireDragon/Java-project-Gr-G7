@@ -26,5 +26,8 @@ public class BookingRequest {
 
     private List<Long> medicalid;
 
+    private Long totalprice;
+
+
 }
 
