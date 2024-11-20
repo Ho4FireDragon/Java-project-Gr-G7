@@ -28,9 +28,13 @@ public class MedicineService {
         return medicineRepository.save(medicine);
     }
 
-    public Set<Medicine> getMedicinesByIds(Set<Long> medicineIds) {
-        return new HashSet<>(medicineRepository.findAllById(medicineIds));
+    public List<Medicine> getMedicinesByIds(List<Long> medicineIds) {
+        return medicineRepository.findAllById(medicineIds)
+                .stream()
+                .distinct() // Ensure no duplicates
+                .toList(); // Convert to List
     }
+
 
 
 }

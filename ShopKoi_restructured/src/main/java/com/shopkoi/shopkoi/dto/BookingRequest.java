@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.Set;
 
 @Setter
@@ -23,7 +24,7 @@ public class BookingRequest {
     private Double distance;
     private PaymentMethod paymentMethod;
 
-    private Set<Long> medicalid;
+    private List<Long> medicalid;
 
 }
 

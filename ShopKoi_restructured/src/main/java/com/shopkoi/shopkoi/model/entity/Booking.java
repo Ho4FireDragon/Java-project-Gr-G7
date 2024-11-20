@@ -12,6 +12,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.Set;
 
 
@@ -51,8 +52,8 @@ public class Booking {
     private boolean isAppointment;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "medicine_id")
-    private Set<Medicine> medical;
+    @Column(name = "medicine_id")
+    private List<Medicine> medical;
 
 
 }

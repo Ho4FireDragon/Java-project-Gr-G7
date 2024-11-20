@@ -72,6 +72,7 @@ public class AuthenticationService {
                 .Email(staffemail.getStaffemail())
                 .Phone(staffemail.getStaffphone())
                 .token(token)
+                .imgpath(staffemail.getProfilephoto())
                 .build();
     }
 

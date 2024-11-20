@@ -60,7 +60,7 @@ public class BookingController {
         String bookingDetail = bookingRequest.getBookingDetail();
         Double distance = bookingRequest.getDistance();
         PaymentMethod paymentMethod = bookingRequest.getPaymentMethod();
-        Set<Long> medicalIds = bookingRequest.getMedicalid();
+        List<Long> medicalIds = bookingRequest.getMedicalid();
 
         // Validate required entities
         Staff staff = staffRepository.findById(staffId).orElse(null);
@@ -72,7 +72,7 @@ public class BookingController {
         }
 
         // Map medical IDs to Medicine entities
-        Set<Medicine> medicines = medicineService.getMedicinesByIds(medicalIds);
+        List<Medicine> medicines = medicineService.getMedicinesByIds(medicalIds);
         if (medicines.size() != medicalIds.size()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }

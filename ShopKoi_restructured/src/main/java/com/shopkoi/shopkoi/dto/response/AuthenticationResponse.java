@@ -17,6 +17,7 @@ public class AuthenticationResponse {
     private String Email;
     private String Address;
     public String token;
+    private String imgpath;
 
 
 }

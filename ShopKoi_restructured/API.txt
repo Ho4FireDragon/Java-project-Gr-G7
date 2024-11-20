@@ -178,6 +178,7 @@ http://localhost:8080/api/staff/delete/{id}
     "roleId": 1,
     "staffSchedule": ["MONDAY", "TUESDAY", "WEDNESDAY"],
     "staffPassword": "123"
+    "profilephoto": "staff.jpg"
 }
 http://localhost:8080/api/staff/update-password/{id}
 "newSecurePassword123"
@@ -290,7 +291,7 @@ Admin
 }
 
 
-<<<<<<< HEAD
+
 http://localhost:8080/api/medicine/create
 http://localhost:8080/api/medicine/update/1
 http://localhost:8080/api/medicine/1
@@ -298,6 +299,4 @@ http://localhost:8080/api/medicine/1
   "medicineName": "Paracetamol",
   "medicinePrice": "12000"
 }
-=======
->>>>>>> 7591b3c4a1a7d0731a8bf043986a97a20ddcd2b9
->>>>>>> 6862fd5b29ebec6ad5799e7f67a392adfcf9d083
+
