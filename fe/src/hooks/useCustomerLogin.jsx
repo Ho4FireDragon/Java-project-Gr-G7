@@ -22,15 +22,28 @@ export const useCustomerLogin = () => {
                 setAuthUser(userData)
                 setCookie('token', token, { path: '/' })
                 localStorage.setItem('__user-information', JSON.stringify(userData))
-                Swal.fire({
-                    title: 'Successfully!',
-                    text: 'Login successfully !!!',
-                    confirmButtonText: 'Go to Home',
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        navigate(config.routes.home)
-                    }
-                })
+
+                if (userData.name === 'Admin') {
+                    Swal.fire({
+                        title: 'Successfully!',
+                        text: 'Login successfully !!!',
+                        confirmButtonText: 'Go to Admin Dashboard',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            navigate(config.routes.admin)
+                        }
+                    })
+                } else {
+                    Swal.fire({
+                        title: 'Successfully!',
+                        text: 'Login successfully !!!',
+                        confirmButtonText: 'Go to Home',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            navigate(config.routes.home)
+                        }
+                    })
+                }
             }
         } catch (error) {
             Swal.fire({

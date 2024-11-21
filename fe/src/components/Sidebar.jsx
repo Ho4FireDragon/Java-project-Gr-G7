@@ -4,9 +4,10 @@ import Logo from './Logo'
 
 function Sidebar() {
     const SIDEBAR_MENUS = [
-        { id: 1, path: config.routes.staff_schedule, label: 'Staff Schedule' },
-        { id: 2, path: config.routes.staff_booking, label: 'Staff Booking' },
-        { id: 3, path: config.routes.staff_medical_service, label: 'Medical Services' },
+        { id: 1, path: config.routes.staff, label: 'Staff Home' },
+        { id: 2, path: config.routes.staff_schedule, label: 'Staff Schedule' },
+        { id: 3, path: config.routes.staff_booking, label: 'Staff Booking' },
+        { id: 4, path: config.routes.staff_medical_service, label: 'Medical Services' },
     ]
     return (
         <aside className="w-full h-screen">

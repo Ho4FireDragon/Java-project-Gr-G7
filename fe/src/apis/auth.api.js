@@ -24,6 +24,14 @@ const authApi = {
             },
         })
     },
+    staffLogout: async () => {
+        const url = `/auth/logout-staff`
+        return await axiosClient.post(url, {
+            headers: {
+                Authorization: `Bearer ${cookies.get('token')}`,
+            },
+        })
+    },
 }
 
 export default authApi

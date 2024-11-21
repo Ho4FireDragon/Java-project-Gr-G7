@@ -22,6 +22,8 @@ import UserBookingAppointment from '../pages/UserBookingAppointment'
 import UserHistoryBooking from '../pages/UserHistoryBooking'
 import Admin from '../pages/Admin'
 import Staff from '../pages/Staff'
+import StaffSchedulePage from '../pages/StaffSchedulePage'
+import StaffBookingPage from '../pages/StaffBookingPage'
 
 export const globalRoutes = [
     // Public Pages
@@ -40,6 +42,9 @@ export const globalRoutes = [
     { path: config.routes.user_history_booking, element: UserHistoryBooking, layout: DefaultLayout, guard: CustomerGuard },
     // Staff Pages
     { path: config.routes.staff, element: Staff, layout: DashboardLayout, guard: StaffGuard },
+    { path: config.routes.staff_schedule, element: StaffSchedulePage, layout: DashboardLayout, guard: StaffGuard },
+    { path: config.routes.staff_schedule, element: StaffSchedulePage, layout: DashboardLayout, guard: StaffGuard },
+    { path: config.routes.staff_booking, element: StaffBookingPage, layout: DashboardLayout, guard: StaffGuard },
     // Admin Pages
     { path: config.routes.admin, element: Admin, layout: EmptyLayout },
 ]
