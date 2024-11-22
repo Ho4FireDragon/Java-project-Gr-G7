@@ -87,35 +87,39 @@ public class StaffController {
 
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Staff> updateStaff(@PathVariable Long id, @RequestBody Staff staffRequest) {
+    public ResponseEntity<Staff> updateStaff(@PathVariable Long id, @RequestBody StaffRequest staffRequest) {
+        // Lấy Staff hiện có theo ID
         Staff existingStaff = staffService.getStaff(id);
 
         if (existingStaff == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null); // Nhân viên không tồn tại
+            // Trả về lỗi 404 nếu không tìm thấy nhân viên
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
 
-        // Kiểm tra và cập nhật thông tin nhân viên
-        existingStaff.setStaffname(staffRequest.getStaffname());
-        existingStaff.setStaffemail(staffRequest.getStaffemail());
-        existingStaff.setStaffphone(staffRequest.getStaffphone());
-        existingStaff.setStaffschedule(staffRequest.getStaffschedule());
+        // Cập nhật thông tin từ StaffRequest vào Staff hiện tại
+        existingStaff.setStaffname(staffRequest.getStaffName());
+        existingStaff.setStaffemail(staffRequest.getStaffEmail());
+        existingStaff.setStaffphone(staffRequest.getStaffPhone());
+        existingStaff.setStaffschedule(staffRequest.getStaffSchedule());
         existingStaff.setProfilephoto(staffRequest.getProfilephoto());
 
-        // Nếu mật khẩu không null hoặc không rỗng, kiểm tra và cập nhật
-        if (staffRequest.getStaffpassword() != null && !staffRequest.getStaffpassword().isEmpty()) {
+        // Mã hóa và cập nhật mật khẩu nếu có thay đổi
+        if (staffRequest.getStaffPassword() != null && !staffRequest.getStaffPassword().isEmpty()) {
             PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
 
-            // Chỉ cập nhật nếu mật khẩu thay đổi
-            if (!passwordEncoder.matches(staffRequest.getStaffpassword(), existingStaff.getStaffpassword())) {
-                existingStaff.setStaffpassword(passwordEncoder.encode(staffRequest.getStaffpassword()));
+            // So sánh mật khẩu mới với mật khẩu cũ đã mã hóa
+            if (!passwordEncoder.matches(staffRequest.getStaffPassword(), existingStaff.getStaffpassword())) {
+                existingStaff.setStaffpassword(passwordEncoder.encode(staffRequest.getStaffPassword()));
             }
         }
 
-        // Lưu nhân viên đã cập nhật
+        // Lưu thông tin Staff sau khi cập nhật
         Staff updatedStaff = staffService.saveStaff(existingStaff);
 
+        // Trả về thông tin Staff đã cập nhật
         return ResponseEntity.ok(updatedStaff);
     }
+
 
 
 
