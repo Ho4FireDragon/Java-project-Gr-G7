@@ -26,7 +26,7 @@ public class BookingService {
     }
 
     // Tạo mới booking với các tham số riêng lẻ
-    public Booking createBooking(Customer customer, Staff staff, ServiceEntity service, String bookingDate, String bookingDetail, Double distance, PaymentMethod paymentMethod, List<Medicine> medicines, Long totalprice, boolean paymentStatus) {
+    public Booking createBooking(Customer customer, Staff staff, ServiceEntity service, String bookingDate, String bookingDetail, Double distance, PaymentMethod paymentMethod, Set<Medicine> medicines, Long totalprice, boolean paymentStatus) {
         Booking booking = new Booking();
         booking.setCustomer(customer);
         booking.setStaff(staff);

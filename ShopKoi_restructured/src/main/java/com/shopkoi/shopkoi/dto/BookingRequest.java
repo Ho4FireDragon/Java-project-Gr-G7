@@ -24,10 +24,10 @@ public class BookingRequest {
     private Double distance;
     private PaymentMethod paymentMethod;
 
-    private List<Long> medicalid;
+    private Set<Long> medicalid;
 
     private Long totalprice;
 
-
+    private boolean paymentstatus;
 }
 

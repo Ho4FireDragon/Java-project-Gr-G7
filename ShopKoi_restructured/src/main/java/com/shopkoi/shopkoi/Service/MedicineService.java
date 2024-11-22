@@ -9,6 +9,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class MedicineService {
@@ -28,12 +29,12 @@ public class MedicineService {
         return medicineRepository.save(medicine);
     }
 
-    public List<Medicine> getMedicinesByIds(List<Long> medicineIds) {
+    public Set<Medicine> getMedicinesByIds(Set<Long> medicineIds) {
         return medicineRepository.findAllById(medicineIds)
                 .stream()
-                .distinct() // Ensure no duplicates
-                .toList(); // Convert to List
+                .collect(Collectors.toSet()); // Convert to Set
     }
+
 
 
 

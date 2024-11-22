@@ -53,7 +53,7 @@ public class Booking {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @Column(name = "medicine_id")
-    private List<Medicine> medical;
+    private Set<Medicine> medical;
 
     private Long totalprice;
 

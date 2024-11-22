@@ -217,7 +217,9 @@ http://localhost:8080/api/bookings/delete/{id}
     "bookingDetail": "Routine checkup for Koi fish.",
     "distance": 15.0,
     "paymentMethod": "CASH",
-    "medicalid": [1]
+    "medicalid": [1,2],
+    "totalprice" : 12000 ,
+    "paymentstatus" : true
 }
 
 

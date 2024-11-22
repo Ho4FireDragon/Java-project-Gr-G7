@@ -60,7 +60,7 @@ public class BookingController {
         String bookingDetail = bookingRequest.getBookingDetail();
         Double distance = bookingRequest.getDistance();
         PaymentMethod paymentMethod = bookingRequest.getPaymentMethod();
-        List<Long> medicalIds = bookingRequest.getMedicalid();
+        Set<Long> medicalIds = bookingRequest.getMedicalid();
         Long totalprice = bookingRequest.getTotalprice();
 
         // Validate required entities
@@ -73,7 +73,7 @@ public class BookingController {
         }
 
         // Map medical IDs to Medicine entities
-        List<Medicine> medicines = medicineService.getMedicinesByIds(medicalIds);
+        Set<Medicine> medicines = medicineService.getMedicinesByIds(medicalIds);
         if (medicines.size() != medicalIds.size()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
@@ -116,8 +116,9 @@ public class BookingController {
         String bookingDetail = bookingRequest.getBookingDetail();
         Double distance = bookingRequest.getDistance();
         PaymentMethod paymentMethod = bookingRequest.getPaymentMethod();
-        List<Long> medicalIds = bookingRequest.getMedicalid();
+        Set<Long> medicalIds = bookingRequest.getMedicalid();
         Long totalprice = bookingRequest.getTotalprice();
+        boolean paymentstatus = bookingRequest.isPaymentstatus();
 
         // Kiểm tra sự tồn tại của các entity cần thiết
         Staff staff = staffRepository.findById(staffId).orElse(null);
@@ -129,7 +130,7 @@ public class BookingController {
         }
 
         // Map medical IDs to Medicine entities
-        List<Medicine> medicines = medicineService.getMedicinesByIds(medicalIds);
+        Set<Medicine> medicines = medicineService.getMedicinesByIds(medicalIds);
         if (medicines.size() != medicalIds.size()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
@@ -144,6 +145,7 @@ public class BookingController {
         booking.setPaymentMethod(paymentMethod);
         booking.setMedical(medicines);
         booking.setTotalprice(totalprice);
+        booking.setPaymentStatus(paymentstatus);
 
         // Lưu lại booking
         Booking updatedBooking = bookingService.saveBooking(booking);
