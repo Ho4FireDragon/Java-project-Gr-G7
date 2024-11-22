@@ -51,7 +51,7 @@ public class Booking {
 
     private boolean isAppointment;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @Column(name = "medicine_id")
     private Set<Medicine> medical;
 

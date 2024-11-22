@@ -160,5 +160,46 @@ public class BookingController {
         bookingService.deleteBooking(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PutMapping("/paymentstatus/{id}")
+    public ResponseEntity<Void> updatePaymentStatus(@PathVariable Long id) {
+        // Lấy đối tượng booking từ cơ sở dữ liệu
+        Booking booking = bookingService.getBookingById(id);
+
+        if (booking != null) {
+            // Cập nhật paymentStatus thành true
+            booking.setPaymentStatus(true);
+
+            // Lưu lại đối tượng booking đã thay đổi vào cơ sở dữ liệu
+            bookingService.saveBooking(booking);
+
+            // Trả về HTTP 200 OK để xác nhận việc cập nhật thành công
+            return ResponseEntity.ok().build();
+        } else {
+            // Nếu không tìm thấy booking với id tương ứng, trả về HTTP 404 Not Found
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PutMapping("/appointment/{id}")
+    public ResponseEntity<Void> updateAppointment(@PathVariable Long id) {
+        // Lấy đối tượng booking từ cơ sở dữ liệu
+        Booking booking = bookingService.getBookingById(id);
+
+        if (booking != null) {
+            // Cập nhật paymentStatus thành true
+            booking.setAppointment(true);
+
+            // Lưu lại đối tượng booking đã thay đổi vào cơ sở dữ liệu
+            bookingService.saveBooking(booking);
+
+            // Trả về HTTP 200 OK để xác nhận việc cập nhật thành công
+            return ResponseEntity.ok().build();
+        } else {
+            // Nếu không tìm thấy booking với id tương ứng, trả về HTTP 404 Not Found
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 }
 
