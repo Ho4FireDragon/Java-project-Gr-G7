@@ -1,29 +1,39 @@
 import PropTypes from 'prop-types'
 import { Checkbox, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from '@nextui-org/react'
 import { formatMoney } from '../../ultils/formatMoney'
-import bookingApi from '../../apis/booking.api'
 import Swal from 'sweetalert2'
+import Cookies from 'universal-cookie'
+
+const cookies = new Cookies(null, { path: '/' })
 
 StaffBookingTable.propTypes = {
     data: PropTypes.array.isRequired,
 }
 
 function StaffBookingTable({ data }) {
-    const handleChangeIsVisited = async (bookingId, state) => {
+    const handleChangeIsVisited = async (bookingId) => {
         try {
-            const response1 = await bookingApi.updateAppointment(bookingId)
-            const response2 = await bookingApi.updatePaymentStatus(bookingId)
-            console.log(response1)
-            console.log(response2)
-
-            const { status } = response1
-            if (status === 200) {
-                Swal.fire({
-                    title: 'Successfully!',
-                    text: 'Set Is Visited successfully !!!',
-                    confirmButtonText: 'OK',
-                })
-            }
+            await fetch(`http://localhost:8080/api/bookings/appointment/${bookingId}`, {
+                method: 'PUT',
+                headers: {
+                    Authorization: `Bearer ${cookies.get('token')}`,
+                },
+            })
+            await fetch(`http://localhost:8080/api/bookings/paymentstatus/${bookingId}`, {
+                method: 'PUT',
+                headers: {
+                    Authorization: `Bearer ${cookies.get('token')}`,
+                },
+            })
+            Swal.fire({
+                title: 'Successfully!',
+                text: 'Set Is Visited successfully !!!',
+                confirmButtonText: 'OK',
+            }).then(result=>{
+                if (result.isConfirmed) {
+                    window.location.href = '/staff/booking'
+                }
+            })
         } catch (error) {
             Swal.fire({
                 title: 'Error!',
