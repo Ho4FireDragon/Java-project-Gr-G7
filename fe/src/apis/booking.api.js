@@ -29,6 +29,22 @@ const bookingApi = {
             },
         })
     },
+    updateAppointment: async (bookingId) => {
+        const url = `/bookings/appointment/${bookingId}`
+        return await axiosClient.put(url, {
+            headers: {
+                Authorization: `Bearer ${cookies.get('token')}`,
+            },
+        })
+    },
+    updatePaymentStatus: async (bookingId) => {
+        const url = `/bookings/paymentstatus/${bookingId}`
+        return await axiosClient.put(url, {
+            headers: {
+                Authorization: `Bearer ${cookies.get('token')}`,
+            },
+        })
+    },
 }
 
 export default bookingApi

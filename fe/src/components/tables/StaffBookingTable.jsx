@@ -11,10 +11,12 @@ StaffBookingTable.propTypes = {
 function StaffBookingTable({ data }) {
     const handleChangeIsVisited = async (bookingId, state) => {
         try {
-            const response = await bookingApi.updateBooking(bookingId, { appointment: !state })
-            console.log(response);
-            
-            const { status } = response
+            const response1 = await bookingApi.updateAppointment(bookingId)
+            const response2 = await bookingApi.updatePaymentStatus(bookingId)
+            console.log(response1)
+            console.log(response2)
+
+            const { status } = response1
             if (status === 200) {
                 Swal.fire({
                     title: 'Successfully!',
