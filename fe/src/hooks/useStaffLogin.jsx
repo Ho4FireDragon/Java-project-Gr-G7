@@ -4,10 +4,12 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuthContext } from '../contexts/AuthContext'
 import { config } from '../configs'
+import { useCookies } from 'react-cookie'
 
 export const useStaffLogin = () => {
     const navigate = useNavigate()
     const [loading, setLoading] = useState(false)
+    const [, setCookie] = useCookies(['token'])
     const { setAuthUser } = useAuthContext()
 
     const staffLogin = async (staffLoginInfo) => {
@@ -16,7 +18,9 @@ export const useStaffLogin = () => {
             const response = await authApi.staffLogin(staffLoginInfo)
             const { status, data } = response
             if (status === 200) {
-                setAuthUser(data)
+                const { token, ...userData } = data
+                setAuthUser(userData)
+                setCookie('token', token, { path: '/' })
                 localStorage.setItem('__user-information', JSON.stringify(data))
                 Swal.fire({
                     title: 'Successfully!',

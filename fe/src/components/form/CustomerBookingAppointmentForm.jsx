@@ -44,6 +44,21 @@ function CustomerBookingAppointmentForm({ services }) {
         },
         validationSchema: BookingSchema,
         onSubmit: async (values) => {
+            let movingPrice = 0
+            const servicePrice = services[values.serviceId].price
+
+            if (values.distance < 1) {
+                movingPrice = 7000
+            } else if (values.distance > 2 && values.distance < 3) {
+                movingPrice = 10000
+            } else if (values.distance > 3 && values.distance < 4) {
+                movingPrice = 20000
+            } else if (values.distance > 4) {
+                movingPrice = 40000
+            }
+
+            const totalPrice = movingPrice + servicePrice
+
             const newBooking = {
                 bookingDate: values.bookingDate,
                 serviceId: values.serviceId,
@@ -52,9 +67,12 @@ function CustomerBookingAppointmentForm({ services }) {
                 distance: values.distance,
                 bookingDetail: values.bookingDetail,
                 paymentMethod: values.paymentMethod,
-                totalprice: 0,
-                paymentStatus: true,
+                totalprice: totalPrice,
+                paymentstatus: false,
+                appointment: false,
+                medicalid: [],
             }
+
             await createBooking(newBooking)
             // Reset Form
             formik.resetForm()
