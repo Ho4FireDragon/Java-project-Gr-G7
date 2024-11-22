@@ -52,6 +52,8 @@ function CustomerBookingAppointmentForm({ services }) {
                 distance: values.distance,
                 bookingDetail: values.bookingDetail,
                 paymentMethod: values.paymentMethod,
+                totalprice: 0,
+                paymentStatus: true,
             }
             await createBooking(newBooking)
             // Reset Form

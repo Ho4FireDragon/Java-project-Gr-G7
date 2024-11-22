@@ -40,7 +40,8 @@ public class SecurityConfig {
             "/api/auth/refreshtoken",
             "/api/roles/create",
             "/api/customers/me",
-            "/api/bookings/create"
+            "/api/bookings/create",
+            "/api/feedback/create",
 
     };
 
@@ -48,7 +49,9 @@ public class SecurityConfig {
             "/api/staff",
             "/api/services",
             "/api/services/{id}",
-            "/api/customers/me"
+            "/api/customers/me",
+            "/api/bookings",
+            "/api/booking/{id}",
 
     };
 
@@ -59,8 +62,6 @@ public class SecurityConfig {
             "/api/blog",
             "/api/blog/{id}",
             "/api/blogslug",
-            "/api/bookings",
-            "/api/booking/{id}",
             "/api/feedback",
             "/api/feedback/{id}",
             "/api/roles",
@@ -94,7 +95,6 @@ public class SecurityConfig {
             "/api/staff/create",
             "/api/blog/create",
             "/api/blogslug/create",
-            "/api/feedback/create",
             "/api/roles/create",
             "/api/services/create",
             "/api/medicine/create"
