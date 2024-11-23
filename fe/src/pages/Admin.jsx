@@ -60,10 +60,7 @@ const Admin = () => {
                 {/* Render component tương ứng dựa trên activeComponent */}
                 {activeComponent === 'Efficiency' && <Efficiency />}
                 {activeComponent === 'DoctorsWorkSchedule' && <DoctorsWorkSchedule />}
-                {activeComponent === 'CustomersSchedule' && <CustomersSchedule />}
                 {activeComponent === 'ServiceManagement' && <ServiceManagement />}
-                {activeComponent === 'Blogs' && <Blogs />}
-                {activeComponent === 'CustomerProfile' && <CustomerProfile />}
             </div>
         </div>
     )

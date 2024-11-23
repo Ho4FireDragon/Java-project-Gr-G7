@@ -1,11 +1,12 @@
 import Swal from 'sweetalert2'
 import { useState } from 'react'
 import bookingApi from '../apis/booking.api'
+import { formatMoney } from '../ultils/formatMoney'
 
 export const useCreateBooking = () => {
     const [loading, setLoading] = useState(false)
 
-    const createBooking = async (newBooking) => {
+    const createBooking = async (newBooking, totalPrice) => {
         try {
             setLoading(true)
             const response = await bookingApi.createBooking(newBooking)
@@ -13,7 +14,7 @@ export const useCreateBooking = () => {
             if (status === 201) {
                 Swal.fire({
                     title: 'Successfully!',
-                    text: 'Booking successfully !!!',
+                    text: `Total price: ${formatMoney(totalPrice)}`,
                     confirmButtonText: 'OK',
                 })
             }

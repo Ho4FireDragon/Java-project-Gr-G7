@@ -52,7 +52,7 @@ public class SecurityConfig {
             "/api/customers/me",
             "/api/bookings",
             "/api/booking/{id}",
-
+            "/api/feedback",
     };
 
     private final String[] AdminGetEndpoints = {
@@ -62,7 +62,6 @@ public class SecurityConfig {
             "/api/blog",
             "/api/blog/{id}",
             "/api/blogslug",
-            "/api/feedback",
             "/api/feedback/{id}",
             "/api/roles",
             "/api/roles/{id}"

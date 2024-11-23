@@ -6,6 +6,7 @@ import FeedbackIcon from '@mui/icons-material/Feedback'
 import { Button, useDisclosure } from '@nextui-org/react'
 import AddFeedbackModal from '../modals/AddFeedbackModal'
 import { useState } from 'react'
+import { formatMoney } from '../../ultils/formatMoney'
 
 HistoryBookingTable.propTypes = {
     data: PropTypes.array.isRequired,
@@ -41,7 +42,7 @@ function HistoryBookingTable({ data }) {
                             <TableCell>
                                 <span className="font-semibold">{item.staff.staffname}</span>
                             </TableCell>
-                            <TableCell>{item.totalPrice}</TableCell>
+                            <TableCell>{formatMoney(item.totalprice)}</TableCell>
                             <TableCell>{item.distance} km</TableCell>
                             <TableCell>{item.paymentMethod}</TableCell>
                             <TableCell>{item.appointment === true ? <CheckBoxIcon className="text-success-600" /> : <CloseIcon className="text-red-500" />}</TableCell>

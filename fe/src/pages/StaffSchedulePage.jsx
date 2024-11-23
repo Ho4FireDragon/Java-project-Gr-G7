@@ -59,7 +59,6 @@ function StaffSchedulePage() {
                         color="success"
                         className="text-white"
                         onClick={async () => {
-                            
                             onOpen()
                         }}
                     >

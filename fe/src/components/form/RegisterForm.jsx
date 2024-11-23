@@ -10,7 +10,7 @@ const RegisterValidationSchema = Yup.object().shape({
     phone: Yup.string().min(9, 'Phone number is invalid!').max(9, 'Phone number is invalid!').required('Required'),
     email: Yup.string().email('Invalid email').min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
     address: Yup.string().min(1, 'Too Short!').max(255, 'Too Long!').required('Required'),
-    password: Yup.string().required('Required'),
+    password: Yup.string().min(6, 'Too short').required('Required'),
     confirmPassword: Yup.string()
         .required('Required')
         .oneOf([Yup.ref('password'), null], 'Password must match'),

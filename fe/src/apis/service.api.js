@@ -10,7 +10,11 @@ const serviceApi = {
     },
     createService: async (newService) => {
         const url = '/services/create'
-        return await axiosClient.post(url, newService)
+        return await axiosClient.post(url, newService, {
+            headers: {
+                Authorization: `Bearer ${cookies.get('token')}`,
+            },
+        })
     },
     updateService: async (serviceId, updated) => {
         const url = `/services/update/${serviceId}`

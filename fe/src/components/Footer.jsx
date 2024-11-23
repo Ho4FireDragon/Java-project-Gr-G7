@@ -1,5 +1,8 @@
 import { Link } from 'react-router-dom'
 import { config } from '../configs'
+import { useEffect, useState } from 'react'
+import feedbackApi from '../apis/feedback.api'
+import StarIcon from '@mui/icons-material/Star'
 
 function Footer(fixedFooter = true) {
     const footerMenus = [
@@ -46,11 +49,38 @@ function Footer(fixedFooter = true) {
             ],
         },
     ]
+    const [feedbacks, setFeedbacks] = useState([])
+    const [ratingAvg, setRatingAvg] = useState(0)
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await feedbackApi.getFeedback()
+            const { data } = response
+            setFeedbacks(data)
+            console.log(data)
+
+            let sum = 0
+            data.forEach((item) => {
+                sum += item.rating
+            })
+            setRatingAvg(Math.round(sum / data.length))
+        }
+        fetchData()
+    }, [])
 
     return (
         <footer className="text-white">
             <div className="bg-primary py-8">
                 <div className="container">
+                    <div className="grid place-items-center">
+                        <div className="flex items-center justify-center mb-5 border rounded-lg w-fit p-5">
+                            <p className="text-lg mr-5">Our Rating</p>
+                            <div className="text-lg flex items-center justify-center gap-2 text-yellow-300">
+                                <StarIcon /> {ratingAvg}
+                                {' / '}5
+                            </div>
+                        </div>
+                    </div>
                     <ul className="grid grid-cols-5 gap-12">
                         {footerMenus.map((item, index) => (
                             <li key={index}>

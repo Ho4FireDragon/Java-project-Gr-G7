@@ -17,12 +17,12 @@ function StaffChangeScheduleModal({ staffData, isOpen, onOpenChange }) {
     const handleChangeSchedule = async () => {
         try {
             const stafffUpdated = {
-                staffname: staffData.staffname,
-                staffemail: staffData.staffemail,
-                staffphone: staffData.staffphone,
-                staffadress: staffData.staffadress,
-                staffschedule: staffSchedule,
-                staffpassword: staffData.staffpassword,
+                staffName: staffData.staffname,
+                staffEmail: staffData.staffemail,
+                staffPhone: staffData.staffphone,
+                staffAdress: staffData.staffadress,
+                staffSchedule: staffSchedule,
+                staffPassword: staffData.staffpassword,
                 profilephoto: staffData.profilephoto,
                 rightstaff: staffData.rightstaff,
             }

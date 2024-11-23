@@ -13,10 +13,10 @@ function UserInformation() {
             <h1 className="text-2xl font-bold text-center py-5">Customer Information</h1>
             <div className="mx-auto max-w-[800px] py-5 px-7 bg-gradient-to-tr from-primary-300 via-primary-400 to-primary-500 hover:bg-gradient-to-tl rounded-lg transition duration-200 text-white">
                 <div className="flex flex-col gap-5 items-center text-lg">
-                    <Avatar style={{ width: '100px', height: '100px' }} isBordered src={`https://ui-avatars.com/api/?name=${authUser.name}`} />
+                    <Avatar style={{ width: '100px', height: '100px' }} isBordered src={`https://ui-avatars.com/api/?name=${authUser.name ?? authUser.firstname}`} />
                     <div className="mt-3 text-center space-y-3">
                         <p>
-                            Full Name: <span className="font-semibold">{authUser.name}</span>
+                            Full Name: <span className="font-semibold">{authUser.name ?? authUser.firstname}</span>
                         </p>
                         <p>
                             Email: <span className="font-semibold">{authUser.email}</span>
