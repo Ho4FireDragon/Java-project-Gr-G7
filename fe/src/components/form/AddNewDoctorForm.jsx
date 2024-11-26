@@ -21,7 +21,7 @@ const LoginSchema = Yup.object().shape({
     staffphone: Yup.string().min(9, 'Invalid phone number!').max(9, 'Invalid phone number!').required('Required'),
     staffemail: Yup.string().email('Invalid email').min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
     staffpassword: Yup.string().required('Required'),
-    staffadress: Yup.string().required('Required'),
+    staffadress: Yup.string().nullable(),
     profilephoto: Yup.string().nullable(),
 })
 
@@ -47,16 +47,16 @@ function AddNewDoctorForm({ isEditMode, dataEdit, isOpen, onOpenChange }) {
             if (isEditMode) {
                 try {
                     const updateStaff = {
-                        staffname: values.staffname,
-                        staffemail: values.staffemail,
-                        staffphone: values.staffphone,
-                        staffadress: values.staffadress,
+                        staffName: values.staffname,
+                        staffEmail: values.staffemail,
+                        staffPhone: values.staffphone,
                         profilephoto: values.profilephoto,
-                        staffpassword: values.staffpassword,
-                        roleId: 1,
-                        staffschedule: staffSchedule,
+                        staffPassword: values.staffpassword,
+                        staffSchedule: staffSchedule,
                     }
                     const response = await staffApi.updateStaff(dataEdit.id, updateStaff)
+                    console.log(response)
+
                     const { status } = response
                     if (status === 200) {
                         Swal.fire({
@@ -133,7 +133,6 @@ function AddNewDoctorForm({ isEditMode, dataEdit, isOpen, onOpenChange }) {
                                 isInvalid={formik.errors.staffphone ? true : false}
                             />
                             <Input
-                                isRequired
                                 label="Address"
                                 name="staffadress"
                                 id="staffadress"

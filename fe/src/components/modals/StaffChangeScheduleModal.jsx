@@ -24,7 +24,6 @@ function StaffChangeScheduleModal({ staffData, isOpen, onOpenChange }) {
                 staffSchedule: staffSchedule,
                 staffPassword: staffData.staffpassword,
                 profilephoto: staffData.profilephoto,
-                rightstaff: staffData.rightstaff,
             }
             const response = await staffApi.updateStaff(staffData.id, stafffUpdated)
             const { status } = response

@@ -33,23 +33,8 @@ const Admin = () => {
                         </div>
                     </li>
                     <li className="mb-4">
-                        <div className={`text-lg cursor-pointer ${activeComponent === 'CustomersSchedule' ? 'active' : ''}`} onClick={() => handleMenuClick('CustomersSchedule')}>
-                            Customer&apos;s schedule
-                        </div>
-                    </li>
-                    <li className="mb-4">
                         <div className={`text-lg cursor-pointer ${activeComponent === 'ServiceManagement' ? 'active' : ''}`} onClick={() => handleMenuClick('ServiceManagement')}>
                             Service Management
-                        </div>
-                    </li>
-                    <li className="mb-4">
-                        <div className={`text-lg cursor-pointer ${activeComponent === 'Blogs' ? 'active' : ''}`} onClick={() => handleMenuClick('Blogs')}>
-                            Blogs
-                        </div>
-                    </li>
-                    <li className="mb-4">
-                        <div className={`text-lg cursor-pointer ${activeComponent === 'CustomerProfile' ? 'active' : ''}`} onClick={() => handleMenuClick('CustomerProfile')}>
-                            Customer profile
                         </div>
                     </li>
                 </ul>

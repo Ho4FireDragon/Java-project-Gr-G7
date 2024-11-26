@@ -55,6 +55,11 @@ public class SecurityConfig {
             "/api/feedback",
     };
 
+    private final String[] PublicPutEndpoints = {
+
+            "/api/staff/update/{id}"
+    };
+
     private final String[] AdminGetEndpoints = {
             "/api/customers",
             "/api/customers/{id}",
@@ -108,6 +113,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(request ->
                         request.requestMatchers(HttpMethod.POST, PublicEndpoints).permitAll()
                                 .requestMatchers(HttpMethod.GET, PublicGetEndpoints).permitAll()
+                                .requestMatchers(HttpMethod.PUT, PublicPutEndpoints).permitAll()
                                 .requestMatchers(HttpMethod.GET, AdminGetEndpoints).hasAnyAuthority("SCOPE_ADMIN")
                                 .requestMatchers(HttpMethod.DELETE, AdminDeleteEndpoints).hasAnyAuthority("SCOPE_ADMIN")
                                 .requestMatchers(HttpMethod.POST, AdminPostEndpoints).hasAnyAuthority("SCOPE_ADMIN")

@@ -83,7 +83,7 @@ const ServiceManagement = () => {
                                     >
                                         <CreateIcon className="text-white" />
                                     </Button>
-                                    <Button
+                                    {/* <Button
                                         color="danger"
                                         size="sm"
                                         isIconOnly
@@ -93,7 +93,7 @@ const ServiceManagement = () => {
                                         }}
                                     >
                                         <DeleteIcon />
-                                    </Button>
+                                    </Button> */}
                                 </div>
                             </TableCell>
                         </TableRow>

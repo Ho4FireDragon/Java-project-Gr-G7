@@ -107,7 +107,7 @@ const DoctorsWorkSchedule = () => {
                                     >
                                         <CreateIcon className="text-white" />
                                     </Button>
-                                    <Button
+                                    {/* <Button
                                         color="danger"
                                         size="sm"
                                         isIconOnly
@@ -117,7 +117,7 @@ const DoctorsWorkSchedule = () => {
                                         }}
                                     >
                                         <DeleteIcon />
-                                    </Button>
+                                    </Button> */}
                                 </div>
                             </TableCell>
                         </TableRow>
